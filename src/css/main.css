@@ -11,5 +11,16 @@
     --font-family-rowdies: 'Rowdies', cursive;
     --font-family-montserrat: 'Montserrat', sans-serif;
     --font-family-poppins: 'Poppins', sans-serif;
+
+    --color-primary: #1a202c; /* Dark Gray */
+    --color-secondary: #2d3748; /* Gray */
+    --color-accent: #4a5568; /* Light Gray */
+    --color-background: #f7fafc; /* Light Background */
+    --color-text: #2d3748; /* Dark Text */
 }
 
+
+.grids{
+    display: grid;
+    grid-template-columns: 600px 600px 200px;
+}
