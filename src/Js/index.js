@@ -21,4 +21,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
         lastScrollY = window.scrollY;
     });
+
+
+    let currentYear = new Date().getFullYear();
+
+    document.getElementById("year").innerText = `\u00A9 ${currentYear} LuxCars.com. All rights reserved.`;
 });
+

@@ -10,14 +10,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
         </style>
 </head>
-<body class="capitalize text-lg font-family-montserrat  ">
+<body class="capitalize text-lg font-family-montserrat">
     <header class="flex items-center justify-between bg-black text-white p-4" id="header">
         <div>
             <p class="text-4xl font-bold font-family-body">luxCars</p>
             <p class="text-sm font-family-montserrat">A luxury-driven, high-performance</p>
         </div>
-        <div>
-            <nav>
+        <div >
+            <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
                     <li class="inline-block mr-4"><a href="#" class="text-white hover:text-gray-400">Home</a></li>
                     <li class="inline-block mr-4"><a href="#" class="text-white hover:text-gray-400">About</a></li>
@@ -27,9 +27,14 @@
                     <li class="inline-block mr-4"><a href="#" class="text-white hover:text-gray-400">FAQ</a></li>
                 </ul>
             </nav>
+            <button class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
+                <span class="block w-full h-0.5 bg-white"></span>
+                <span class="block w-full h-0.5 bg-white"></span>
+                <span class="block w-full h-0.5 bg-white"></span>
+              </button>
         </div>
         <div class="flex items-center space-x-4">
-            <i class="material-icons" style="font-size: 30px;">search</i>
+            <i class="material-icons hidden sm:block" style="font-size: 30px;">search</i>
             <i class="material-icons" style="font-size: 30px;">account_circle</i>
 
         </div>
@@ -94,7 +99,7 @@
         <div class="w-11/12 md:w-5/6 mx-auto py-20">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start place-items-center">
             <!-- Left Heading Column -->
-            <div class="uppercase font-bold text-2xl md:text-3xl">
+            <div class="uppercase font-bold text-2xl md:text-3xl text-center">
               <p>We are Big on What matters to you</p>
             </div>
       
@@ -369,6 +374,94 @@
         </div>
       </section>
       
+      <footer class="bg-white  py-10 text-sm font-family-montserrat ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 text-gray-800 place-content-center px-4">
+            
+                <!-- Company -->
+                <div>
+                <h3 class="font-semibold mb-3 text-center">Company</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">About Us</a></li>
+                    <li><a href="#" class="hover:underline">Blog</a></li>
+                    <li><a href="#" class="hover:underline">Services</a></li>
+                    <li><a href="#" class="hover:underline">FAQs</a></li>
+                    <li><a href="#" class="hover:underline">Terms</a></li>
+                    <li><a href="#" class="hover:underline">Contact Us</a></li>
+                </ul>
+                </div>
+        
+                <!-- Quick Links -->
+                <div>
+                <h3 class="font-semibold mb-3 text-center">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Get in Touch</a></li>
+                    <li><a href="#" class="hover:underline">Help Center</a></li>
+                    <li><a href="#" class="hover:underline">Live Chat</a></li>
+                    <li><a href="#" class="hover:underline">How it Works</a></li>
+                </ul>
+                </div>
+        
+                <!-- Our Brands -->
+                <div>
+                <h3 class="font-semibold mb-3 text-center">Our Brands</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Toyota</a></li>
+                    <li><a href="#" class="hover:underline">Porsche</a></li>
+                    <li><a href="#" class="hover:underline">Audi</a></li>
+                    <li><a href="#" class="hover:underline">BMW</a></li>
+                    <li><a href="#" class="hover:underline">Ford</a></li>
+                    <li><a href="#" class="hover:underline">Nissan</a></li>
+                    <li><a href="#" class="hover:underline">Peugeot</a></li>
+                    <li><a href="#" class="hover:underline">Volkswagen</a></li>
+                </ul>
+                </div>
+        
+                <!-- Vehicle Types -->
+                <div>
+                <h3 class="font-semibold mb-3 text-center">Vehicles Type</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Sedan</a></li>
+                    <li><a href="#" class="hover:underline">Hatchback</a></li>
+                    <li><a href="#" class="hover:underline">SUV</a></li>
+                    <li><a href="#" class="hover:underline">Hybrid</a></li>
+                    <li><a href="#" class="hover:underline">Electric</a></li>
+                    <li><a href="#" class="hover:underline">Coupe</a></li>
+                    <li><a href="#" class="hover:underline">Truck</a></li>
+                    <li><a href="#" class="hover:underline">Convertible</a></li>
+                </ul>
+                </div>
+        
+                <!-- Sale Hours & Social -->
+                <div>
+                <h3 class="font-semibold mb-3 text-center">Sale Hours</h3>
+                <ul class="space-y-1">
+                    <li>Mon – Fri: 09:00AM – 09:00 PM</li>
+                    <li>Saturday: 09:00AM – 07:00PM</li>
+                    <li>Sunday: Closed</li>
+                </ul>
+        
+                <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
+                <div class="flex gap-4 text-gray-600">
+                    <img src="./assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
+                    <img src="./assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
+                    <img src="./assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
+                    
+                </div>
+                </div>
+        
+            </div>
+        
+            <!-- Bottom Line -->
+            <div class="mt-10 flex flex-col md:flex-row justify-between items-center text-gray-500 border-t pt-6 text-xs">
+                <p id="year">© 2024 exemple.com. All rights reserved.</p>
+                <div class="space-x-4 mt-2 md:mt-0">
+                <a href="#" class="hover:underline">Terms & Conditions</a>
+                <a href="#" class="hover:underline">Privacy Notice</a>
+            </div>
+        </div>
+        </div>
+      </footer>
       
       
       
