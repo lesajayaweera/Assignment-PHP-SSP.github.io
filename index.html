@@ -34,10 +34,10 @@
 
         </div>
     </header>
-    <section class="relative w-full  mx-auto mt-20 ">
-        <div class="relative w-full bg-black m-auto ">
+    <section class="relative w-full  mx-auto  ">
+        <div class="relative w-full bg-black m-auto  ">
             <img src="./assets/images/bentley-continental.jpg" 
-                alt="Luxury Car" class="w-full h-[600px] object-cover opacity-80">
+                alt="Luxury Car" class="w-full  object-cover opacity-80 h-screen">
             
             <!-- Overlay Text -->
             <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-center">
@@ -91,35 +91,59 @@
         </div>
     </section>
     <section class="bg-slate-300 mt-20 font-family-montserrat">
-        <div class="flex  items-center justify-between gap-20 pt-10 pb-20  w-5/6  m-auto">
-            <div class="uppercase font-bold text-2xl w-5/6 "><p>We are Big on What matters to u</p></div>
-            <div class="grid grid-cols-2  gap-12">
-                <div class="flex flex-wrap gap-4 items-center justify-start">
-                    <img src="assets/icons/dealership.png" class="w-14" alt="icon">
-                    <h2 class="font-bold text-lg capitalize">Trusted Car dealership</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam, delectus voluptas libero ipsum a accusamus error hic ipsam omnis veritatis voluptatem, eos exercitationem quisquam repellendus eum doloribus!</p>
-                </div>
-                <div class="flex flex-wrap gap-4 items-center justify-start">
-                    <img src="assets/icons/service.png" class="w-14" alt="icon">
-                    <h2 class="font-bold text-lg capitalize">expert car service</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam, delectus voluptas libero ipsum a accusamus error hic ipsam omnis veritatis voluptatem, eos exercitationem quisquam repellendus eum doloribus!</p>
-                </div><div class="flex flex-wrap gap-4 items-center justify-start">
-                    <img src="assets/icons/financing.png" class="w-14" alt="icon">
-                    <h2 class="font-bold text-lg capitalize">special financing offers</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam, delectus voluptas libero ipsum a accusamus error hic ipsam omnis veritatis voluptatem, eos exercitationem quisquam repellendus eum doloribus!</p>
-                </div><div class="flex flex-wrap gap-4 items-center justify-start">
-                    <img src="assets/icons/pricing.png" class="w-14" alt="icon">
-                    <h2 class="font-bold text-lg capitalize">transparent pricing</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam, delectus voluptas libero ipsum a accusamus error hic ipsam omnis veritatis voluptatem, eos exercitationem quisquam repellendus eum doloribus!</p>
-                </div>
+        <div class="w-11/12 md:w-5/6 mx-auto py-20">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start place-items-center">
+            <!-- Left Heading Column -->
+            <div class="uppercase font-bold text-2xl md:text-3xl">
+              <p>We are Big on What matters to you</p>
             </div>
+      
+            <!-- Right Features Grid -->
+            <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-10">
+              <!-- Feature 1 -->
+              <div class="grid grid-cols-[auto_1fr] gap-4">
+                <img src="assets/icons/dealership.png" class="w-14" alt="icon">
+                <div>
+                  <h2 class="font-bold text-lg capitalize">Trusted Car dealership</h2>
+                  <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam.</p>
+                </div>
+              </div>
+      
+              <!-- Feature 2 -->
+              <div class="grid grid-cols-[auto_1fr] gap-4">
+                <img src="assets/icons/service.png" class="w-14" alt="icon">
+                <div>
+                  <h2 class="font-bold text-lg capitalize">Expert Car Service</h2>
+                  <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam.</p>
+                </div>
+              </div>
+      
+              <!-- Feature 3 -->
+              <div class="grid grid-cols-[auto_1fr] gap-4">
+                <img src="assets/icons/financing.png" class="w-14" alt="icon">
+                <div>
+                  <h2 class="font-bold text-lg capitalize">Special Financing Offers</h2>
+                  <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam.</p>
+                </div>
+              </div>
+      
+              <!-- Feature 4 -->
+              <div class="grid grid-cols-[auto_1fr] gap-4">
+                <img src="assets/icons/pricing.png" class="w-14" alt="icon">
+                <div>
+                  <h2 class="font-bold text-lg capitalize">Transparent Pricing</h2>
+                  <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit illum quis aperiam.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        
-    </section>
+      </section>
+      
     <section>
         <div class="text-center text-white mt-10 font-family-montserrat">
-            <h2 class="text-2xl md:text-3xl font-bold text-black">Our Featured Cars</h2>
-            <p class="text-sm mt-2">Explore our exclusive collection of luxury cars</p>
+            <h2 class="text-2xl md:text-3xl font-bold text-black capitalize">Explore our Priemium brands</h2>
+            
         </div>
         <div class="flex items-center justify-between gap-x-20 gap-y-10 pt-10 pb-10  w-5/6  m-auto flex-wrap">
 
@@ -224,16 +248,16 @@
             </div>
         </div>
     </section>
-    <section class="font-sans">
+    <!-- <section class="font-sans">
         <div class="flex flex-col md:flex-row h-auto md:h-[600px]">
           
-          <!-- Image Section -->
+    
           <div class="w-full md:w-1/2 h-64 md:h-full">
-            <img src="./assets/images/products/range-rover.jpg" alt="Vehicle" class="w-full h-full object-cover">
+            <img src="./assets/images/products/range-rover.jpg" alt="Vehicle" class="w-full h-full object-contain">
           </div>
       
-          <!-- Text Section -->
-          <div class="w-full md:w-1/2 bg-[#0b0d17] text-white flex flex-col justify-center px-8 md:px-16 py-12">
+         
+          <div class="w-full md:w-1/2 bg-[#0b0d17] text-white flex flex-col justify-center px-7 md:px-16 py-10">
             <h1 class="text-3xl md:text-4xl font-semibold mb-4">
               Online, in–person,<br />everywhere
             </h1>
@@ -249,10 +273,103 @@
           </div>
       
         </div>
+    </section> -->
+    <!-- <section class="">
+        <div class="w-4/5 flex items-center justify-between ">
+            <div class="w-1/2">
+                <div class="flex flex-row-reverse items-center justify-between">
+                    <h2>lesandu</h2>
+                    <img src="./assets/images/profile pic.jpg" alt="profile-pic" class="rounded-full">
+                </div>
+            </div>
+
+        </div>
+        
+    </section> -->
+
+    <section class="font-family-montserrat">
+        <div class="grid grid-cols-1 md:grid-cols-2 max-w-full">
+          <!-- Image Section -->
+          <div>
+            <img src="./assets/images/products/range-rover.jpg" alt="Range Rover" class="w-full h-full object-cover" />
+          </div>
+      
+          <!-- Text Section -->
+          <div class="flex flex-col items-center justify-center bg-black text-white p-6">
+            <h1 class="text-3xl md:text-4xl font-semibold mb-4 text-center md:text-left">
+              Online, in–person,<br />everywhere
+            </h1>
+            <p class="text-gray-400 mb-6 max-w-md text-center md:text-left">
+              Choose from thousands of vehicles from multiple brands and buy online with Click & Drive, or visit us at one of our dealerships today.
+            </p>
+            <button class="border border-white text-white py-2 px-6 rounded-md hover:bg-white hover:text-black transition flex items-center gap-2 w-fit">
+              Get Started 
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
     </section>
-    <section>
-        <div><p>hellow world</p></div>
-    </section>
+    <section class="bg-gray-50 py-12 px-6 md:px-20 font-family-montserrat">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          
+          <!-- Left Side: Trustpilot Summary -->
+          <div>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-4">What Our Customers Say</h2>
+            <p class="text-lg font-medium mb-2">Great</p>
+            <img src="./assets/images/5 stars.png" alt="stars" class="mb-2 w-32" />
+            <p class="text-sm text-gray-500 mb-2">Based on 5,801 reviews</p>
+            <p class="text-sm text-green-600 font-medium flex items-center gap-1">
+              <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.104 3.405a1 1 0 00.95.69h3.584c.969 0 1.371 1.24.588 1.81l-2.898 2.104a1 1 0 00-.364 1.118l1.104 3.405c.3.921-.755 1.688-1.54 1.118L10 13.347l-2.898 2.104c-.784.57-1.838-.197-1.539-1.118l1.103-3.405a1 1 0 00-.364-1.118L3.404 8.832c-.783-.57-.38-1.81.588-1.81h3.584a1 1 0 00.95-.69l1.104-3.405z"/></svg>
+              Trustpilot
+            </p>
+          </div>
+      
+          <!-- Right Side: Testimonial Card -->
+          <div class="bg-white p-6 rounded-md shadow-md relative">
+            <!-- Quote Stars -->
+            <img src="./assets/images/5 stars.png" alt="5 stars" class="mb-2 w-24" />
+            
+            <!-- User Info -->
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <p class="font-semibold text-sm">Ali TUFAN</p>
+                <p class="text-xs text-gray-500">Designer</p>
+              </div>
+              <span class="text-xs text-gray-400">Verified</span>
+            </div>
+      
+            <!-- Testimonial Text -->
+            <p class="text-gray-700 mb-6">
+              I'd suggest <strong>LuxCars Nissan Glasgow South</strong> to a friend because I had great service from my salesman Patrick and all of the team.
+            </p>
+      
+            <!-- Avatars -->
+            <div class="flex items-center space-x-2">
+              <img src="./assets/images/profile pic.jpg" class="w-10 h-10 rounded-full border-2 border-white shadow" />
+              <img src="./assets/images/profile pic2.jpg" class="w-10 h-10 rounded-full border-2 border-white shadow opacity-50" />
+              <img src="./assets/images/profile pic3.jpg" class="w-10 h-10 rounded-full border-2 border-white shadow opacity-50" />
+            </div>
+      
+            <!-- Arrows -->
+            <div class="absolute top-4 right-4 flex gap-2">
+              <button class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      
       
       
     
