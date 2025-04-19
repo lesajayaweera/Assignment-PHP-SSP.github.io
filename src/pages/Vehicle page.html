@@ -11,7 +11,35 @@
         </style>
     </head>
 <body class="capitalize text-lg font-family-montserrat">
-    <section class="max-w-7xl mx-auto px-4 py-10 font-family-montserrat">
+  <header class="flex items-center justify-between bg-black text-white p-4" id="header">
+    <div>
+        <p class="text-4xl font-bold font-family-body">luxCars</p>
+        <p class="text-sm font-family-montserrat">A luxury-driven, high-performance</p>
+    </div>
+    <div >
+        <nav class="hidden md:block"     >
+            <ul class="text-lg font-family-montserrat">
+                <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
+                <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
+                <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
+                <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
+                <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                
+            </ul>
+        </nav>
+        <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
+            <span class="block w-full h-0.5 bg-white"></span>
+            <span class="block w-full h-0.5 bg-white"></span>
+            <span class="block w-full h-0.5 bg-white"></span>
+        </button>
+    </div>
+    <div class="flex items-center space-x-4">
+        <i class="material-icons hidden sm:block" style="font-size: 30px;">search</i>
+        <i class="material-icons" style="font-size: 30px;">account_circle</i>
+
+    </div>
+</header>
+    <section class="max-w-7xl mx-auto px-4 py-30 font-family-montserrat">
         <!-- Breadcrumb -->
         <div class="text-sm text-gray-500 mb-2">
           <a href="../../index.html" class="text-blue-600 hover:underline">Home</a> / 
@@ -193,23 +221,23 @@
         <form class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-800">
           <div>
             <label class="block mb-1">Price ($)</label>
-            <input type="number" placeholder="10000" id="price" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" placeholder="10000" min="1" id="price" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500">
           </div>
           <div>
             <label class="block mb-1">Interest Rate</label>
-            <input type="number" placeholder="10" id="rate" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" placeholder="10" min="1" id="rate" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500">
           </div>
           <div>
             <label class="block mb-1">Loan Term (years)</label>
-            <input type="number" placeholder="3" id="term" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" placeholder="3" min="1" id="term" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500">
           </div>
           <div>
             <label class="block mb-1">Down Payment</label>
-            <input type="number" placeholder="5000" id="down" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="number" placeholder="5000" min="1" id="down" class="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500">
           </div>
       
           <div class="col-span-1 md:col-span-2">
-            <button type="button" id="calculator" class="mt-4 inline-flex items-center bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+            <button type="button" id="calculator" class="mt-4 inline-flex items-center bg-black text-white px-6 py-2 rounded-full hover:bg-slate-700 transition">
               Calculate
               <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -225,7 +253,8 @@
       <section class="py-10 px-6 max-w-5xl mx-auto  bg-white font-family-montserrat">
         <h2 class="text-2xl font-semibold mb-6">2 Reviews</h2>
         
-        <div class="flex flex-wrap gap-6 items-start">
+        <div class="flex flex-wrap lg:gap-20 gap-6 lg:justify-center
+          mx-10 items-start justify-around">
           <!-- Overall Rating Circle -->
           <div class="flex flex-col items-center">
             <div class="relative w-24 h-24 rounded-full border-4 border-blue-500 flex items-center justify-center">
@@ -235,7 +264,7 @@
           </div>
       
           <!-- Category Ratings -->
-          <div class="grid grid-cols-2 gap-y-2 text-sm">
+          <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 gap-y-2 text-sm">
             <div class="flex justify-between w-60">
               <span>Comfort</span> <span class="text-blue-600">⭐ 5.0</span>
             </div>
@@ -301,7 +330,7 @@
                 <label for="save" class="text-sm text-gray-600">Save my name and email</label>
               </div>
           
-              <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+              <button type="submit" class="bg-black text-white px-6 py-2 rounded hover:bg-slate-700">
                 Submit Review
               </button>
             </form>
@@ -395,7 +424,7 @@
       </footer>
       
       
-      
+    <script src="../Js/index.js"></script>
     <script src="../Js/vehicle.js"></script>
 </body>
 </html>

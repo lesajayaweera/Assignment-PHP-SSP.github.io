@@ -107,7 +107,7 @@
           </div>
         </div>
       </section>
-      <section class="py-16 bg-white">
+      <section class="py-16 bg-white font-family-montserrat">
         <div class="max-w-7xl mx-auto px-4 text-center">
           <h2 class="text-3xl font-bold text-gray-900 mb-12">Why Choose Us?</h2>
       
@@ -160,7 +160,7 @@
           <!-- Header -->
           <div class="flex justify-between items-center mb-8">
             <h2 class="text-2xl font-bold text-gray-900">Explore Our Premium Brands</h2>
-            <a href="#" class="text-sm text-gray-500 hover:text-black flex items-center space-x-1">
+            <a href="#" id="show-more-btn" class="text-sm text-gray-500 hover:text-black flex items-center space-x-1">
               <span>Show All Brands</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -169,7 +169,7 @@
           </div>
       
           <!-- Brand Cards Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="brand-list">
             <!-- Audi -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
               <img src="../../assets/images/audi.png" alt="Audi" class="h-10 mb-2" />
@@ -201,10 +201,19 @@
             </div>
       
             <!-- Rolls Royce -->
-            <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/rolls royce.png" alt="Rolls Royce" class="h-10 mb-2" />
-              <span class="text-sm text-gray-700">Rolls Royce</span>
+            <div class="flex flex-col  items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
+              <img src="../../assets/images/ferrari.png" alt="Ferrari" class="h-10 mb-2" />
+              <span class="text-sm text-gray-700">Ferrari</span>
             </div>
+            <div class="flex flex-col hidden items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
+              <img src="../../assets/images/lamborghini.png" alt="lamborghini" class="h-10 mb-2" />
+              <span class="text-sm text-gray-700">Lamborghini</span>
+            </div>
+            <div class="flex flex-col hidden items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
+              <img src="../../assets/images/bugatti.png" alt="bugatti" class="h-10 mb-2" />
+              <span class="text-sm text-gray-700">Bugatti</span>
+            </div>
+            
           </div>
         </div>
       </section>
@@ -320,9 +329,7 @@
           <!-- Header -->
           <div class="flex justify-between items-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900">What our customers say</h2>
-            <p class="text-sm text-gray-600">
-              Rated 4.7 / 5 based on 28,370 reviews Showing our 4 & 5 star reviews
-            </p>
+            
           </div>
       
           <!-- Testimonials -->

@@ -24,28 +24,25 @@ function toggleFAQ(index) {
     }
 }
 
-window.addEventListener('DOMContentLoaded', function () {
-    const images=document.getElementById("images");
-    console.log(images);
-    const children=this.document.querySelectorAll("#images img");
-    
-    fetch(`https://api.unsplash.com/search/photos?query=${query}&client_id=${accessKey}`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data.results); // Contains array of image objects
-  })
-  .catch(error => console.error('Error:', error));
 
-  for (let i = 0; i < children.length; i++) {
-    const img = children[i];
-    const imageUrl = data.results[0].urls.regular;
-    console.log(imageUrl);
-    
-    img.src = imageUrl;
-  }
-    console.log(children);
-    
-    
+window.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('show-more-btn');
+const hiddenElements = document.querySelectorAll("#brand-list .hidden");
+
+let isExpanded = false;
+
+function toggleItems() {
+  hiddenElements.forEach((item) => {
+    item.classList.toggle("hidden");
+  });
+
+  isExpanded = !isExpanded;
+  btn.textContent = isExpanded ? "Show Less ↑" : "Show All Brands →";
+}
+
+btn.addEventListener('click', toggleItems);
+
+
 })
       
         
