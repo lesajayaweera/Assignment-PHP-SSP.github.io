@@ -1,6 +1,10 @@
+// Add event listner that waits for the DOM to be fully loaded before executing the function
 window.addEventListener('DOMContentLoaded', function () {
+
     const header = document.getElementById('header');
+   
     let lastScrollY = window.scrollY;
+    
 
     // Add initial Tailwind classes via JS
     header.classList.add(
@@ -20,8 +24,19 @@ window.addEventListener('DOMContentLoaded', function () {
         }
 
         lastScrollY = window.scrollY;
+
+
     });
 
+    
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+  
+    hamburger.addEventListener('click', function () {
+      nav.classList.toggle('hidden');
+    });
+
+  
 
     let currentYear = new Date().getFullYear();
 
