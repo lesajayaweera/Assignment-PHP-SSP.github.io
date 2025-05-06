@@ -1,5 +1,4 @@
-const accessKey = 'AQbzvmm7dPvzLB7QK2_Ws1ScYarbOYR4i09aVtUpoYw';
-const query = 'people';
+
 
 
 

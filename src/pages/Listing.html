@@ -38,52 +38,49 @@
 
         </div>
     </header>
-    <section class="bg-[#050b22] pt-30 py-6 font-family-montserrat">
-      <div class="flex justify-center w-1/2 mx-auto">
-        <div class="flex flex-col lg:flex-row  items-center justify-center w-full rounded-lg bg-white  shadow px-4 py-2 space-x-4">
+    <section class="bg-[#050b22] py-6 font-family-montserrat pt-30">
+      <div class="w-full px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto bg-white rounded-lg shadow p-4 flex flex-col lg:flex-row items-center justify-between space-y-4 lg:space-y-0 lg:space-x-4">
           
           <!-- Condition -->
-          <select title="section" class=" bg-transparent text-sm text-gray-700 pr-6 pl-2 py-1 focus:outline-none w-2/3 mx-auto w-2/3 mx-auto">
-            <option>Condition</option>
+          <select class="bg-transparent text-sm text-gray-700 px-2 py-1 border border-gray-200 rounded focus:outline-none w-full">
+            <option disabled selected>Condition</option>
             <option>New</option>
             <option>Used</option>
           </select>
-          
     
-          <div class="h-6 border-l border-gray-200"></div>
+          <!-- Divider -->
+          <div class="hidden lg:block h-6 border-l border-gray-300"></div>
     
-          <!-- Any Makes -->
-          <div >
-            <select title="section" class="bg-transparent text-sm text-gray-700 focus:outline-none w-2/3 mx-auto">
-              <option>Any Makes</option>
-            </select>
-            
-          </div>
-    
-          <div class="h-6 border-l border-gray-200"></div>
-    
-          <!-- Any Models -->
-          <div>
-            <select title="section" class="bg-transparent text-sm text-gray-700 focus:outline-none w-2/3 mx-auto">
-              <option>Any Models</option>
-            </select>
-            
-          </div>
-    
-          <div class="h-6 border-l border-gray-200"></div>
-    
-          <!-- Prices -->
-          <span class="text-sm text-gray-700">Prices:</span>
-          <select title="section" class="bg-transparent text-sm text-gray-700 focus:outline-none w-2/3 mx-auto">
-            <option>All Prices</option>
+          <!-- Makes -->
+          <select class="bg-transparent text-sm text-gray-700 px-2 py-1 border border-gray-200 rounded focus:outline-none w-full">
+            <option disabled selected>Any Makes</option>
+            <!-- Add makes dynamically if needed -->
           </select>
     
-          <div class="h-6 border-l border-gray-200"></div>
+          <!-- Divider -->
+          <div class="hidden lg:block h-6 border-l border-gray-300"></div>
     
-          
+          <!-- Models -->
+          <select class="bg-transparent text-sm text-gray-700 px-2 py-1 border border-gray-200 rounded focus:outline-none w-full">
+            <option disabled selected>Any Models</option>
+            <!-- Add models dynamically if needed -->
+          </select>
     
-          <!-- Find Listing Button -->
-          <button type="button" class="ml-4 bg-black  text-white hover:bg-white hover:text-black hover:border text-sm font-medium max-w-full px-4 py-2 rounded-full">
+          <!-- Divider -->
+          <div class="hidden lg:block h-6 border-l border-gray-300"></div>
+    
+          <!-- Price -->
+          <select class="bg-transparent text-sm text-gray-700 px-2 py-1 border border-gray-200 rounded focus:outline-none w-full">
+            <option disabled selected>All Price</option>
+            <!-- Add makes dynamically if needed -->
+          </select>
+    
+          <!-- Divider -->
+          <div class="hidden lg:block h-6 border-l border-gray-300"></div>
+    
+          <!-- Button -->
+          <button type="button" class="bg-black text-white text-sm font-medium px-6 py-2 rounded-full hover:bg-white hover:text-black hover:border hover:border-black transition duration-300 w-full">
             🔍 Find Listing
           </button>
         </div>

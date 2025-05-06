@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LuxCars - Sign Up</title>
+  <link rel="stylesheet" href="../output.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+  </style>
+</head>
+
+<body class="capitalize text-lg font-[Montserrat]">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between bg-black text-white p-4" id="header">
+    <div>
+        <p class="text-4xl font-bold font-family-body">luxCars</p>
+        <p class="text-sm font-family-montserrat">A luxury-driven, high-performance</p>
+    </div>
+    <div >
+        <nav class="hidden md:block"     >
+            <ul class="text-lg font-family-montserrat">
+                <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
+                <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
+                <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
+                <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
+                <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                
+            </ul>
+        </nav>
+        <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
+            <span class="block w-full h-0.5 bg-white"></span>
+            <span class="block w-full h-0.5 bg-white"></span>
+            <span class="block w-full h-0.5 bg-white"></span>   
+        </button>
+    </div>
+    <div class="flex items-center space-x-4">
+        <i class="material-icons hidden sm:block" style="font-size: 30px;">search</i>
+        <i class="material-icons" style="font-size: 30px;">account_circle</i>
+
+    </div>
+</header>
+
+  <!-- Sign Up Section -->
+  <section class="font-family-montserrat">
+    <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
+      <img src="../../assets/images/Login page/login-image.jpg" class="w-full h-full object-cover" alt="Login Visual"/>
+
+      <form class="flex flex-col justify-center items-start p-8 space-y-6 w-full">
+        <h2 class="text-3xl font-bold">Sign Up</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <input type="text" name="firstName" placeholder="First Name" class="p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+          <input type="text" name="lastName" placeholder="Last Name" class="p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+        </div>
+
+        <input type="email" name="email" placeholder="Email" class="w-full p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+        <input type="password" name="password" placeholder="Password" class="w-full p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+
+        <button type="submit" class="bg-black text-white p-4 w-full hover:bg-white hover:text-black hover:border transition duration-500">
+          Sign Up
+        </button>
+
+        <p class="text-sm self-end">
+          Already have an account? 
+          <a href="./Login.html" class="text-blue-500 hover:underline">Login</a>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <script src="../Js/index.js"></script>
+</body>
+</html>
