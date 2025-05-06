@@ -572,6 +572,9 @@
   .w-60 {
     width: calc(var(--spacing) * 60);
   }
+  .w-64 {
+    width: calc(var(--spacing) * 64);
+  }
   .w-fit {
     width: fit-content;
   }
