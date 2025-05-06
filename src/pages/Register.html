@@ -11,7 +11,7 @@
   </style>
 </head>
 
-<body class="capitalize text-lg font-[Montserrat]">
+<body class="capitalize text-lg font-family-montserrat">
 
   <!-- Header -->
   <header class="flex items-center justify-between bg-black text-white p-4" id="header">
@@ -52,18 +52,27 @@
         <h2 class="text-3xl font-bold">Sign Up</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-          <input type="text" name="firstName" placeholder="First Name" class="p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
-          <input type="text" name="lastName" placeholder="Last Name" class="p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+          <input type="text" name="firstName" placeholder="First Name" class="p-2 border rounded  outline-none focus:ring-blue-500" required />
+          <input type="text" name="lastName" placeholder="Last Name" class="p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
         </div>
 
-        <input type="email" name="email" placeholder="Email" class="w-full p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
-        <input type="password" name="password" placeholder="Password" class="w-full p-2 border rounded ring-2 focus:outline-none focus:ring-blue-500" required />
+        <input type="email" name="email" placeholder="Email" class="w-full p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
+
+
+        <input type="password" name="password" placeholder="Password" class="w-full p-2 border  rounded  focus:ring-blue-500" required />
+
+        
+        <select title="role" name="role"  class="text-sm border px-2 py-2 rounded w-[200px] " required>
+          <option value="" disabled selected>Select Role</option>
+          <option value="buyer">Buyer</option>
+          <option value="seller">Seller</option>
+      </select>
 
         <button type="submit" class="bg-black text-white p-4 w-full hover:bg-white hover:text-black hover:border transition duration-500">
           Sign Up
         </button>
 
-        <p class="text-sm self-end">
+        <p class="text-sm self-start">
           Already have an account? 
           <a href="./Login.html" class="text-blue-500 hover:underline">Login</a>
         </p>

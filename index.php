@@ -1,3 +1,9 @@
+
+
+<?php
+include './src/php/Class/Database.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +17,7 @@
         </style>  
 </head>
 <body class="capitalize text-lg font-family-montserrat">
+  
     <header class="flex items-center justify-between bg-black text-white p-4" id="header">
         <div>
             <p class="text-4xl font-bold font-family-body">luxCars</p>
