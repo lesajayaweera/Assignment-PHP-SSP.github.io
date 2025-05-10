@@ -4,23 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Admin Dashboard</title>
-  <link rel="stylesheet" href="../../output.css">
+  <link rel="stylesheet" href="/Assignment/src/output.css">
 </head>
-<body class=" font-family-montserrat">
+<body class="font-family-montserrat">
 
   <!-- Mobile Sidebar Overlay -->
-  <div id="mobileSidebar" class="fixed inset-0 z-40 bg-black text-white w-3/4 max-w-xs transform -translate-x-full transition-transform duration-300 lg:hidden">
+  <div id="mobileSidebar" class="fixed inset-0 z-40 bg-black text-white w-3/4 max-w-xs transform -translate-x-full transition-transform duration-300 lg:hidden font-sans">
     <div class="p-6 space-y-4">
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
-        <a href="./Dashboard.html" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
         <a href="./ViewProducts.html" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+        <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
       </nav>
     </div>
   </div>
@@ -36,7 +36,7 @@
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+        <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
       </nav>
     </aside>
 

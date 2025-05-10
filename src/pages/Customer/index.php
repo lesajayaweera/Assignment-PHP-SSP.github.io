@@ -26,11 +26,11 @@ include './src/php/Class/Database.php';
         <div >
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
-                    <li class="inline-block mr-4"><a href="./index.html" class="text-white hover:text-gray-400">Home</a></li>
-                    <li class="inline-block mr-4"><a href="./src/pages/About.html" class="text-white hover:text-gray-400">About</a></li>
-                    <li class="inline-block mr-4"><a href="./src/pages/Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                    <li class="inline-block mr-4"><a href="./src/pages/ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                    <li class="inline-block mr-4"><a href="./src/pages/Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Services" class="text-white hover:text-gray-400">Services</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Listings" class="text-white hover:text-gray-400">Listing</a></li>
                     
                 </ul>
             </nav>

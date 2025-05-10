@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LuxCars-Home</title>
-        <link rel="stylesheet" href="../output.css">
+        <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -19,12 +19,12 @@
         <div >
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
-                    <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
-                    <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
-                    <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                    <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                    <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
-                    
+                  <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
+                  <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                  <li class="inline-block mr-4"><a href="/Assignment/Services" class="text-white hover:text-gray-400">Services</a></li>
+                  <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                  <li class="inline-block mr-4"><a href="/Assignment/Listings" class="text-white hover:text-gray-400">Listing</a></li>
+                  
                 </ul>
             </nav>
             <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
@@ -43,7 +43,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Breadcrumb -->
           <p class="text-sm text-gray-500 mb-2">
-            <a href="../../index.html" class="hover:underline transition">Home</a> / <span class="text-black">About Us</span>
+            <a href="/Assignment/" class="hover:underline transition">Home</a> / <span class="text-black">About Us</span>
           </p>
       
           <!-- Title -->
@@ -86,7 +86,7 @@
                 <div class="text-3xl font-bold">45</div>
                 <div class="text-lg">Years in Business</div>
               </div>
-              <img src="../../assets/images/AboutUs page/handshake.jpg" alt="Handshake" class="rounded-lg w-full h-auto object-cover max-w-[600px]" />
+              <img src="/Assignment/assets/images/AboutUs page/handshake.jpg" alt="Handshake" class="rounded-lg w-full h-auto object-cover max-w-[600px]" />
               <div class="bg-black  text-white rounded-xl px-6 py-8 text-center shadow-md w-full">
                 <div class="text-3xl font-bold">100+</div>
                 <div class="text-lg">Countries in Business</div>
@@ -95,14 +95,14 @@
       
             <!-- Main person image -->
             <div>
-              <img src="../../assets/images/AboutUs page/person in a car.jpg" alt="Person with car" class="rounded-lg w-full h-auto object-cover" />
+              <img src="/Assignment/assets/images/AboutUs page/person in a car.jpg" alt="Person with car" class="rounded-lg w-full h-auto object-cover" />
             </div>
       
             <!-- Grid of 3 images -->
             <div class="grid grid-cols-2 gap-4">
-              <img src="../../assets/images/AboutUs page/car showroom.jpg" alt="Car showroom" class="rounded-lg w-full h-auto object-cover col-span-2" />
-              <img src="../../assets/images/AboutUs page/car rear.jpg   " alt="Car rear" class="rounded-lg w-full h-auto object-cover" />
-              <img src="../../assets/images/AboutUs page/key handover.jpg" alt="Keys handover" class="rounded-lg w-full h-auto object-cover" />
+              <img src="/Assignment/assets/images/AboutUs page/car showroom.jpg" alt="Car showroom" class="rounded-lg w-full h-auto object-cover col-span-2" />
+              <img src="/Assignment/assets/images/AboutUs page/car rear.jpg   " alt="Car rear" class="rounded-lg w-full h-auto object-cover" />
+              <img src="/Assignment/assets/images/AboutUs page/key handover.jpg" alt="Keys handover" class="rounded-lg w-full h-auto object-cover" />
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
             <div class="flex flex-col items-center">
               <div class="text-blue-500 text-4xl mb-4">
                 <!-- Replace with your SVG icon or Lucide icon -->
-                <img src="../../assets/icons/financing.png" alt="" class="h-10 w-10" />
+                <img src="/Assignment/assets/icons/financing.png" alt="" class="h-10 w-10" />
               </div>
               <h4 class="font-semibold text-lg">Special Financing Offers</h4>
               <p class="text-sm text-gray-600 mt-2">Our stress-free finance department that can find financial solutions to save you money.</p>
@@ -126,7 +126,7 @@
             <div class="flex flex-col items-center">
               <div class="text-blue-500 text-4xl mb-4">
                 <!-- Icon -->
-                <img src="../../assets/icons/dealership.png" alt="" class="h-10 w-10" />
+                <img src="/Assignment/assets/icons/dealership.png" alt="" class="h-10 w-10" />
               </div>
               <h4 class="font-semibold text-lg">Trusted Car Dealership</h4>
               <p class="text-sm text-gray-600 mt-2">Our stress-free finance department that can find financial solutions to save you money.</p>
@@ -136,7 +136,7 @@
             <div class="flex flex-col items-center">
               <div class="text-blue-500 text-4xl mb-4">
                 <!-- Icon -->
-                <img src="../../assets/icons/pricing.png" alt="" class="h-10 w-10" />
+                <img src="/Assignment/assets/icons/pricing.png" alt="" class="h-10 w-10" />
               </div>
               <h4 class="font-semibold text-lg">Transparent Pricing</h4>
               <p class="text-sm text-gray-600 mt-2">Our stress-free finance department that can find financial solutions to save you money.</p>
@@ -146,7 +146,7 @@
             <div class="flex flex-col items-center">
               <div class="text-blue-500 text-4xl mb-4">
                 <!-- Icon -->
-                <img src="../../assets/icons/service.png" alt="" class="h-10 w-10" />
+                <img src="/Assignment/assets/icons/service.png" alt="" class="h-10 w-10" />
               </div>
               <h4 class="font-semibold text-lg">Expert Car Service</h4>
               <p class="text-sm text-gray-600 mt-2">Our stress-free finance department that can find financial solutions to save you money.</p>
@@ -172,45 +172,45 @@
           <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="brand-list">
             <!-- Audi -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/audi.png" alt="Audi" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/audi.png" alt="Audi" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Audi</span>
             </div>
       
             <!-- BMW -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/bmw.png" alt="BMW" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/bmw.png" alt="BMW" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">BMW</span>
             </div>
       
             <!-- Ford -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/ford.png" alt="Ford" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/ford.png" alt="Ford" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Ford</span>
             </div>
       
             <!-- Mercedes Benz -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/benz.png" alt="Mercedes Benz" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/benz.png" alt="Mercedes Benz" class="h-10 mb-2" />
               <span class="text-sm text-gray-700 text-center">Mercedes Benz</span>
             </div>
       
             <!-- Land Rover -->
             <div class="flex flex-col items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/land rover.png" alt="land Rover" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/land rover.png" alt="land Rover" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Land Rover</span>
             </div>
       
             <!-- Rolls Royce -->
             <div class="flex flex-col  items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/ferrari.png" alt="Ferrari" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/ferrari.png" alt="Ferrari" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Ferrari</span>
             </div>
             <div class="flex flex-col hidden items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/lamborghini.png" alt="lamborghini" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/lamborghini.png" alt="lamborghini" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Lamborghini</span>
             </div>
             <div class="flex flex-col hidden items-center justify-center border rounded-lg p-4 bg-white hover:shadow-md transition">
-              <img src="../../assets/images/bugatti.png" alt="bugatti" class="h-10 mb-2" />
+              <img src="/Assignment/assets/images/bugatti.png" alt="bugatti" class="h-10 mb-2" />
               <span class="text-sm text-gray-700">Bugatti</span>
             </div>
             
@@ -224,7 +224,7 @@
           <div class="grid md:grid-cols-2 gap-8 bg-gray-100 p-8 rounded-xl">
             <!-- Left: Image with play button -->
             <div class=" rounded-xl overflow-hidden">
-              <img src="../../assets/images/AboutUs page/car.jpg" alt="Car on road" class="w-full h-full object-cover rounded-xl" />
+              <img src="/Assignment/assets/images/AboutUs page/car.jpg" alt="Car on road" class="w-full h-full object-cover rounded-xl" />
               
             </div>
       
@@ -534,7 +534,7 @@
         
                 <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
                 <div class="flex gap-4 text-gray-600">
-                    <img src="../../assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
                     <img src="../../assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
                     <img src="../../assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
                     

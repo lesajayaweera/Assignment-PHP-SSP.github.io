@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>LuxCars - Sign Up</title>
-  <link rel="stylesheet" href="../output.css" />
+  <link rel="stylesheet" href="/Assignment/src/output.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:wght@300;400;500;700&display=swap');

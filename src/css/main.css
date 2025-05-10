@@ -20,7 +20,3 @@
 }
 
 
-.grids{
-    display: grid;
-    grid-template-columns: 600px 600px 200px;
-}

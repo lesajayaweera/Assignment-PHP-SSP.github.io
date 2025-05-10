@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Admin-View Listings</title>
   <link rel="stylesheet" href="../../output.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
-<body class="bg-gray-100 font-family-montserrat">
+<body class="bg-gray-100 font-family-monteserat">
 
   <!-- Mobile Sidebar Overlay -->
-  <div id="mobileSidebar" class="fixed inset-0 z-40 bg-black text-white w-3/4 max-w-xs transform -translate-x-full transition-transform font-family-montserrat duration-300 lg:hidden">
+  <div id="mobileSidebar" class="fixed inset-0 z-40 bg-black text-white w-3/4 max-w-xs transform -translate-x-full transition-transform duration-300 lg:hidden">
     <div class="p-6 space-y-4">
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
@@ -42,13 +41,13 @@
     </aside>
 
     <!-- Main Content -->
-    <section class="flex-1 p-6 font-family-montserrat space-y-6 w-full">
+    <main class="flex-1 p-6 space-y-6 w-full">
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div class="flex items-center space-x-4">
           <!-- Hamburger -->
           <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
-          <h2 class="text-2xl font-semibold">All Listings</h2>
+          <h2 class="text-2xl font-semibold">Manage Accounts</h2>
         </div>
         <div class="flex items-center space-x-3">
           <span class="text-sm">Mevi Roy</span>
@@ -58,36 +57,22 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100">
         <!-- Card -->
-        <div class="max-w-xs bg-white rounded-lg font-family-montserrat shadow-md p-6 text-center">
-          <!-- Title -->
-          <h3 class="text-lg font-semibold text-gray-900 mb-1">Porshe 718 Cayman S</h3>
-          <p class="text-gray-500 mb-4">Coupe</p>
-        
-          <!-- Car Image -->
-          <img src="../../../assets/images/land rover.png" 
-               alt="Car" 
-               class="w-full h-40 object-contain mb-4" />
-        
-          <!-- Icons and Info -->
-          <div class="flex justify-center items-center gap-6 mb-4 text-gray-600">
-            <div class="flex items-center gap-1">
-              <i class="fas fa-user text-purple-500"></i>
-              <span class="text-sm">4</span>
-            </div>
-            <div class="flex items-center gap-1">
-              <i class="fas fa-cogs text-purple-500"></i>
-              <span class="text-sm">Manual</span>
-            </div>
+        <div class="max-w-xs rounded-2xl bg-gray-100 p-6 shadow-md text-center">
+          <img src="../../../assets/images/profile pic3.jpg" alt="Profile" class="mx-auto h-16 w-16 rounded-full object-cover">
+          
+          <h2 class="mt-4 text-lg font-semibold text-gray-800">admin</h2>
+          <p class="text-sm text-gray-600">943 Broadway, Brooklyn</p>
+          
+          <div class="mt-3 flex items-center justify-center text-gray-600 text-sm">
+            <svg class="h-5 w-5 text-indigo-400 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M2.01 3.51a.75.75 0 0 1 1.05.04l3.26 3.58a.75.75 0 0 1-.02 1.02L4.7 9.73a16.99 16.99 0 0 0 9.58 9.58l1.58-1.58a.75.75 0 0 1 1.02-.02l3.58 3.26a.75.75 0 0 1 .04 1.05l-2.3 2.73a2.25 2.25 0 0 1-2.53.7C7.69 21.21 2.79 16.31 1.26 9.83a2.25 2.25 0 0 1 .7-2.53l2.73-2.3a.75.75 0 0 1 1.05.04z"/>
+            </svg>
+            +88-123456789
           </div>
         
-          <!-- Buttons -->
-          <div class="flex justify-center gap-4">
-            <button class="bg-green-500 text-white px-5 py-2 w-full rounded-full hover:bg-green-600 capitalize transition">
-              view
-            </button>
-            <button class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 capitalize transition">
-              Delete
-            </button>
+          <div class="mt-6 flex justify-center space-x-3">
+            <button class="rounded-xl bg-red-600 px-4 py-2 text-white font-medium hover:bg-red-700 w-full transition">Delete Account</button>
+            <button class="rounded-xl bg-blue-600 px-4 py-2 text-white font-medium hover:bg-blue-700 w-full transition">Edit Account</button>
           </div>
         </div>
         
@@ -95,7 +80,7 @@
         <!-- Repeat the card as needed -->
       </div>
       
-    </section>
+    </main>
   </div>
 
   <!-- JavaScript -->
