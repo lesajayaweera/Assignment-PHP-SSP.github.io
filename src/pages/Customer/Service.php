@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LuxCars-Home</title>
-        <link rel="stylesheet" href="../output.css">
+        <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -19,7 +19,7 @@
             <div >
                 <nav class="hidden md:block"     >
                     <ul class="text-lg font-family-montserrat">
-                        <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
+                        <li class="inline-block mr-4"><a href="/Assignment/index.html" class="text-white hover:text-gray-400">Home</a></li>
                         <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
                         <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
                         <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
@@ -72,11 +72,11 @@
               <!-- Image -->
               <div class="w-full lg:w-3/4 grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div class="grid grid-rows-1 lg:grid-rows-2 gap-2">
-                  <img src="../../assets/images/Service page/service.jpg" alt="Service" class="rounded-xl shadow-lg w-full object-cover">
-                <img src="../../assets/images/Service page/service team.jpg" alt="Service Team" class="rounded-xl shadow-lg w-full object-cover">
+                  <img src="/Assignment/assets/images/Service page/service.jpg" alt="Service" class="rounded-xl shadow-lg w-full object-cover">
+                <img src="/Assignment/assets/images/Service page/service team.jpg" alt="Service Team" class="rounded-xl shadow-lg w-full object-cover">
 
                 </div>
-                <img src="../../assets/images/Service page/mechanic.jpg" alt="Service" class="rounded-xl shadow-lg w-full object-cover">
+                <img src="/Assignment/assets/images/Service page/mechanic.jpg" alt="Service" class="rounded-xl shadow-lg w-full object-cover">
               </div>
           
             </div>
@@ -88,28 +88,28 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                 <!-- Benefit 1 -->
                 <div class="flex flex-col items-center text-center">
-                  <img src="../../assets/icons/financing.png" alt="Icon" class="w-12 h-12 mb-4 " />
+                  <img src="/Assignment/assets/icons/financing.png" alt="Icon" class="w-12 h-12 mb-4 " />
                   <h3 class="font-semibold mb-2">Special Financing Offers</h3>
                   <p class="text-sm text-gray-600">Our stress-free finance department that can find financial solutions to save you money.</p>
                 </div>
           
                 <!-- Benefit 2 -->
                 <div class="flex flex-col items-center text-center">
-                  <img src="../../assets/icons/dealership.png" alt="Icon" class="w-12 h-12 mb-4 " />
+                  <img src="/Assignment/assets/icons/dealership.png" alt="Icon" class="w-12 h-12 mb-4 " />
                   <h3 class="font-semibold mb-2">Trusted Car Dealership</h3>
                   <p class="text-sm text-gray-600">Our stress-free finance department that can find financial solutions to save you money.</p>
                 </div>
           
                 <!-- Benefit 3 -->
                 <div class="flex flex-col items-center text-center">
-                  <img src="../../assets/icons/pricing.png" alt="Icon" class="w-12 h-12 mb-4 " />
+                  <img src="/Assignment/assets/icons/pricing.png" alt="Icon" class="w-12 h-12 mb-4 " />
                   <h3 class="font-semibold mb-2">Transparent Pricing</h3>
                   <p class="text-sm text-gray-600">Our stress-free finance department that can find financial solutions to save you money.</p>
                 </div>
           
                 <!-- Benefit 4 -->
                 <div class="flex flex-col items-center text-center">
-                  <img src="../../assets/icons/service.png" alt="Icon" class="w-12 h-12 mb-4 " />
+                  <img src="/Assignment/assets/icons/service.png" alt="Icon" class="w-12 h-12 mb-4 " />
                   <h3 class="font-semibold mb-2">Expert Car Service</h3>
                   <p class="text-sm text-gray-600">Our stress-free finance department that can find financial solutions to save you money.</p>
                 </div>
@@ -127,7 +127,7 @@
                 <div class="flex space-x-6 space-y-4 overflow-x-auto scrollbar-hide scroll-smooth">
                   <!-- Card -->
                   <div class="min-w-[250px] max-w-sm bg-white rounded-xl shadow p-4  flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">2024 BMW ALPINA XB7 wit...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -138,7 +138,7 @@
           
                   <!-- Duplicate cards as needed -->
                   <div class="min-w-[250px] max-w-sm bg-white rounded-xl shadow p-4 flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">BMW X6 M50i is designed...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -147,7 +147,7 @@
                     </a>
                   </div>
                   <div class="min-w-[250px] max-w-sm bg-white rounded-xl shadow p-4 flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">BMW X6 M50i is designed...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -156,7 +156,7 @@
                     </a>
                   </div>
                   <div class="min-w-[250px] max-w-sm bg-white rounded-xl shadow p-4 flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">BMW X6 M50i is designed...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -165,7 +165,7 @@
                     </a>
                   </div>
                   <div class="min-w-[250px] max-w-sm bg-white rounded-xl shadow p-4 flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">BMW X6 M50i is designed...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -174,7 +174,7 @@
                     </a>
                   </div>
                   <div class="min-w-[250px] mb-4 max-w-sm bg-white rounded-xl shadow p-4 flex-shrink-0">
-                    <img src="../../assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
+                    <img src="/Assignment/assets/images/products/bmw-m4.jpg" alt="Car" class="rounded-lg mb-4 object-cover w-full h-40">
                     <h3 class="font-semibold text-md mb-1">BMW X6 M50i is designed...</h3>
                     <p class="text-sm text-gray-500 mb-2">Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec.</p>
                     <a href="#" class="text-sm text-blue-600 font-medium flex items-center gap-1">
@@ -307,9 +307,9 @@
             
                     <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
                     <div class="flex gap-4 text-gray-600">
-                        <img src="../../assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
-                        <img src="../../assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
-                        <img src="../../assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
+                        <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
+                        <img src="/Assignment/assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
+                        <img src="/Assignment/assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
                         
                     </div>
                     </div>

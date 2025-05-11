@@ -46,7 +46,7 @@
   <!-- Sign Up Section -->
   <section class="font-family-montserrat">
     <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
-      <img src="../../assets/images/Login page/login-image.jpg" class="w-full h-full object-cover" alt="Login Visual"/>
+      <img src="/Assignment/assets/images/Login page/login-image.jpg" class="w-full h-full object-cover" alt="Login Visual"/>
 
       <form class="flex flex-col justify-center items-start p-8 space-y-6 w-full">
         <h2 class="text-3xl font-bold">Sign Up</h2>

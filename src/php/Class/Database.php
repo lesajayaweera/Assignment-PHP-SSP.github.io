@@ -16,9 +16,7 @@ class Database {
     private function connectDB(){
         $this->conn = new mysqli($this->host, $this->username, $this->password, $this->DbName);
         if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-
-            
+            die("Connection failed: " . $this->conn->connect_error);  
         }
         
     }

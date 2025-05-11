@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LuxCars-Brands</title>
-        <link rel="stylesheet" href="../output.css">
+        <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -46,12 +46,12 @@
             <!-- Cart Items -->
             <div>
               <h2 class="text-2xl font-semibold">Your cart</h2>
-              <p class="text-sm text-gray-500 mt-1">Not ready to checkout? <a href="#" class="underline">Continue Shopping</a></p>
+              <p class="text-sm text-gray-500 mt-1">Not ready to checkout? <a href="/Assignment/" class="underline">Continue Shopping</a></p>
     
               <div class="mt-6 border-b pb-6 space-y-6">
                 <!-- Item -->
                 <div class="flex items-start gap-4">
-                  <img src="https://via.placeholder.com/100x80" alt="Car" class="w-24 h-20 object-cover rounded" />
+                  <img src="/Assignment/assets/images/products/range-rover.jpg" alt="Car" class="w-24 h-20 object-cover rounded" />
                   <div class="flex-1">
                     <h3 class="font-semibold">Car Name</h3>
                     <p class="text-sm text-gray-500">Model: Name</p>
@@ -63,7 +63,7 @@
     
                 <!-- Another Item -->
                 <div class="flex items-start gap-4">
-                  <img src="https://via.placeholder.com/100x80" alt="Car" class="w-24 h-20 object-cover rounded" />
+                  <img src="/Assignment/assets/images/products/range-rover.jpg" alt="Car" class="w-24 h-20 object-cover rounded" />
                   <div class="flex-1">
                     <h3 class="font-semibold">Car Name</h3>
                     <p class="text-sm text-gray-500">Model: Name</p>
@@ -198,6 +198,6 @@
         </div>
       </footer>
 
-      <script src="../Js/index.js"></script>
+      <script src="/Assignment/src/Js/index.js"></script>
 </body>
 </html>

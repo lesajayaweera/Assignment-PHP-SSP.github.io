@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LuxCars-Home</title>
-        <link rel="stylesheet" href="../output.css">
+        <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -19,7 +19,7 @@
         <div >
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
-                    <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/index.html" class="text-white hover:text-gray-400">Home</a></li>
                     <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
                     <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
                     <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
@@ -124,7 +124,7 @@
             <a href="#" class="text-blue-600 mt-2 inline-block">View Details</a>
             </div>
           <div class="bg-white p-4 rounded-xl shadow-md">
-            <img src="../../assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
+            <img src="/Assignment/assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
             <h3 class="mt-3 font-semibold">T-Cross – 2023</h3>
             <p class="text-gray-500 text-sm">4.0 D5 PowerPulse Momentum</p>
             <div class="flex justify-between text-gray-600 text-sm mt-2">
@@ -136,7 +136,7 @@
             <a href="#" class="text-blue-600 mt-2 inline-block">View Details</a>
             </div>
           <div class="bg-white p-4 rounded-xl shadow-md">
-            <img src="../../assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
+            <img src="/Assignment/assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
             <h3 class="mt-3 font-semibold">T-Cross – 2023</h3>
             <p class="text-gray-500 text-sm">4.0 D5 PowerPulse Momentum</p>
             <div class="flex justify-between text-gray-600 text-sm mt-2">
@@ -237,9 +237,9 @@
         
                 <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
                 <div class="flex gap-4 text-gray-600">
-                    <img src="../../assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
                     
                 </div>
                 </div>
@@ -256,7 +256,7 @@
         </div>
         </div>
       </footer>
-    <script src="../Js/index.js"></script>
+    <script src="/Assignment/src/Js/index.js"></script>
       
     
 </body>

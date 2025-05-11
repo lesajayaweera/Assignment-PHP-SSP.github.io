@@ -1,9 +1,6 @@
 
 
-<?php
-include './src/php/Class/Database.php';
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

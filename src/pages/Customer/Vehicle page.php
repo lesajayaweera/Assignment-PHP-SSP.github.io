@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LuxCars-Home</title>
-        <link rel="stylesheet" href="../output.css">
+        <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
@@ -19,7 +19,7 @@
     <div >
         <nav class="hidden md:block"     >
             <ul class="text-lg font-family-montserrat">
-                <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
+                <li class="inline-block mr-4"><a href="/Assignment/index.html" class="text-white hover:text-gray-400">Home</a></li>
                 <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
                 <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
                 <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
@@ -42,7 +42,7 @@
     <section class="max-w-7xl mx-auto px-4 py-30 font-family-montserrat">
         <!-- Breadcrumb -->
         <div class="text-sm text-gray-500 mb-2">
-          <a href="../../index.html" class="text-blue-600 hover:underline">Home</a> / 
+          <a href="/Assignment/index.html" class="text-blue-600 hover:underline">Home</a> / 
           <a href="./Listing.html" class="text-blue-600 hover:underline">Listings</a> / 
           Toyota Camry New
         </div>
@@ -64,15 +64,15 @@
           <!-- Images -->
           <div class="lg:col-span-2 space-y-4">
             <div class="relative">
-              <img src="../../assets/images/products/cars/bmw.jpg" alt="Main car" class="rounded-lg w-full">
+              <img src="/Assignment/assets/images/products/cars/bmw.jpg" alt="Main car" class="rounded-lg w-full">
               <span class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 text-xs rounded-full">Great Price</span>
               <span class="absolute bottom-4 left-4 bg-white text-black px-3 py-1 text-sm rounded-full border">🎥 Video</span>
             </div>
             <div class="grid grid-cols-4 gap-4">
-              <img title="images" src="../../assets/images/products/cars/bmw side.jpg" class="rounded-md">
-              <img title="images" src="../../assets/images/products/cars/bmw frot.jpg" class="rounded-md">
-              <img title="images" src="../../assets/images/products/cars/bmw frot.jpg" class="rounded-md">
-              <img title="images" src="../../assets/images/products/cars/bmw frot.jpg" class="rounded-md">
+              <img title="images" src="/Assignment/assets/images/products/cars/bmw side.jpg" class="rounded-md">
+              <img title="images" src="/Assignment/assets/images/products/cars/bmw frot.jpg" class="rounded-md">
+              <img title="images" src="/Assignment/assets/images/products/cars/bmw frot.jpg" class="rounded-md">
+              <img title="images" src="/Assignment/assets/images/products/cars/bmw frot.jpg" class="rounded-md">
             </div>
           </div>
       
@@ -91,7 +91,7 @@
             <!-- Dealer Info -->
             <div class="border rounded-lg p-4 space-y-4">
               <div class="flex items-center space-x-4">
-                <img title="images" src="https://via.placeholder.com/40" class="rounded-full">
+                <img title="images" src="/Assignment/assets/images/profile pic.jpg" class="w-[30px] object-contain  rounded-full">
                 <div>
                   <p class="font-medium">admin</p>
                   <p class="text-sm text-gray-500">943 Broadway, Brooklyn</p>
@@ -382,7 +382,7 @@
           <!-- Card Item -->
           <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="../../assets/images/products/porsche_911.png" alt="Car" class="w-full h-48 object-cover" />
+              <img src="/Assignment/assets/images/products/porsche_911.png" alt="Car" class="w-full h-48 object-cover" />
               <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
@@ -405,7 +405,7 @@
           <!-- Card 2 -->
           <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="../../assets/images/products/porsche_new.png" alt="Car" class="w-full h-48 object-cover" />
+              <img src="/Assignment/assets/images/products/porsche_new.png" alt="Car" class="w-full h-48 object-cover" />
               <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">Low Mileage</span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
@@ -510,9 +510,9 @@
         
                 <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
                 <div class="flex gap-4 text-gray-600">
-                    <img src="../../assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
                     
                 </div>
                 </div>
