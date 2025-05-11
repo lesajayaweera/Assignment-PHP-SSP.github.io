@@ -15,14 +15,13 @@
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
-        <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">View Products</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
-      </nav>
+                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+            </nav>
     </div>
   </div>
 
@@ -31,14 +30,13 @@
     <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
-        <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">View Products</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
-      </nav>
+                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+            </nav>
     </aside>
 
     <!-- Main Content -->
@@ -64,28 +62,31 @@
           <p class="text-gray-500 mb-4">Coupe</p>
         
           <!-- Car Image -->
-          <img src="../../../assets/images/land rover.png" 
+          <img src="../../../assets/images/products/porsche.png" 
                alt="Car" 
                class="w-full h-40 object-contain mb-4" />
         
           <!-- Icons and Info -->
           <div class="flex justify-center items-center gap-6 mb-4 text-gray-600">
             <div class="flex items-center gap-1">
-              <i class="fas fa-user text-purple-500"></i>
+              <img src="../../../assets/icons/seats.png" class="w-[30px] object-contain" alt="">
               <span class="text-sm">4</span>
             </div>
             <div class="flex items-center gap-1">
-              <i class="fas fa-cogs text-purple-500"></i>
+              <img src="../../../assets/icons/transmission.png" class="w-[30px] object-contain" alt="">
               <span class="text-sm">Manual</span>
             </div>
           </div>
         
           <!-- Buttons -->
           <div class="flex justify-center gap-4">
-            <button class="bg-green-500 text-white px-5 py-2 w-full rounded-full hover:bg-green-600 capitalize transition">
-              view
+            <button class="bg-green-500 text-white px-5 py-2 w-full rounded hover:bg-green-600 capitalize transition">
+              Edit
             </button>
-            <button class="bg-red-600 text-white px-5 py-2 rounded-full hover:bg-red-700 capitalize transition">
+            <button class="bg-blue-500 text-white px-5 py-2 w-full rounded hover:bg-blue-600 capitalize transition">
+              View
+            </button>
+            <button class="bg-red-600 text-white px-5 py-2 rounded w-full hover:bg-red-700 capitalize transition">
               Delete
             </button>
           </div>

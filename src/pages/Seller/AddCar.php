@@ -92,33 +92,33 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                             <label class="text-sm font-semibold">Make</label>
-                            <input type="text" class="border p-2 rounded w-full" required>
+                            <input title="input" type="text" class="border p-2 rounded w-full" required>
                             </div>
                             <div>
                             <label class="text-sm font-semibold">Model</label>
-                            <input type="text" class="border p-2 rounded w-full" required>
+                            <input title="input" type="text" class="border p-2 rounded w-full" required>
                             </div>
                             <div>
                             <label class="text-sm font-semibold">Year</label>
-                            <input type="number" class="border p-2 rounded w-full" required>
+                            <input title="input" type="number" class="border p-2 rounded w-full" required>
                             </div>
                             <div>
                             <label class="text-sm font-semibold">Price</label>
-                            <input type="number" class="border p-2 rounded w-full" required>
+                            <input title="input" type="number" class="border p-2 rounded w-full" required>
                             </div>
                             <div>
                             <label class="text-sm font-semibold">Dimensions (L x W x H in mm)</label>
-                            <input type="text" class="border p-2 rounded w-full" placeholder="e.g. 4500 x 1800 x 1700" required>
+                            <input title="input" type="text" class="border p-2 rounded w-full" placeholder="e.g. 4500 x 1800 x 1700" required>
                             </div>
                             <div>
                             <label class="text-sm font-semibold">Seating Capacity</label>
-                            <input type="number" class="border p-2 rounded w-full" required>
+                            <input title="input" type="number" class="border p-2 rounded w-full" required>
                             </div>
                         </div>
 
                         <div>
                             <label class="text-sm font-semibold">Description</label>
-                            <textarea class="border p-2 rounded w-full" rows="4" required></textarea>
+                            <textarea title="textarea" class="border p-2 rounded w-full" rows="4" required></textarea>
                         </div>
                         </form>
                     </div>
@@ -300,7 +300,6 @@
 
   <!-- JavaScript -->
   <script>
-    
     function toggleSidebar() {
       const sidebar = document.getElementById("mobileSidebar");
       sidebar.classList.toggle("-translate-x-full");
