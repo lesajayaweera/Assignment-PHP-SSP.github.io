@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LuxCars-Home</title>
+        <title>LuxCars- All Listings</title>
         <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
@@ -19,11 +19,11 @@
         <div >
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
-                    <li class="inline-block mr-4"><a href="/Assignment/index.html" class="text-white hover:text-gray-400">Home</a></li>
-                    <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
-                    <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                    <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                    <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Service" class="text-white hover:text-gray-400">Services</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Listing" class="text-white hover:text-gray-400">Listing</a></li>
                 </ul>
             </nav>
             <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
@@ -112,7 +112,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <!-- Card -->
           <div class="bg-white p-4 rounded-xl shadow-md">
-            <img src="../../assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
+            <img src="/Assignment/assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
             <h3 class="mt-3 font-semibold">T-Cross – 2023</h3>
             <p class="text-gray-500 text-sm">4.0 D5 PowerPulse Momentum</p>
             <div class="flex justify-between text-gray-600 text-sm mt-2">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LuxCars-Home</title>
+    <title>LuxCars-Contact Us</title>
     <link rel="stylesheet" href="/Assignment/src/output.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
@@ -19,11 +19,11 @@
         <div >
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
-                    <li class="inline-block mr-4"><a href="../../index.html" class="text-white hover:text-gray-400">Home</a></li>
-                    <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
-                    <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                    <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                    <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Service" class="text-white hover:text-gray-400">Services</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Listing" class="text-white hover:text-gray-400">Listing</a></li>
                     
                 </ul>
             </nav>

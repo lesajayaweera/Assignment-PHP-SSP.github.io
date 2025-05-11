@@ -37,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <nav class="hidden md:block"     >
                 <ul class="text-lg font-family-montserrat">
                     <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
-                    <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
-                    <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                    <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                    <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Service" class="text-white hover:text-gray-400">Services</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                    <li class="inline-block mr-4"><a href="/Assignment/Listing" class="text-white hover:text-gray-400">Listing</a></li>
                     
                 </ul>
             </nav>
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                 <div class="text-sm mt-4">
                     <p>Don't have an account?
-                        <a href="./Register.html" class="text-blue-500 hover:underline">Register</a>
+                        <a href="/Assignment/Register" class="text-blue-500 hover:underline">Register</a>
                     </p>
                 </div>
             </div>
@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     
 
-    <script src="../Js/index.js"></script>
+    <script src="/Assignment/src/Js/index.js"></script>
     
 </body>
 </html>
