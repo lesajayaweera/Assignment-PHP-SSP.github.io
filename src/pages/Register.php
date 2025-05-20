@@ -1,47 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LuxCars - Sign Up</title>
-  <link rel="stylesheet" href="/Assignment/src/output.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:wght@100..900&family=Poppins:wght@100..900&family=Roboto:wght@100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:wght@300;400;500;700&display=swap');
-  </style>
-</head>
-
-<body class="capitalize text-lg font-family-montserrat">
-
-  <!-- Header -->
-  <header class="flex items-center justify-between bg-black text-white p-4" id="header">
-    <div>
-        <p class="text-4xl font-bold font-family-body">luxCars</p>
-        <p class="text-sm font-family-montserrat">A luxury-driven, high-performance</p>
-    </div>
-    <div >
-        <nav class="hidden md:block"     >
-            <ul class="text-lg font-family-montserrat">
-                <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
-                <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
-                <li class="inline-block mr-4"><a href="/Assignment/Service" class="text-white hover:text-gray-400">Services</a></li>
-                <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
-                <li class="inline-block mr-4"><a href="/Assignment/Listing" class="text-white hover:text-gray-400">Listing</a></li>
-                
-            </ul>
-        </nav>
-        <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
-            <span class="block w-full h-0.5 bg-white"></span>
-            <span class="block w-full h-0.5 bg-white"></span>
-            <span class="block w-full h-0.5 bg-white"></span>   
-        </button>
-    </div>
-    <div class="flex items-center space-x-4">
-        <i class="material-icons hidden sm:block" style="font-size: 30px;">search</i>
-        <i class="material-icons" style="font-size: 30px;">account_circle</i>
-
-    </div>
-</header>
+<?php include("./src/private/initialize.php");?>
+<?php $pageTitle = "Sign Up";
+$script = "SignUp";
+?>
+<?php include_once (SHARED_PATH . '/customer_header.php'); ?>
 
   <!-- Sign Up Section -->
   <section class="font-family-montserrat">
@@ -79,7 +40,4 @@
       </form>
     </div>
   </section>
-
-  <script src="/Assignment/src/Js/index.js"></script>
-</body>
-</html>
+<?php include_once (SHARED_PATH . '/customer_footer.php'); ?> 

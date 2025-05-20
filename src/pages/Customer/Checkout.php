@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LuxCars-Shipping Information</title>
-        <link rel="stylesheet" href="/Assignment/src/output.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-        </style>
-    </head>
-<body>
+<?php include_once("./src/private/initialize.php");?>
+<?php $pageTitle ="Checkout";
+$script ="checkout";
+?>
+<?php include_once(SHARED_PATH."/customer_header.php");?>
     <section class="py-12 font-family-montserrat">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-10">
     
@@ -110,5 +102,4 @@
         </div>
       </section>
     
-</body>
-</html>
+<?php include_once(SHARED_PATH."/customer_footer.php");?>

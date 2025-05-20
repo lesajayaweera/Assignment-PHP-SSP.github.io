@@ -33,7 +33,8 @@ $links = array(
     "Assignment/Service"=>"./src/pages/Customer/Service.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
     "Assignment/Seller/AddCar"=>"./src/pages/Seller/AddCar.php",
-    "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php"
+    "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php",
+    "Assignment/payments"=>"./src/pages/Customer/Checkout-payment.php",
     
 
 

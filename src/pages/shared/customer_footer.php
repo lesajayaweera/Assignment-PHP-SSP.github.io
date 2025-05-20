@@ -1,7 +1,7 @@
-      <footer class="bg-white  py-10 text-sm font-family-montserrat ">
+      <footer class="<?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? 'bg-black text-white' : 'bg-white'; ?>  py-10 text-sm font-family-montserrat ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 text-gray-800 place-content-center px-4">
-            
+            <div class="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 <?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? ' text-white' : 'text-gray-800'; ?> place-content-center px-4">
+
                 <!-- Company -->
                 <div>
                 <h3 class="font-semibold mb-3 text-center">Company</h3>
