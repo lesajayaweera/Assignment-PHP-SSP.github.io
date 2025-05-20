@@ -131,4 +131,6 @@ $script = "Listing";?>
           </div>
         </div>
       </section>
+
+<?php include_once(SHARED_PATH. "/customer_footer.php") ?>
       

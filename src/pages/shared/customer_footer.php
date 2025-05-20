@@ -1,3 +1,18 @@
+
+
+<?php 
+
+if($script !="Brands"){
+     require("./src/php/Controller/BrandController.php");
+     
+}
+
+
+
+
+$result_brands = $brand->DisplayAll();
+ ?>     
+      
       <footer class="<?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? 'bg-black text-white' : 'bg-white'; ?>  py-10 text-sm font-family-montserrat ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 <?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? ' text-white' : 'text-gray-800'; ?> place-content-center px-4">
@@ -30,11 +45,19 @@
                 <div>
                 <h3 class="font-semibold mb-3 text-center">Our Brands</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="hover:underline">Toyota</a></li>
+                    <?php
+                    if(!empty($result_brands)){
+                        foreach($result_brands as $brands){
+                            echo '<li><a href="/Assignment/Brands?id=' . $brands['Id'] . '" class="hover:underline">' . htmlspecialchars($brands["Make"]) . '</a></li>';
+                        }
+                    }
+                    ?>
+                   <!-- echo '<li><a href="/Assignment/Brands?id=' . $row_brand['Id'] . '" class="hover:underline">' . htmlspecialchars($row_brand["Make"]) . '</a></li>'; -->
+                    <!-- <li><a href="#" class="hover:underline">Toyota</a></li>
                     <li><a href="#" class="hover:underline">Porsche</a></li>
                     <li><a href="#" class="hover:underline">Audi</a></li>
                     <li><a href="#" class="hover:underline">BMW</a></li>
-                    <li><a href="#" class="hover:underline">Ford</a></li>
+                    <li><a href="#" class="hover:underline">Ford</a></li> -->
 
                 </ul>
                 </div>
