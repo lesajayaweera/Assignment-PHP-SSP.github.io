@@ -4,7 +4,7 @@
 
 if($script !="Brands"){
      require("./src/php/Controller/BrandController.php");
-     
+     $brand = new BrandController();
 }
 
 
