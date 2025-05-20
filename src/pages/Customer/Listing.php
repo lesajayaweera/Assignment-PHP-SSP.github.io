@@ -145,7 +145,7 @@
                 <span>CVT</span>
             </div>
             <p class="mt-3 text-lg font-bold">$15,000</p>
-            <a href="./Vehicle page.html" class="text-blue-600 mt-2 inline-block">View Details</a>
+            <a href="/Assignment/ViewDetails" class="text-blue-600 mt-2 inline-block">View Details</a>
             </div>
       
           <!-- Repeat the card above for other listings -->

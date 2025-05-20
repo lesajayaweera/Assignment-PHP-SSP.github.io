@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LuxCars-Home</title>
+        <title>LuxCars-Vehicle page</title>
         <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
@@ -19,12 +19,12 @@
     <div >
         <nav class="hidden md:block"     >
             <ul class="text-lg font-family-montserrat">
-                <li class="inline-block mr-4"><a href="/Assignment/index.html" class="text-white hover:text-gray-400">Home</a></li>
-                <li class="inline-block mr-4"><a href="./About.html" class="text-white hover:text-gray-400">About</a></li>
-                <li class="inline-block mr-4"><a href="./Service.html" class="text-white hover:text-gray-400">Services</a></li>
-                <li class="inline-block mr-4"><a href="./ContactUs.html" class="text-white hover:text-gray-400">Contact</a></li>
-                <li class="inline-block mr-4"><a href="./Listing.html" class="text-white hover:text-gray-400">Listing</a></li>
-                
+                <li class="inline-block mr-4"><a href="/Assignment/" class="text-white hover:text-gray-400">Home</a></li>
+                <li class="inline-block mr-4"><a href="/Assignment/About" class="text-white hover:text-gray-400">About</a></li>
+                <li class="inline-block mr-4"><a href="/Assignment/Service" class="text-white hover:text-gray-400">Services</a></li>
+                <li class="inline-block mr-4"><a href="/Assignment/ContactUs" class="text-white hover:text-gray-400">Contact</a></li>
+                <li class="inline-block mr-4"><a href="/Assignment/Listing" class="text-white hover:text-gray-400">Listing</a></li>
+
             </ul>
         </nav>
         <button title="button" type="button" class="flex flex-col justify-between w-6 h-5 cursor-pointer md:hidden" id="hamburger">
@@ -121,8 +121,7 @@
             <div><strong>Cylinder:</strong> 12</div>
             <div><strong>Transmission:</strong> Automatic</div>
             <div><strong>Color:</strong> Black, Blue, White</div>
-            <div><strong>Drive Type:</strong> AWD</div>
-            <div><strong>VIN:</strong> MCB123818</div>
+           
           </div>
         </div>
       
@@ -184,33 +183,17 @@
               </div>
             </div>
           </div>
-          <div class="max-w-7xl mx-auto  py-10 border-t mt-10">
+          <div class="max-w-7xl mx-auto  py-2 border-t mt-10">
             <h2 class="text-xl font-semibold mb-6">Dimensions & Capacity</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm text-gray-800">
               <div><strong>Length:</strong> 4950mm</div>
               <div><strong>Width:</strong> 2100mm</div>
               <div><strong>Height:</strong> 1550mm</div>
-              <div><strong>Width (including mirrors):</strong> 2140mm</div>
-              <div><strong>Wheelbase:</strong> 2580mm</div>
-              <div><strong>Gross Vehicle Weight (kg):</strong> 1550</div>
-              <div><strong>Height (roof rails):</strong> 1850mm</div>
-              <div><strong>Max Loading Weight (kg):</strong> 1200</div>
-              <div><strong>Luggage Capacity (Seats Up):</strong> 480L</div>
-              <div><strong>Max Roof Load (kg):</strong> 400</div>
-              <div><strong>Luggage Capacity (Seats Down):</strong> 850L</div>
+              
               <div><strong>No. of Seats:</strong> 5</div>
             </div>
           </div>
-          <div class="max-w-7xl mx-auto  py-10 border-t mt-10">
-            <h2 class="text-xl font-semibold mb-6">Engine and Transmission</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm text-gray-800">
-              <div><strong>Fuel Tank Capacity (Litres):</strong> 80</div>
-              <div><strong>Minimum Kerbweight (kg):</strong> 350</div>
-              <div><strong>Max. Towing Weight – Braked (kg):</strong> 1000</div>
-              <div><strong>Turning Circle (m):</strong> 6500</div>
-              <div><strong>Max. Towing Weight – Unbraked (kg):</strong> 1100</div>
-            </div>
-          </div>
+          
           
           
           
@@ -279,94 +262,7 @@
         </form>
         
       </section>
-      <section class="py-10 px-6 max-w-5xl mx-auto  bg-white font-family-montserrat">
-        <h2 class="text-2xl font-semibold mb-6">2 Reviews</h2>
-        
-        <div class="flex flex-wrap lg:gap-20 gap-6 lg:justify-center
-          mx-10 items-start justify-around">
-          <!-- Overall Rating Circle -->
-          <div class="flex flex-col items-center">
-            <div class="relative w-24 h-24 rounded-full border-4 border-blue-500 flex items-center justify-center">
-              <span class="text-2xl font-bold text-blue-500">4.5</span>
-            </div>
-            <span class="text-sm text-gray-600 mt-2">Out of 5</span>
-          </div>
       
-          <!-- Category Ratings -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-x-12 gap-y-2 text-sm">
-            <div class="flex justify-between w-60">
-              <span>Comfort</span> <span class="text-blue-600">⭐ 5.0</span>
-            </div>
-            <div class="flex justify-between w-60">
-              <span>Interior Design</span> <span class="text-blue-600">⭐ 4.5</span>
-            </div>
-            <div class="flex justify-between w-60">
-              <span>Exterior Styling</span> <span class="text-blue-600">⭐ 5.0</span>
-            </div>
-            <div class="flex justify-between w-60">
-              <span>Value For The Money</span> <span class="text-blue-600">⭐ 5.0</span>
-            </div>
-            <div class="flex justify-between w-60">
-              <span>Performance</span> <span class="text-blue-600">⭐ 5.0</span>
-            </div>
-            <div class="flex justify-between w-60">
-              <span>Reliability</span> <span class="text-blue-600">⭐ 4.5</span>
-            </div>
-          </div>
-        </div>
-        <div class="space-y-6 mt-10">
-            <!-- Review Item -->
-            <div class="border-t pt-6">
-              <div class="flex items-center space-x-3 mb-2">
-                <img title="images" src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full" />
-                <div>
-                  <p class="font-semibold">Demo</p>
-                  <p class="text-sm text-gray-500">November 30, 2023</p>
-                </div>
-              </div>
-              <div class="text-blue-600 mb-1">⭐ 4.7</div>
-              <p class="text-sm text-gray-700">
-                Etiam sit amet ex pharetra, venenatis ante vehicula, gravida sapien...
-              </p>
-            </div>
-          </div>
-          <div class="mt-12 border-t pt-10">
-            <h3 class="text-xl font-semibold mb-4">Add a review</h3>
-            
-            <!-- Ratings -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
-              <div>Comfort ⭐⭐⭐⭐⭐</div>
-              <div>Interior Design ⭐⭐⭐⭐⭐</div>
-              <div>Exterior Styling ⭐⭐⭐⭐⭐</div>
-              <div>Value For The Money ⭐⭐⭐⭐⭐</div>
-              <div>Performance ⭐⭐⭐⭐⭐</div>
-              <div>Reliability ⭐⭐⭐⭐⭐</div>
-            </div>
-          
-            <!-- Input Fields -->
-            <form class="space-y-4">
-              <div class="grid grid-cols-2 gap-4">
-                <input type="text" placeholder="Name" class="w-full border rounded p-2" />
-                <input type="email" placeholder="Email" class="w-full border rounded p-2" />
-              </div>
-          
-              <div>
-                <textarea rows="4" placeholder="Review" class="w-full border rounded p-2"></textarea>
-              </div>
-          
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="save" />
-                <label for="save" class="text-sm text-gray-600">Save my name and email</label>
-              </div>
-          
-              <button type="submit" class="bg-black text-white px-6 py-2 rounded hover:bg-slate-700">
-                Submit Review
-              </button>
-            </form>
-          </div>
-          
-          
-      </section>
       <section class="px-6 py-10 font-family-montserrat bg-white border-t max-w-5xl mx-auto">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-xl font-semibold text-gray-900">Related Listings</h2>
@@ -531,7 +427,7 @@
       </footer>
       
       
-    <script src="../Js/index.js"></script>
-    <script src="../Js/vehicle.js"></script>
+    <script src="/Assignment/src/Js/index.js"></script>
+    <script src="/Assignment/src/Js/vehicle.js"></script>
 </body>
 </html>

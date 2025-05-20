@@ -27,7 +27,7 @@
 
   <div class="flex min-h-screen">
     <!-- Desktop Sidebar -->
-    <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+    <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 font-sans">
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
         <a href="#" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
@@ -41,7 +41,7 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6 space-y-6 w-full">
+    <main class="flex-1 p-6 space-y-6 w-full font-sans">
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div class="flex items-center space-x-4">
@@ -51,7 +51,7 @@
         </div>
         <div class="flex items-center space-x-3">
           <span class="text-sm">Mevi Roy</span>
-          <img src="https://i.pravatar.cc/150?img=4" alt="profile" class="w-10 h-10 rounded-full" />
+          <img src="/Assignment/assets/images/profile pic.jpg" alt="profile" class="w-10 h-10 rounded-full" />
         </div>
       </div>
 

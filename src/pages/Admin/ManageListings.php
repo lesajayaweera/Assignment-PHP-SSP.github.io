@@ -89,7 +89,7 @@
               Delete
             </button>
             <button class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 capitalize transition">
-              View
+              View  
             </button>
           </div>
         </div>

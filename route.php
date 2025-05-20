@@ -32,7 +32,9 @@ $links = array(
     "Assignment/Seller"=>"./src/pages/Customer/Seller page.php",
     "Assignment/Service"=>"./src/pages/Customer/Service.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
-    "Assignment/Home"=> "./index.php",
+    "Assignment/Seller/AddCar"=>"./src/pages/Seller/AddCar.php",
+    "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php"
+    
 
 
 
@@ -47,8 +49,11 @@ foreach ($links as $key => $value) {
         include_once $value;
         exit;
     }
+    
    
 }
+
+
 
 // Optional fallback
 

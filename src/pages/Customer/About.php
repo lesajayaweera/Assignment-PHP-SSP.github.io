@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LuxCars-Home</title>
+        <title>LuxCars-About</title>
         <link rel="stylesheet" href="/Assignment/src/output.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
@@ -251,7 +251,7 @@
                   <span class="text-gray-700">We fix 4 out of 5 cars at the roadside</span>
                 </li>
               </ul>
-              <a href="#" class="inline-flex items-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg shadow hover:bg-black hover:text-white border hover:border-white transition">
+              <a href="/Assignment/Login" class="inline-flex items-center px-6 py-3 bg-white text-black text-sm font-medium rounded-lg shadow hover:bg-black hover:text-white border hover:border-white transition">
                 Get Started
                 <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -535,8 +535,8 @@
                 <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
                 <div class="flex gap-4 text-gray-600">
                     <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
-                    <img src="../../assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
+                    <img src="/Assignment/assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
                     
                 </div>
                 </div>
@@ -556,8 +556,8 @@
       
       
     
-    <script src="../Js/index.js"></script>
-    <script  src="../Js/Aboutus.js"></script>
+    <script src="/Assignment/src/Js/index.js"></script>
+    <script  src="/Assignment/src/Js/Aboutus.js"></script>
 </body>
 </html>
 
