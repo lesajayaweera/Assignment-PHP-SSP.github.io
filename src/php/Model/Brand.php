@@ -61,12 +61,16 @@ class Brand {
         return null; // Brand not found
     }
 
+    //  Getters for the brand Name
     public function GetBrand(){
         return $this->brandName;
     }
+    // Getter for the brand Id
     public function GetBrandID(){
         return $this->brandID;
     }
+
+    //  Getter to the Brand Descriptions
     public function GetBrandDescription(){
         return $this->brandDescription;
     }

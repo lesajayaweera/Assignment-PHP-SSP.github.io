@@ -5,6 +5,8 @@ class Database{
 
     public $conn;
 
+
+    // constructor to the Db Connection
     public function __construct()
     {
        try{
@@ -21,16 +23,13 @@ class Database{
        }
 
     }
-
-
-    
-
-
+    // function to get the connection
     public function getConnection(){
         return $this->conn;
 
     }
 
+    //  function to close the all ready started connection
     public function closeConnection(){
         if($this->conn){
             $this->conn->close();

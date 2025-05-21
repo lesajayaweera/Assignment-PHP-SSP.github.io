@@ -3,6 +3,10 @@
 <?php $pageTitle = "Login";
 $script = "Login";
 ?>
+
+<?php 
+session_start();
+?>
 <?php include_once (SHARED_PATH . '/customer_header.php'); ?>
     <section class="font-family-montserrat">
         <div class="grid grid-cols-1 md:grid-cols-2 h-screen">

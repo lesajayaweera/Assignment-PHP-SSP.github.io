@@ -2,7 +2,7 @@
 
 <?php 
 
-if($script !="Brands"){
+if($script !="Brands" ||$script !="SignUp" ){
      require("./src/php/Controller/BrandController.php");
      $brand = new BrandController();
 }

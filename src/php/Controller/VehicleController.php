@@ -13,8 +13,6 @@ class VehicleController{
     }
 
     public function AddCar(){
-        if($_SERVER["REQUEST_METHOD"]=== "POST"){
-            
-        }
+        
     }
 }

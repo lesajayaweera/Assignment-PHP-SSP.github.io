@@ -2,9 +2,7 @@
 
 class Vehicle{
 
-    public function addCar($data){
-        
-    }
+    public function addCar($data){}
 
     public function addFeatures($data){}
 

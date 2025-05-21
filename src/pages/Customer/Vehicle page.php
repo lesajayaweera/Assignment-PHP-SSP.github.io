@@ -243,7 +243,7 @@ $script = "vehicle";
           <!-- Card Item -->
           <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="/Assignment/assets/images/products/porsche_911.png" alt="Car" class="w-full h-48 object-cover" />
+              <img src="/Assignment/assets/images/products/porsche_911.png" alt="Car" class="w-full h-48 object-contain" />
               <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
@@ -266,7 +266,7 @@ $script = "vehicle";
           <!-- Card 2 -->
           <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="/Assignment/assets/images/products/porsche_new.png" alt="Car" class="w-full h-48 object-cover" />
+              <img src="/Assignment/assets/images/products/porsche_new.png" alt="Car" class="w-full h-48 object-contain" />
               <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">Low Mileage</span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>

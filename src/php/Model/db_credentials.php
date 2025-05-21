@@ -1,6 +1,6 @@
 <?php
 
-// keep the database credentials
+// Used to store the Database Credentials of the Db
 
 define("DB_SERVER","localhost");
 define("DB_USER","root");

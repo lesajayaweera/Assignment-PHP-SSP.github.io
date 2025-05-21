@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +77,8 @@
 
 
                         <!-- Vehicle Form -->
-                        <form id="vehicleForm" class="space-y-4" method="post" action="">
+                        <form id="vehicleForm" class="space-y-4" method="post"
+                            action="../../php/Controller/VehicleController.php" enctype="multipart/form-data">
                             <div class="flex flex-col gap-2 mb-4">
                                 <div>
                                     <img id="mainPreview" src="#" alt="Main Preview"
@@ -140,6 +139,39 @@
                                     <textarea title="textarea" class="border p-2 rounded w-full" rows="4"
                                         name="description" required></textarea>
                                 </div>
+                                <div>
+                                    <label class="text-sm font-semibold">Fuel Type</label>
+                                    <select name="fuelType" class="border p-2 rounded w-full">
+                                        <option value="Petrol">Petrol</option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Electric">Electric</option>
+                                        <option value="Hybrid">Hybrid</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="text-sm font-semibold">Category</label>
+                                    <select name="category" class="border p-2 rounded w-full">
+                                        <option value="Sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="Truck">Truck</option>
+                                        <option value="Hatchback">Hatchback</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="text-sm font-semibold">Transmission</label>
+                                    <select name="transmission" class="border p-2 rounded w-full">
+                                        <option value="Automatic">Automatic</option>
+                                        <option value="Manual">Manual</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="text-sm font-semibold">Engine (cc)</label>
+                                    <input type="number" class="border p-2 rounded w-full" name="engine">
+                                </div>
+
                             </div>
                             <div>
                                 <!-- Features Section -->
@@ -148,7 +180,7 @@
                                         <div>
                                             <h2 class="capitalize text-2xl font-semibold">Features</h2>
                                         </div>
-                                        
+
                                     </div>
 
                                     <div class="mt-4 space-y-6">

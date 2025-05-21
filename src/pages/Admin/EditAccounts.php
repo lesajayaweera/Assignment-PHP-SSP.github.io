@@ -1,3 +1,10 @@
+<?php 
+if(!isset($_SESSION['Id']) || $_SESSION['role']==="admin" ){
+  header("Location:/Assignment/Login");
+}
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
