@@ -20,7 +20,10 @@ class BrandController{
         return [
             "ID"=>$result->GetBrandID(),
             "Name"=>$result->GetBrand(),
-            "Description"=>$result->GetBrandDescription()
+            "Description"=>$result->GetBrandDescription(),
+            "Image_1"=>$result->GetImage_1(),
+            "Image_2"=>$result->GetImage_2(),
+            "Image_3"=>$result->GetImage_3(),
         ];
 
     }

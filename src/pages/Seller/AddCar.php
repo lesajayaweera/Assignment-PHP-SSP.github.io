@@ -79,7 +79,7 @@
 
 
                         <!-- Vehicle Form -->
-                        <form id="vehicleForm" class="space-y-4" method="post" action="/Assignment/src/php/Controller/VehicleController.php">
+                        <form id="vehicleForm" class="space-y-4" method="post" action="">
                             <div class="flex flex-col gap-2 mb-4">
                                 <div>
                                     <img id="mainPreview" src="#" alt="Main Preview"
@@ -116,6 +116,13 @@
                                             required>
                                     </div>
                                     <div>
+                                        <label class="text-sm font-semibold">Condition</label>
+                                        <select name="condition" class="border p-2 rounded w-full" id="">
+                                            <option value="New">New</option>
+                                            <option value="Used">Used</option>
+                                        </select>
+                                    </div>
+                                    <div>
                                         <label class="text-sm font-semibold">Price</label>
                                         <input title="input" type="number" class="border p-2 rounded w-full"
                                             name="price" required>
@@ -141,7 +148,7 @@
                                         <div>
                                             <h2 class="capitalize text-2xl font-semibold">Features</h2>
                                         </div>
-                                        <div class="h-[5px] w-6 bg-black"></div>
+                                        
                                     </div>
 
                                     <div class="mt-4 space-y-6">
@@ -295,6 +302,30 @@
         </div>
     </section>
 
+    <?php 
+    $make = isset($_POST['make']) ? trim(htmlspecialchars($_POST['make'])) : null;
+    $model = isset($_POST['model']) ? trim(htmlspecialchars($_POST['model'])) : null;
+    $year = isset($_POST['year']) ? (int)$_POST['year'] : null; // Cast to integer
+    $condition = isset($_POST['condition']) ? trim(htmlspecialchars($_POST['condition'])) : null;
+    $price = isset($_POST['price']) ? (float)$_POST['price'] : null; // Cast to float
+    $seating_capacity = isset($_POST['seating_capacity']) ? (int)$_POST['seating_capacity'] : null; // Cast to integer
+    $description = isset($_POST['description']) ? trim(htmlspecialchars($_POST['description'])) : null;
+    $length = isset($_POST['length']) ? (float)$_POST['length'] : null;
+    $width = isset($_POST['width']) ? (float)$_POST['width'] : null;
+    $height = isset($_POST['height']) ? (float)$_POST['height'] : null;
+    $fuel_tank = isset($_POST['fuel_tank']) ? (float)$_POST['fuel_tank'] : null;
+    $min_kerbweight = isset($_POST['min_kerbweight']) ? (float)$_POST['min_kerbweight'] : null;
+    $towing_braked = isset($_POST['towing_braked']) ? (float)$_POST['towing_braked'] : null;
+    $towing_unbraked = isset($_POST['towing_unbraked']) ? (float)$_POST['towing_unbraked'] : null;
+    $turning_circle = isset($_POST['turning_circle']) ? (float)$_POST['turning_circle'] : null;
+
+    // Features (checkboxes will send an array if named features[])
+    $features = isset($_POST['features']) && is_array($_POST['features']) ? $_POST['features'] : [];
+    $features_string = implode(', ', $features); // Store as a comma-separated string in DB
+
+
+    echo $make;
+    ?>
 
 
 

@@ -11,11 +11,7 @@ $brandDescription = null; // Initialize to null
 $errorMessage = ""; // Initialize to an empty string
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $result =$brand->DisplayByID($_GET['id']);
-
-
-
-    
+  $result =$brand->DisplayByID($_GET['id']); 
 
 }
 ?>
@@ -42,12 +38,12 @@ $script = "Brands";
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center p-4">
           <div class="max-w-[400px] w-full mx-auto">
-            <img src="/Assignment/assets/images/Login page/ben-cvoro-UQpsWWHtCS8-unsplash (1).jpg" class="w-full h-auto object-cover rounded-lg" alt="">
+            <img src="<?php echo ($result !== null) ? $result["Image_1"] : 'error'; ?>" class="w-full h-auto object-cover rounded-lg" alt="">
           </div>
 
           <div class="flex flex-col space-y-4">
-            <img src="/Assignment/assets/images/Login page/metin-ozer-hShrr0WvrQs-unsplash.jpg" class="w-full h-auto object-cover rounded-lg" alt="">
-            <img src="/Assignment/assets/images/Login page/landrover-water.jpg" class="w-full h-auto object-cover rounded-lg" alt="">
+            <img src="<?php echo ($result !== null) ? $result["Image_2"] : 'error'; ?>" class="w-full h-auto object-cover rounded-lg" alt="">
+            <img src="<?php echo ($result !== null) ? $result["Image_3"] : 'error'; ?>" class="w-full h-auto object-cover rounded-lg" alt="">
           </div>
         </div>
 
@@ -68,7 +64,7 @@ $script = "Brands";
           <div class="hidden lg:block h-6 border-l border-gray-300"></div>
 
           <select title="options" class="bg-transparent text-sm text-gray-700 px-2 py-1 border border-gray-200 rounded focus:outline-none w-full">
-            <option disabled selected>Any Makes</option>
+            <option disabled selected><?php echo $result['Name'] ?></option>
             </select>
 
           <div class="hidden lg:block h-6 border-l border-gray-300"></div>

@@ -1,6 +1,6 @@
 <?php
 
-require_once "../Model/Vehicle.php";
+require_once "./src/php/Model/Vehicle.php";
 
 class VehicleController{
 
