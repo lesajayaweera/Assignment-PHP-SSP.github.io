@@ -1,6 +1,8 @@
 <?php include("./src/private/initialize.php");?>
 <?php include("./src/php/Controller/BrandController.php");?>
-
+<?php if(!isset($_GET['id'])){
+  header("Location:/Assignment/");
+} ?>
 
 <?php
 $brand = new BrandController();

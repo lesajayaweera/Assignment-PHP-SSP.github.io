@@ -275,7 +275,8 @@ $script ="";
               Choose from thousands of vehicles from multiple brands and buy online with Click & Drive, or visit us at one of our dealerships today.
             </p>
             <button class="border border-white text-white py-2 px-6 rounded-md hover:bg-white hover:text-black transition flex items-center gap-2 w-fit">
-              Get Started 
+              <a href="/Assignment/Register">Get Started</a>
+              
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

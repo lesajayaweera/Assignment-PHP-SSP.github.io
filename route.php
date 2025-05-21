@@ -32,9 +32,30 @@ $links = array(
     "Assignment/Seller"=>"./src/pages/Customer/Seller page.php",
     "Assignment/Service"=>"./src/pages/Customer/Service.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
-    "Assignment/Seller/AddCar"=>"./src/pages/Seller/AddCar.php",
-    "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php",
     "Assignment/payments"=>"./src/pages/Customer/Checkout-payment.php",
+
+
+    // Admin pages
+    "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php",
+    "Assignment/Admin/EditAccounts"=>"./src/pages/Admin/EditAccounts.php",
+    "Assignment/Admin/ManageAccounts"=>"./src/pages/Admin/ManageAccounts.php",
+    "Assignment/Admin/ManageListings"=>"./src/pages/Admin/ManageListings.php",
+    "Assignment/Admin/Tables"=>"./src/pages/Admin/Tables.php",
+    "Assignment/Admin/ViewProducts"=> "./src/pages/Admin/ViewProductDetails.php",
+
+
+
+
+    // Seller pages
+    "Assignment/Seller/AddCar"=>"./src/pages/Seller/AddCar.php",
+    "Assignment/Seller/EditCar" => "./src/pages/Seller/EditCar.php",
+    "Assignment/Seller/ManageProducts"=>"./src/pages/Seller/ManageProducts.php",
+    "Assignment/Seller/Negotiations"=>"./src/pages/Seller/Negotiation.php",
+    "Assignment/Seller/Dashboard" =>"./src/pages/Seller/SellerDashboard.php",
+
+
+
+
     
 
 

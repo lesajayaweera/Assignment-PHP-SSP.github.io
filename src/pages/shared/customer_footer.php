@@ -2,16 +2,12 @@
 
 <?php 
 
-if($script !="Brands" ||$script !="SignUp" ){
-     require("./src/php/Controller/BrandController.php");
-     $brand = new BrandController();
+if($script ="Brands" ){
+    require("./src/php/Controller/BrandController.php");
+    $brand = new BrandController();
+    $result_brands = $brand->DisplayAll();
 }
-
-
-
-
-$result_brands = $brand->DisplayAll();
- ?>     
+?>     
       
       <footer class="<?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? 'bg-black text-white' : 'bg-white'; ?>  py-10 text-sm font-family-montserrat ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

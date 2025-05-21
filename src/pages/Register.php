@@ -9,18 +9,24 @@ $script = "SignUp";
 
 <?php 
 if($_SERVER["REQUEST_METHOD"]==="POST"){
-  $first_name = $_POST['firstName'];
-  $last_name =$_POST['lastName'];
-  $email =$_POST['email'];
-  $password =$_POST['password'];
 
+  include_once("./src/php/Controller/UserController.php");
+
+
+  $first_name = htmlspecialchars($_POST['firstName']);
+  $last_name =htmlspecialchars($_POST['lastName']);
+  $email =htmlspecialchars($_POST['email']);
+  $password =htmlspecialchars($_POST['password']);
   $role =$_POST['role'];
 
-  if($role==="admin"){
-    include_once("./src/php/Controller/AdminController.php");
-    $admin = new AdminController();
-    $admin->Register($first_name,$last_name,$email,$password,$role);
-  }
+  $user = new UserController;
+  $user->register($first_name,$last_name,$email,$password,$role);
+
+
+
+
+
+  
 
 
 }

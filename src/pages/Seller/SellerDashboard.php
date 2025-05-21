@@ -1,10 +1,12 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Seller Dashboard</title>
-  <link rel="stylesheet" href="../../output.css">
+  <link rel="stylesheet" href="/Assignment/src/output.css">
 </head>
 <body class="font-family-montserrat">
 
@@ -14,12 +16,11 @@
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
     </div>
   </div>
@@ -29,12 +30,12 @@
     <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assingment/Seller/" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
     </aside>
 
@@ -80,7 +81,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 ">
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
           <div class="relative">
-            <img class="w-full h-48 object-cover" src="../../../assets/images/rolls-royce-black.jpg" alt="Car">
+            <img class="w-full h-48 object-cover" src="/Assignment/assets/images/rolls-royce-black.jpg" alt="Car">
             <span class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
               Great Price
             </span>

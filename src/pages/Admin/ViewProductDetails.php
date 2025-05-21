@@ -1,5 +1,5 @@
 <?php 
-if(!isset($_SESSION['Id']) || $_SESSION['role']==="admin" ){
+if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
   header("Location:/Assignment/Login");
 }
 ?>

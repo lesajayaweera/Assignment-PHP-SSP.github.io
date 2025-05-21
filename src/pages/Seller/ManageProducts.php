@@ -1,10 +1,15 @@
+<?php 
+if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
+  header("Location:/Assignment/Login");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Admin-View Listings</title>
-  <link rel="stylesheet" href="../../output.css">
+  <link rel="stylesheet" href="/Assignment/src/output.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 <body class="bg-gray-100 font-family-montserrat">
@@ -62,7 +67,7 @@
           <p class="text-gray-500 mb-4">Coupe</p>
         
           <!-- Car Image -->
-          <img src="../../../assets/images/products/porsche.png" 
+          <img src="/Assignment/assets/images/products/porsche.png" 
                alt="Car" 
                class="w-full h-40 object-contain mb-4" />
         
