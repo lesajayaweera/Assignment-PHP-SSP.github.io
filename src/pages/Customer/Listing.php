@@ -102,7 +102,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
                 <span><?= htmlspecialchars($car['Transmission']);?></span>
               </div>
               <div class="flex items-center justify-between mt-4">
-                <span class="text-lg font-bold text-gray-900">$35,000</span>
+                <span class="text-lg font-bold text-gray-900"><?= "$".number_format(htmlspecialchars($car['price'])); ?></span>
                 <a href="/Assignment/ViewDetails?id=<?=$car['VehicleID'] ?>" class="text-sm text-blue-600 hover:underline">View Details</a>
               </div>
             </div>
