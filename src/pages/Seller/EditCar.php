@@ -1,6 +1,9 @@
-<?php 
-if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
-  header("Location:/Assignment/Login");
+<?php
+session_start();
+
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
+    header("Location: /Assignment/Login");
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -25,11 +28,10 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                 <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>
@@ -42,11 +44,10 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
             <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
                 <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
                 <nav class="space-y-3">
-                    <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                    <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">Add Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                    <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                    <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 bg-gray-800  rounded">Add Products</a>
+                    <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+                    <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                     <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
                 </nav>
             </aside>

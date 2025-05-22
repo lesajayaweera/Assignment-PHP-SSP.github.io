@@ -1,7 +1,43 @@
-<?php 
-if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
-  header("Location:/Assignment/Login");
+<?php
+session_start();
+
+if (!isset($_SESSION['email']) && $_SESSION['role'] !== 'seller') {
+    header("Location: /Assignment/Login");
+    exit;
 }
+?>
+
+<?php 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get seller ID from session or wherever it's stored
+    require_once("./src/php/Controller/VehicleController.php");
+    $sellerID = $_SESSION['user_id'] ?? 0; // Adjust based on your auth system
+    $features =isset($_POST['features']) ? $_POST['features'] :[];
+    $images = isset($_FILES['image']) ? $_FILES['image'] : null;
+
+
+    // Process form data
+   $controller = new VehicleController;
+    $controller->AddCar(
+        $features,
+        htmlspecialchars($_POST['make']),
+        htmlspecialchars($_POST['model']),
+        htmlspecialchars($_POST['year']),
+        htmlspecialchars($_POST['fuelType']),
+        htmlspecialchars($_POST['category']),
+        htmlspecialchars($_POST['transmission']),
+        htmlspecialchars($_POST['seating_capacity']),
+        htmlspecialchars($_POST['condition']),
+        htmlspecialchars($_POST['engine']),
+        htmlspecialchars($_POST['width']),
+        htmlspecialchars($_POST['length']),
+        htmlspecialchars($_POST['height']),
+        htmlspecialchars($_POST['description']),
+        $sellerID,
+        $images // not 'images'
+   );
+}
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +61,11 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
+                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                 <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>
@@ -42,11 +78,12 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
             <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
                 <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
                 <nav class="space-y-3 ">
-                    <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                    <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">Add Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                    <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
+                    <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 bg-gray-800  rounded">Add Products</a>
+                    <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                        Products</a>
+                    <a href="/Assignment/Seller/Negotiations"
+                        class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                     <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
                 </nav>
             </aside>
@@ -61,7 +98,8 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                         <h2 class="text-4xl  font-bold  ">Add Products</h2>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <span class="text-sm">Mevi Roy</span>
+                        <span
+                            class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
                         <img src="https://i.pravatar.cc/150?img=4" alt="profile" class="w-10 h-10 rounded-full" />
                     </div>
                 </div>
@@ -79,27 +117,47 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                         </div>
 
                         <!-- Image Preview -->
+                        <div class="flex items-center space-x-3" id="imgs">
+
+                        </div>
 
 
                         <!-- Vehicle Form -->
-                        <form id="vehicleForm" class="space-y-4" method="post"
-                            action="../../php/Controller/VehicleController.php" enctype="multipart/form-data">
+                        <form id="vehicleForm" class="space-y-4" method="post" action="" enctype="multipart/form-data">
                             <div class="flex flex-col gap-2 mb-4">
-                                <div>
-                                    <img id="mainPreview" src="#" alt="Main Preview"
-                                        class="hidden object-contain w-[800px] rounded" />
-                                </div>
+
                                 <div class="flex space-x-4">
-                                    <!-- <div id="thumbPreview1" class="w-[200px] h-[120px] bg-gray-200 border rounded flex items-center justify-center text-xs">Thumbnail 1</div>
-                                        <div id="thumbPreview2" class="w-[200px] h-[120px] bg-gray-200 border rounded flex items-center justify-center text-xs">Thumbnail 2</div>
-                                        <div id="thumbPreview3" class="w-[200px] h-[120px] bg-gray-200 border rounded flex items-center justify-center text-xs">Thumbnail 3</div> -->
-                                    <div>
-                                        <label for="imageUpload"
-                                            class="w-[200px] h-[120px] cursor-pointer border rounded flex items-center justify-center bg-gray-100">
-                                            Upload Images
-                                            <input type="file" id="imageUpload" accept="image/*" multiple hidden>
+
+                                    <div class="flex items-start justify-center flex-wrap space-x-6">
+                                        <label
+                                            class="upload-slot w-[200px] h-[120px] cursor-pointer border rounded flex items-center justify-center bg-gray-100 relative">
+                                            <span class="upload-text">Upload Images</span>
+                                            <input type="file" id="imageUpload" name="image[]"
+                                                class="image-input absolute inset-0 opacity-0 z-10 cursor-pointer" />
+                                        </label>
+
+                                        <label
+                                            class="upload-slot w-[200px] h-[120px] cursor-pointer border rounded flex items-center justify-center bg-gray-100 relative">
+                                            <span class="upload-text">Upload Images</span>
+                                            <input type="file" id="imageUpload1" name="image[]"
+                                                class="image-input absolute inset-0 opacity-0 z-10 cursor-pointer" />
+                                        </label>
+
+                                        <label
+                                            class="upload-slot w-[200px] h-[120px] cursor-pointer border rounded flex items-center justify-center bg-gray-100 relative">
+                                            <span class="upload-text">Upload Images</span>
+                                            <input type="file" id="imageUpload2" name="image[]"
+                                                class="image-input absolute inset-0 opacity-0 z-10 cursor-pointer" />
+                                        </label>
+
+                                        <label
+                                            class="upload-slot w-[200px] h-[120px] cursor-pointer border rounded flex items-center justify-center bg-gray-100 relative">
+                                            <span class="upload-text">Upload Images</span>
+                                            <input type="file" id="imageUpload3" name="image[]"
+                                                class="image-input absolute inset-0 opacity-0 z-10 cursor-pointer" />
                                         </label>
                                     </div>
+
                                 </div>
                             </div>
                             <div>
@@ -189,7 +247,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                     </div>
 
                                     <div class="mt-4 space-y-6">
-                                        <!-- Interior Features -->
+                                        
                                         <div>
                                             <h3 class="font-medium text-gray-700 mb-2">Interior</h3>
                                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -204,7 +262,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                             </div>
                                         </div>
 
-                                        <!-- Safety Features -->
+                                        
                                         <div>
                                             <h3 class="font-medium text-gray-700 mb-2">Safety</h3>
                                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -220,7 +278,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                             </div>
                                         </div>
 
-                                        <!-- Exterior Features -->
+                                        
                                         <div>
                                             <h3 class="font-medium text-gray-700 mb-2">Exterior</h3>
                                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -232,7 +290,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                             </div>
                                         </div>
 
-                                        <!-- Comfort Features -->
+                                       
                                         <div>
                                             <h3 class="font-medium text-gray-700 mb-2">Comfort & Convenience</h3>
                                             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
@@ -250,7 +308,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                 </div>
                             </div>
                             <div>
-                                <!-- Dimensions & Capacity -->
+                                
                                 <div>
                                     <h2 class="text-2xl font-semibold mb-4">Dimensions & Capacity</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -279,45 +337,10 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
                                 </div>
                             </div>
                             <!-- Engine and Transmission -->
-                            <div>
-                                <h2 class="text-2xl font-semibold mb-4">Engine and Transmission</h2>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                                    <div class="flex flex-col">
-                                        <label class="font-semibold">Fuel Tank Capacity (L)</label>
-                                        <input type="number" name="fuel_tank" class="border border-gray-300 rounded p-2"
-                                            placeholder="80">
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <label class="font-semibold">Minimum Kerbweight (kg)</label>
-                                        <input type="number" name="min_kerbweight" class="border rounded p-2"
-                                            placeholder="350">
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <label class="font-semibold">Max. Towing Weight – Braked (kg)</label>
-                                        <input type="number" name="towing_braked" class="border rounded p-2"
-                                            placeholder="1000">
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <label class="font-semibold">Max. Towing Weight – Unbraked (kg)</label>
-                                        <input type="number" name="towing_unbraked" class="border rounded p-2"
-                                            placeholder="1100">
-                                    </div>
-
-                                    <div class="flex flex-col">
-                                        <label class="font-semibold">Turning Circle (m)</label>
-                                        <input type="number" name="turning_circle" class="border rounded p-2"
-                                            placeholder="6500">
-                                    </div>
-
-                                </div>
-                            </div>
                             <div class="my-6 space-y-8 ">
                                 <div class="mt-6">
-                                    <button type="submit"
+                                    <button type="submit" name="submit"
                                         class="bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700">Save
                                         Details</button>
                                 </div>
@@ -339,30 +362,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
         </div>
     </section>
 
-    <?php 
-    $make = isset($_POST['make']) ? trim(htmlspecialchars($_POST['make'])) : null;
-    $model = isset($_POST['model']) ? trim(htmlspecialchars($_POST['model'])) : null;
-    $year = isset($_POST['year']) ? (int)$_POST['year'] : null; // Cast to integer
-    $condition = isset($_POST['condition']) ? trim(htmlspecialchars($_POST['condition'])) : null;
-    $price = isset($_POST['price']) ? (float)$_POST['price'] : null; // Cast to float
-    $seating_capacity = isset($_POST['seating_capacity']) ? (int)$_POST['seating_capacity'] : null; // Cast to integer
-    $description = isset($_POST['description']) ? trim(htmlspecialchars($_POST['description'])) : null;
-    $length = isset($_POST['length']) ? (float)$_POST['length'] : null;
-    $width = isset($_POST['width']) ? (float)$_POST['width'] : null;
-    $height = isset($_POST['height']) ? (float)$_POST['height'] : null;
-    $fuel_tank = isset($_POST['fuel_tank']) ? (float)$_POST['fuel_tank'] : null;
-    $min_kerbweight = isset($_POST['min_kerbweight']) ? (float)$_POST['min_kerbweight'] : null;
-    $towing_braked = isset($_POST['towing_braked']) ? (float)$_POST['towing_braked'] : null;
-    $towing_unbraked = isset($_POST['towing_unbraked']) ? (float)$_POST['towing_unbraked'] : null;
-    $turning_circle = isset($_POST['turning_circle']) ? (float)$_POST['turning_circle'] : null;
 
-    // Features (checkboxes will send an array if named features[])
-    $features = isset($_POST['features']) && is_array($_POST['features']) ? $_POST['features'] : [];
-    $features_string = implode(', ', $features); // Store as a comma-separated string in DB
-
-
-    echo $make;
-    ?>
 
 
 
@@ -374,6 +374,68 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="seller" ){
         const sidebar = document.getElementById("mobileSidebar");
         sidebar.classList.toggle("-translate-x-full");
     }
+
+
+
+    
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadSlots = document.querySelectorAll('.upload-slot');
+
+    uploadSlots.forEach(slot => {
+        const input = slot.querySelector('.image-input');
+        const uploadText = slot.querySelector('.upload-text');
+        
+        // Create preview container (initially hidden)
+        const previewContainer = document.createElement('div');
+        previewContainer.className = 'absolute inset-0 hidden';
+        slot.appendChild(previewContainer);
+
+        input.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                // Create preview elements using Tailwind classes
+                const previewWrapper = document.createElement('div');
+                previewWrapper.className = 'relative w-full h-full';
+                
+                const previewImg = document.createElement('img');
+                previewImg.src = event.target.result;
+                previewImg.className = 'w-full h-full object-cover rounded';
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.className = 'absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center hover:bg-red-700 transition-colors';
+                removeBtn.innerHTML = '×';
+                removeBtn.title = 'Remove image';
+                
+                // Build the preview structure
+                previewWrapper.appendChild(previewImg);
+                previewWrapper.appendChild(removeBtn);
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(previewWrapper);
+                
+                // Toggle visibility
+                previewContainer.classList.remove('hidden');
+                if (uploadText) uploadText.classList.add('hidden');
+
+                // Remove button functionality
+                removeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    input.value = '';
+                    previewContainer.classList.add('hidden');
+                    if (uploadText) uploadText.classList.remove('hidden');
+                });
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+});
+
+
     </script>
 
 </body>

@@ -55,6 +55,18 @@
         }
         return false;
     }
+    public function GetUser_ID($email,$role){
+        $stmt =$this->conn->prepare("SELECT id FROM $this->table WHERE email = ? AND role = ?");
+        $stmt->bind_param("ss",$email,$role);
+        $stmt->execute();
+
+        $result =$stmt->get_result();
+        if($result->num_rows === 1){
+            $row = $result->fetch_assoc();
+            return $row['id'];
+        }
+        return false;
+    }
     
     private function ValidateEmail() {
         if (!empty($this->email)) {
@@ -101,4 +113,6 @@
     public function ValidateCredentials() {
         return $this->ValidateEmail() && $this->ValidateNames() && $this->ValidatePassword();
     }
+
+
 }
