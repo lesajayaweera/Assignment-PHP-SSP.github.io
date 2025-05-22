@@ -13,12 +13,13 @@ class UserController{
             $_SESSION['role'] = $role;
             $_SESSION['user_id'] = $user->GetUser_ID($email,$role);
 
-            echo $_SESSION['user_id'];
+            
 
-            if($role ==="admin"){
+            if($role =="admin"){
                 header("Location:/Assignment/Admin/Dashboard");
                 exit;
-            }else if ($role ==="seller"){
+                
+            }else if ($role =="seller"){
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
             }else if ($role =="buyer"){

@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 
         <p class="text-sm self-start">
           Already have an account? 
-          <a href="./Login.html" class="text-blue-500 hover:underline">Login</a>
+          <a href="/Assignment/Login" class="text-blue-500 hover:underline">Login</a>
         </p>
       </form>
     </div>

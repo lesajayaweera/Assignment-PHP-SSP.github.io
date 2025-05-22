@@ -1,8 +1,12 @@
 <?php 
-if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
-  header("Location:/Assignment/Login");
+session_start();
+
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header("Location: /Assignment/Login");
+    exit;
 }
- ?>
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +25,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
         <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
+        <a href="/Assignment/Admin/ManageListing" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
@@ -37,7 +41,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
         <a href="#" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
+        <a href="/Assignment/Admin/ManageListing" class="block px-4 py-2 hover:bg-gray-700 rounded">View Products</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
@@ -56,7 +60,7 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
           <h2 class="text-2xl font-semibold">Admin Dashboard</h2>
         </div>
         <div class="flex items-center space-x-3">
-          <span class="text-sm">Mevi Roy</span>
+          <span class="text-sm"><?php echo $_SESSION['name']?$_SESSION['name']: "Guest User"  ?></span>
           <img src="/Assignment/assets/images/profile pic.jpg" alt="profile" class="w-10 h-10 rounded-full" />
         </div>
       </div>

@@ -12,14 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get seller ID from session or wherever it's stored
     require_once("./src/php/Controller/VehicleController.php");
     $sellerID = $_SESSION['user_id'] ?? 0; // Adjust based on your auth system
-    $features =isset($_POST['features']) ? $_POST['features'] :[];
     $images = isset($_FILES['image']) ? $_FILES['image'] : null;
 
 
     // Process form data
    $controller = new VehicleController;
     $controller->AddCar(
-        $features,
         htmlspecialchars($_POST['make']),
         htmlspecialchars($_POST['model']),
         htmlspecialchars($_POST['year']),
@@ -236,77 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
 
                             </div>
-                            <div>
-                                <!-- Features Section -->
-                                <div class="my-6">
-                                    <div class="flex items-start justify-between">
-                                        <div>
-                                            <h2 class="capitalize text-2xl font-semibold">Features</h2>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="mt-4 space-y-6">
-                                        
-                                        <div>
-                                            <h3 class="font-medium text-gray-700 mb-2">Interior</h3>
-                                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Air Conditioner" /> Air
-                                                    Conditioner</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Touchscreen Display" /> Touchscreen
-                                                    Display</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Leather Seats" /> Leather Seats</label>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div>
-                                            <h3 class="font-medium text-gray-700 mb-2">Safety</h3>
-                                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Anti-Lock Braking" /> Anti-Lock
-                                                    Braking</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Driver Air Bag" /> Driver Air
-                                                    Bag</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Rearview Camera" /> Rearview
-                                                    Camera</label>
-                                            </div>
-                                        </div>
-
-                                        
-                                        <div>
-                                            <h3 class="font-medium text-gray-700 mb-2">Exterior</h3>
-                                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Fog Lights Front" /> Fog Lights
-                                                    Front</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Alloy Wheels" /> Alloy Wheels</label>
-                                            </div>
-                                        </div>
-
-                                       
-                                        <div>
-                                            <h3 class="font-medium text-gray-700 mb-2">Comfort & Convenience</h3>
-                                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Bluetooth" /> Bluetooth</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Cruise Control" /> Cruise
-                                                    Control</label>
-                                                <label class="flex items-center gap-2"><input type="checkbox"
-                                                        name="features[]" value="Remote Keyless Entry" /> Remote Keyless
-                                                    Entry</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div>
                                 
                                 <div>

@@ -7,13 +7,4 @@ class Admin extends User{
     public function Login(){
         
     }
-    public function Register(){
-        if($this->SaveData()){
-            echo "<script> alert('Admin Registration is sucessfull')</script>";
-            header("Location:/Assignment/Admin/Dashboard");
-        }
-        else{
-             echo "<script> alert('Admin Registration is un sucessfull')</script>";
-        }
-    }
 }

@@ -1,6 +1,14 @@
-<?php include("./src/private/initialize.php");?>
+<?php include("./src/private/initialize.php");
+require_once("./src/php/Controller/VehicleController.php")
+?>
+
+
 <?php $pageTitle = "Listing";
 $script = "Listing";
+
+
+$vehicle  = new VehicleController();
+$vehicle = $vehicle->Load_all_with_main_Image();
 ?>
 <?php include_once (SHARED_PATH . '/customer_header.php'); ?>
     <section class="bg-[#050b22] py-6 font-family-montserrat pt-30">
@@ -77,19 +85,28 @@ $script = "Listing";
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <!-- Card -->
           
-          
-          <div class="bg-white p-4 rounded-xl shadow-md">
-            <img src="/Assignment/assets/images/products/rolls-royce-ghost.png" alt="Car" class="rounded-lg">
-            <h3 class="mt-3 font-semibold">Brand Name</h3>
-            <p class="text-gray-500 text-sm">Model Name</p>
-            <div class="flex justify-between text-gray-600 text-sm mt-2">
-                <span>15 Miles</span>
-                <span>Petrol</span>
-               
+          <?php ?>
+          <!-- <div class="bg-white shadow rounded-xl overflow-hidden">
+            <div class="relative">
+              <img src="/Assignment/assets/images/products/Audi-a4.jpg" alt="Car" class="w-full h-48 object-contain" />
+              <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
+              <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">Condition</span>
+              <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
-            <p class="mt-3 text-lg font-bold">$15,000</p>
-            <a href="/Assignment/ViewDetails" class="text-blue-600 mt-2 inline-block">View Details</a>
-          </div>
+            <div class="p-4 space-y-2">
+              <h3 class="text-sm font-semibold text-gray-800">Brand Name</h3>
+              <p class="text-xs text-gray-500">Model</p>
+              <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
+                <span>Engine CC</span>
+                <span>fuel type</span>
+                <span>transmission</span>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <span class="text-lg font-bold text-gray-900">$35,000</span>
+                <a href="/Assignment/ViewDetails" class="text-sm text-blue-600 hover:underline">View Details</a>
+              </div>
+            </div>
+          </div> -->
       
           <!-- Repeat the card above for other listings -->
         </div>

@@ -42,7 +42,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                 <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 hover:bg-gray-700 rounded">Add Products</a>
                 <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
                 <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
-                <a href="/Assignment/Seller/" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
     </aside>
 

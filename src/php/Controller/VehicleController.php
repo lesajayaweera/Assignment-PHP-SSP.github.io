@@ -3,20 +3,30 @@
 require_once "./src/php/Model/Vehicle.php";
 
 class VehicleController{
+    private $vehicle;
+
+    public function __construct()
+    {
+        $this->vehicle = new Vehicle();
+    }
 
     
 
 
-    public function AddCar($features,$make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$seller_id,$images){
-        $vehicle  = new Vehicle($features,$make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description);
+    public function AddCar($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$seller_id,$images){
+        $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description);
         
-        print_r($vehicle);
+        
         $vehicle->AddCar($seller_id,$images);
         if($vehicle){
-            echo "Sucess";
+            echo "<script> $make $model is sucessfully added </script>" ;
 
         }else{
-            echo "failed";
+            echo "<script> Listing is Unscessfull </script>" ;
         }
+    }
+
+    public function Load_all_with_main_Image(){
+       return $this->vehicle->Get_details_with_mainImage();
     }
 }

@@ -1,4 +1,4 @@
-<?php include('./src/php/Model/Database.php'); ?>
+<?php require_once('./src/php/Model/Database.php'); ?>
 <?php
 
 class Brand {

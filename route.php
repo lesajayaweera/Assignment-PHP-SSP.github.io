@@ -54,6 +54,9 @@ $links = array(
     "Assignment/Seller/Dashboard" =>"./src/pages/Seller/SellerDashboard.php",
 
 
+    "Assignment/Logout"=>"./src/pages/Logout.php"
+
+
 
 
     

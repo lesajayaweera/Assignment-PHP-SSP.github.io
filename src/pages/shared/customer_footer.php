@@ -2,11 +2,10 @@
 
 <?php 
 
-if($script ="Brands" ){
-    require("./src/php/Controller/BrandController.php");
+    require_once("./src/php/Controller/BrandController.php");
     $brand = new BrandController();
     $result_brands = $brand->DisplayAll();
-}
+
 ?>     
       
       <footer class="<?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? 'bg-black text-white' : 'bg-white'; ?>  py-10 text-sm font-family-montserrat ">

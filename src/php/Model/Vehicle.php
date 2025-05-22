@@ -18,10 +18,9 @@ class Vehicle {
     private $height;
     private $description;
 
-    public function __construct($features = [], $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "") {
+    public function __construct( $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "") {
         $db = new Database;
         $this->conn = $db->getConnection();
-        $this->features = $features;
         $this->make = $make;
         $this->model = $model;
         $this->year = $year;
@@ -42,7 +41,7 @@ class Vehicle {
         $imageQueue = [];
 
         try {
-            // Insert into vehicles
+            // Insert into vehicles (unchanged)
             $query = "INSERT INTO vehicles 
                 (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, width, length, height, description) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -71,70 +70,34 @@ class Vehicle {
             $vehicleID = $this->conn->insert_id;
             $stmt->close();
 
-            // Insert features
-            if (!empty($this->features)) {
-                $this->features = array_unique($this->features); // Remove duplicates
-
-                foreach ($this->features as $featureName) {
-                    // Check if feature exists
-                    $featCheckStmt = $this->conn->prepare("SELECT FeatureID FROM features WHERE FeatureName = ?");
-                    if (!$featCheckStmt) throw new Exception("Feature check prepare failed: " . $this->conn->error);
-                    
-                    $featCheckStmt->bind_param("s", $featureName);
-                    if (!$featCheckStmt->execute()) throw new Exception("Feature check execute failed: " . $featCheckStmt->error);
-                    
-                    $featCheckStmt->bind_result($featureID);
-                    $featureExists = $featCheckStmt->fetch();
-                    $featCheckStmt->close();
-
-                    // If feature doesn't exist, insert it
-                    if (!$featureExists) {
-                        $insertFeatStmt = $this->conn->prepare("INSERT INTO features (FeatureName) VALUES (?)");
-                        if (!$insertFeatStmt) throw new Exception("Feature insert prepare failed: " . $this->conn->error);
-                        
-                        $insertFeatStmt->bind_param("s", $featureName);
-                        if (!$insertFeatStmt->execute()) {
-                            throw new Exception("Feature insert failed: " . $insertFeatStmt->error);
-                        }
-                        $featureID = $insertFeatStmt->insert_id;
-                        $insertFeatStmt->close();
-                    }
-
-                    // Link feature to vehicle
-                    $featStmt = $this->conn->prepare("INSERT INTO vehiclefeatures (vehicleID, featureID) VALUES (?, ?)");
-                    if (!$featStmt) throw new Exception("vehiclefeatures insert prepare failed: " . $this->conn->error);
-                    
-                    $featStmt->bind_param("ii", $vehicleID, $featureID);
-                    if (!$featStmt->execute()) {
-                        throw new Exception("vehiclefeatures insert failed: " . $featStmt->error);
-                    }
-                    $featStmt->close();
-                }
-            }
-
-            // Insert vehicle images (handling multiple uploads)
+            // Insert vehicle images
             if (!empty($images["name"]) && is_array($images["name"])) {
                 $imgStmt = $this->conn->prepare("INSERT INTO vehicle_images (vehicle_id, image_path, is_main) VALUES (?, ?, ?)");
                 if (!$imgStmt) throw new Exception("Image prepare failed: " . $this->conn->error);
 
                 $isFirst = true;
                 foreach ($images["name"] as $key => $filename) {
-                    // Skip if there's no file for this index
-                    if (empty($images["tmp_name"][$key])) ;
+                    if (empty($images["tmp_name"][$key])) continue;
 
                     $tmp_name = $images["tmp_name"][$key];
                     $uniqueName = time() . "_" . uniqid() . "_" . basename($filename);
-                    $targetPath = $uploadDir . $uniqueName;
+                    
+                    // Physical storage path (unchanged)
+                    $physicalPath = $uploadDir . $uniqueName;
+                    
+                    // Database storage path (modified)
+                    $dbPath = "/Assignment/uploads/" . $uniqueName;
+                    
                     $is_main = $isFirst ? 1 : 0;
 
-                    $imgStmt->bind_param("isi", $vehicleID, $targetPath, $is_main);
+                    $imgStmt->bind_param("isi", $vehicleID, $dbPath, $is_main);
                     if (!$imgStmt->execute()) {
                         throw new Exception("Image insert failed: " . $imgStmt->error);
                     }
 
                     $imageQueue[] = [
                         "tmp_name" => $tmp_name,
-                        "target" => $targetPath
+                        "target" => $physicalPath  // Still using ./uploads/ for actual storage
                     ];
                     $isFirst = false;
                 }
@@ -143,7 +106,7 @@ class Vehicle {
 
             $this->conn->commit();
 
-            // Move uploaded files after successful transaction
+            // Move uploaded files (using original ./uploads/ location)
             foreach ($imageQueue as $img) {
                 if (!move_uploaded_file($img["tmp_name"], $img["target"])) {
                     error_log("Warning: Failed to move file to " . $img["target"]);
@@ -157,5 +120,21 @@ class Vehicle {
             error_log("Transaction failed: " . $e->getMessage());
             return false;
         }
+}
+
+    //  method to get the vehicle details with the main image
+    public function Get_details_with_mainImage(){
+        $query = "SELECT v.*, vi.image_path as main_image FROM vehicles v LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1 ORDER BY v.VehicleID DESC";
+        $result =$this->conn->query($query);
+        $vehicle =[];
+
+        if($result && $result->num_rows >0){
+            while ($row = $result->fetch_assoc()){
+                $vehicle[] =$row;
+            }
+        }
+        return $vehicle;
     }
+
+
 }
