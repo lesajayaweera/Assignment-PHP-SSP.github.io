@@ -64,8 +64,10 @@ $script = "vehicle";
               </div>
               <p class="text-sm">📞 +88-123456789</p>
               <div class="space-y-2">
-                <button class="w-full bg-blue-600 text-white py-2 rounded-md">Message Dealer</button>
-                <button class="w-full border py-2 rounded-md">Chat via WhatsApp</button>
+                <button class="w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out">Buy Now</button>
+                <button class="w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out">WishList</button>
+                <button class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out">Negotiate</button>
+                <button class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out">Add To Cart </button>
               </div>
               <a href="#" class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
             </div>

@@ -138,5 +138,37 @@ class Vehicle {
         return $vehicle;
     }
 
+    //  function to load car details inside the veiwDetails page
+    public function Get_everyThing_by_ID($id){
+        $query ="SELECT * FROM vehicles WHERE VehicleID = ?";
+        $stmt =$this->conn->prepare($query);
+        $stmt->bind_param("i",$id);
+        $stmt->execute();
+
+        $v_result =$stmt->get_result();
+        $vehicle = $v_result->fetch_assoc();
+        $stmt->close();
+
+        if(!$vehicle){
+            return null;
+        }
+        $imagesQuery = "SELECT * FROM vehicle_images WHERE vehicle_id = ? ORDER BY is_main DESC";
+        $imgStmt = $this->conn->prepare($imagesQuery);
+        $imgStmt->bind_param("i", $vehicleId);
+        $imgStmt->execute();
+        $imagesResult = $imgStmt->get_result();
+        $images = [];
+        
+        while ($imgRow = $imagesResult->fetch_assoc()) {
+            $images[] = $imgRow;
+        }
+        
+        $imgStmt->close();
+        $vehicle['images'] = $images;
+        return $vehicle;
+
+
+    }
+
 
 }
