@@ -85,28 +85,29 @@ $vehicle = $vehicle->Load_all_with_main_Image();
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <!-- Card -->
           
-          <?php ?>
-          <!-- <div class="bg-white shadow rounded-xl overflow-hidden">
+          <?php foreach($vehicle as $car):?>
+          <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="/Assignment/assets/images/products/Audi-a4.jpg" alt="Car" class="w-full h-48 object-contain" />
+              <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full h-48 object-contain" />
               <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
-              <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">Condition</span>
+              <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
             <div class="p-4 space-y-2">
-              <h3 class="text-sm font-semibold text-gray-800">Brand Name</h3>
-              <p class="text-xs text-gray-500">Model</p>
+              <h3 class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
+              <p class="text-xs text-gray-500"><?= htmlspecialchars($car['cateogory']); ?></p>
               <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
-                <span>Engine CC</span>
-                <span>fuel type</span>
-                <span>transmission</span>
+                <span><?= htmlspecialchars($car['Engine']. "cc");?></span>
+                <span><?= htmlspecialchars($car['FuelType']);?></span>
+                <span><?= htmlspecialchars($car['Transmission']);?></span>
               </div>
               <div class="flex items-center justify-between mt-4">
                 <span class="text-lg font-bold text-gray-900">$35,000</span>
-                <a href="/Assignment/ViewDetails" class="text-sm text-blue-600 hover:underline">View Details</a>
+                <a href="/Assignment/ViewDetails?id=<?=$car['VehicleID'] ?>" class="text-sm text-blue-600 hover:underline">View Details</a>
               </div>
             </div>
-          </div> -->
+          </div>
+          <?php endforeach?>
       
           <!-- Repeat the card above for other listings -->
         </div>
