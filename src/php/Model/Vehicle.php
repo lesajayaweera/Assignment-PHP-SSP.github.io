@@ -50,7 +50,7 @@ class Vehicle {
             if (!$stmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
 
             $stmt->bind_param(
-                "ississssisssss",
+                "ississssisssssd",
                 $sellerID,
                 $this->make,
                 $this->model,

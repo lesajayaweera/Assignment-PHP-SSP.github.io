@@ -17,6 +17,7 @@ class VehicleController{
         $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price);
         
         
+        
         $vehicle->AddCar($seller_id,$images);
         if($vehicle){
             echo "<script> $make $model is sucessfully added </script>" ;
