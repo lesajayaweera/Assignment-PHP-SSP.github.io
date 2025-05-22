@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         htmlspecialchars($_POST['length']),
         htmlspecialchars($_POST['height']),
         htmlspecialchars($_POST['description']),
+        htmlspecialchars($_POST['price']),
+
         $sellerID,
         $images // not 'images'
    );

@@ -3,7 +3,7 @@
 <?php
 class Vehicle {
     private $conn;
-    private $features;
+    private $price;
     private $make;
     private $model;
     private $year;
@@ -18,7 +18,7 @@ class Vehicle {
     private $height;
     private $description;
 
-    public function __construct( $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "") {
+    public function __construct( $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "",$price=0) {
         $db = new Database;
         $this->conn = $db->getConnection();
         $this->make = $make;
@@ -34,6 +34,7 @@ class Vehicle {
         $this->length = $length;
         $this->height = $height;
         $this->description = $description;
+        $this->price =$price;
     }
 
     public function AddCar($sellerID, $images = [], $uploadDir = "./uploads/") {
@@ -43,8 +44,8 @@ class Vehicle {
         try {
             // Insert into vehicles (unchanged)
             $query = "INSERT INTO vehicles 
-                (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, width, length, height, description) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, width, length, height, description, price) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($query);
             if (!$stmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
 
@@ -63,7 +64,8 @@ class Vehicle {
                 $this->width,
                 $this->length,
                 $this->height,
-                $this->description
+                $this->description,
+                $this->price
             );
 
             if (!$stmt->execute()) throw new Exception("Vehicle insert failed: " . $stmt->error);
