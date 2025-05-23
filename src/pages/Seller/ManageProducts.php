@@ -119,9 +119,10 @@ $vehicle = $vehicle->Load_all_with_main_Image();
                                 class="flex-1 bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600 capitalize transition">
                                 <a href="/Assignment/Seller/ViewProducts?id=<?= htmlspecialchars($car['VehicleID']) ?>">Veiw</a>
                             </button>
+
                             <button
                                 class="flex-1 bg-red-600 text-white px-5 py-2 rounded hover:bg-red-700 capitalize transition">
-                                Delete
+                                <a href="/Assignment/Seller/DeleteProducts?id=<?= htmlspecialchars($car['VehicleID']) ?>">Delete</a>
                             </button>
                         </div>
                     </div>

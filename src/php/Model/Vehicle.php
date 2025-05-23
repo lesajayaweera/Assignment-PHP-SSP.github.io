@@ -244,6 +244,113 @@ class Vehicle {
         return $vehicle;
     }
 
+    public function DeleteCar($vehicleID, $uploadDir = "./uploads/") {
+    // Validate input
+        if (!is_numeric($vehicleID) || $vehicleID <= 0) {
+            throw new InvalidArgumentException("Invalid vehicle ID");
+        }
+
+        $this->conn->begin_transaction();
+        $imagePaths = [];
+
+        try {
+            // 1. Get all image paths before deletion (for file cleanup)
+            $getImagesQuery = "SELECT image_path FROM vehicle_images WHERE vehicle_id = ?";
+            $getImagesStmt = $this->conn->prepare($getImagesQuery);
+            if (!$getImagesStmt) {
+                throw new Exception("Prepare failed for image paths: " . $this->conn->error);
+            }
+
+            $getImagesStmt->bind_param("i", $vehicleID);
+            if (!$getImagesStmt->execute()) {
+                throw new Exception("Execute failed for image paths: " . $getImagesStmt->error);
+            }
+
+            $result = $getImagesStmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $imagePaths[] = $uploadDir . basename($row['image_path']);
+            }
+            $getImagesStmt->close();
+
+            // 2. Delete from vehicle_images table
+            $deleteImagesQuery = "DELETE FROM vehicle_images WHERE vehicle_id = ?";
+            $deleteImagesStmt = $this->conn->prepare($deleteImagesQuery);
+            if (!$deleteImagesStmt) {
+                throw new Exception("Prepare failed for image deletion: " . $this->conn->error);
+            }
+
+            $deleteImagesStmt->bind_param("i", $vehicleID);
+            if (!$deleteImagesStmt->execute()) {
+                throw new Exception("Execute failed for image deletion: " . $deleteImagesStmt->error);
+            }
+            $deleteImagesStmt->close();
+
+            // 3. Delete from locations table
+            $deleteLocationQuery = "DELETE FROM locations WHERE VehicleID = ?";
+            $deleteLocationStmt = $this->conn->prepare($deleteLocationQuery);
+            if (!$deleteLocationStmt) {
+                throw new Exception("Prepare failed for location deletion: " . $this->conn->error);
+            }
+
+            $deleteLocationStmt->bind_param("i", $vehicleID);
+            if (!$deleteLocationStmt->execute()) {
+                throw new Exception("Execute failed for location deletion: " . $deleteLocationStmt->error);
+            }
+            $deleteLocationStmt->close();
+
+            // 4. Delete from vehicles table
+            $deleteVehicleQuery = "DELETE FROM vehicles WHERE VehicleID = ?";
+            $deleteVehicleStmt = $this->conn->prepare($deleteVehicleQuery);
+            if (!$deleteVehicleStmt) {
+                throw new Exception("Prepare failed for vehicle deletion: " . $this->conn->error);
+            }
+
+            $deleteVehicleStmt->bind_param("i", $vehicleID);
+            if (!$deleteVehicleStmt->execute()) {
+                throw new Exception("Execute failed for vehicle deletion: " . $deleteVehicleStmt->error);
+            }
+
+            // Check if any rows were affected
+            if ($deleteVehicleStmt->affected_rows === 0) {
+                throw new Exception("No vehicle found with ID: $vehicleID");
+            }
+            $deleteVehicleStmt->close();
+
+            // Commit the transaction if all queries succeeded
+            $this->conn->commit();
+
+            // 5. Delete the actual image files (only after successful DB commit)
+            $this->deleteImageFiles($imagePaths);
+
+            return true;
+
+        } catch (Exception $e) {
+            // Roll back any changes if something went wrong
+            $this->conn->rollback();
+            error_log("DeleteCar transaction failed: " . $e->getMessage());
+            throw $e; // Re-throw for the caller to handle
+        }
+    }
+
+/**
+ * Helper method to delete physical image files
+ * 
+ * @param array $imagePaths Array of file paths to delete
+ */
+    private function deleteImageFiles(array $imagePaths) {
+        foreach ($imagePaths as $filePath) {
+            try {
+                if (file_exists($filePath)) {
+                    if (!unlink($filePath)) {
+                        error_log("Warning: Failed to delete image file: " . $filePath);
+                    }
+                }
+            } catch (Exception $e) {
+                error_log("Error deleting file $filePath: " . $e->getMessage());
+                // Continue with other files even if one fails
+            }
+        }
+    }
 
 
     

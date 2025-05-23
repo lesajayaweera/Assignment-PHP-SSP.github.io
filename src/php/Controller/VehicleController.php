@@ -39,5 +39,25 @@ class VehicleController{
         return $this->vehicle->Get_everyThing_by_ID($vehicle_id);
     }
 
+    public function deleteCar($vehicleID,$location){
+        try {
+            $result = $this->vehicle->DeleteCar($vehicleID);
+            if($result){
+                echo "<script>alert('Vehicle and all associated data deleted successfully!');</script>";
+                header($location);
+                exit;
+            }
+            else{
+                echo "<script>alert('Vehicle Deletion is failed!');</script>";
+                header($location);
+                exit;
+            }
+        }
+        catch (Exception $e){
+            echo "Error: " . $e->getMessage();
+
+        }
+    }
+
     
 }
