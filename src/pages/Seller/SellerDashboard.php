@@ -64,11 +64,11 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                     <div class="flex items-center space-x-3">
                         <span
                             class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                        <img src="https://i.pravatar.cc/150?img=4" alt="profile" class="w-10 h-10 rounded-full" />
+                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
                     </div>
                 </a>
             </div>
-
+<!-- https://i.pravatar.cc/150?img=4 -->
             <!-- Statistics -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded shadow">

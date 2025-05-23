@@ -1,4 +1,6 @@
-<?php require_once ("./src/php/Model/Database.php"); ?>
+<?php require_once ("./src/php/Model/Database.php");
+require_once("./src/php/Model/Validator.php");
+ ?>
 
 <?php
 
@@ -23,8 +25,8 @@
     }
 
      // Save user to DB (returns boolean)
-    public function save() {
-        if (!$this->validateCredentials()) {
+    public function save($firstname,$lastname,$email,$password) {
+        if (!Validator::validateCredentials($firstname,$lastname,$email,$password)) {
             return false;
         }
 
@@ -68,51 +70,7 @@
         return false;
     }
     
-    private function ValidateEmail() {
-        if (!empty($this->email)) {
-            if (filter_var($this->email, FILTER_VALIDATE_EMAIL) && strlen($this->email) < 255) {
-                return true;
-            } else {
-                echo "Invalid Email Format<br>";
-                return false;
-            }
-        } else {
-            echo "Email is mandatory<br>";
-            return false;
-        }
-    }
-
-    private function ValidateNames() {
-        if (!empty($this->first_name) && !empty($this->last_name)) {
-            if (preg_match("/^[a-zA-Z-' ]*$/", $this->first_name) && preg_match("/^[a-zA-Z-' ]*$/", $this->last_name)) {
-                return true;
-            } else {
-                echo "Name can only contain letters, spaces, hyphens, and apostrophes.<br>";
-                return false;
-            }
-        } else {
-            echo "First and last name are mandatory<br>";
-            return false;
-        }
-    }
-
-    private function ValidatePassword() {
-        if (!empty($this->password)) {
-            if (strlen($this->password) >= 8) {
-                return true;
-            } else {
-                echo "The password must have a minimum of 8 characters<br>";
-                return false;
-            }
-        } else {
-            echo "The password is mandatory<br>";
-            return false;
-        }
-    }
-
-    public function ValidateCredentials() {
-        return $this->ValidateEmail() && $this->ValidateNames() && $this->ValidatePassword();
-    }
+    
 
 
 }
