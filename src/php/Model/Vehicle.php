@@ -17,8 +17,12 @@ class Vehicle {
     private $length;
     private $height;
     private $description;
+    private $street;
+    private $city;
+    private $embeded_link;
+    private $direction_link;
 
-    public function __construct( $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "",$price=0) {
+    public function __construct( $make = "", $model = "", $year = "", $fuel_type = "", $cateogory = "", $transmission = "", $seats = "", $vehicle_condition = "", $engine = "", $width = "", $length = "", $height = "", $description = "",$price=0,$street="",$city="",$embeded_link="",$direction_link="") {
         $db = new Database;
         $this->conn = $db->getConnection();
         $this->make = $make;
@@ -35,6 +39,10 @@ class Vehicle {
         $this->height = $height;
         $this->description = $description;
         $this->price =$price;
+        $this->street =$street;
+        $this->city =$city;
+        $this->embeded_link =$embeded_link;
+        $this->direction_link =$direction_link;
     }
 
     public function AddCar($sellerID, $images = [], $uploadDir = "./uploads/") {
@@ -42,14 +50,15 @@ class Vehicle {
         $imageQueue = [];
 
         try {
-            // Insert into vehicles (unchanged)
-            $query = "INSERT INTO vehicles 
-                (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, width, length, height, description, price) 
+            // Insert into vehicles table
+            $vehicleQuery = "INSERT INTO vehicles 
+                (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, 
+                width, length, height, description, price) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($query);
-            if (!$stmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
+            $vehicleStmt = $this->conn->prepare($vehicleQuery);
+            if (!$vehicleStmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
 
-            $stmt->bind_param(
+            $vehicleStmt->bind_param(
                 "ississssisssssd",
                 $sellerID,
                 $this->make,
@@ -68,9 +77,29 @@ class Vehicle {
                 $this->price
             );
 
-            if (!$stmt->execute()) throw new Exception("Vehicle insert failed: " . $stmt->error);
+            if (!$vehicleStmt->execute()) throw new Exception("Vehicle insert failed: " . $vehicleStmt->error);
             $vehicleID = $this->conn->insert_id;
-            $stmt->close();
+            $vehicleStmt->close();
+
+            // Insert into locations table
+            $locationQuery = "INSERT INTO locations 
+                (VehicleID, street_no, city, embededLink, directionLink) 
+                VALUES (?, ?, ?, ?, ?)";
+            $locationStmt = $this->conn->prepare($locationQuery);
+            if (!$locationStmt) throw new Exception("Location prepare failed: " . $this->conn->error);
+
+            $url =$this->extractSrcFromEmbed($this->embeded_link);
+            $locationStmt->bind_param(
+                "issss",
+                $vehicleID,
+                $this->street,
+                $this->city,
+                $url,
+                $this->direction_link
+            );
+
+            if (!$locationStmt->execute()) throw new Exception("Location insert failed: " . $locationStmt->error);
+            $locationStmt->close();
 
             // Insert vehicle images
             if (!empty($images["name"]) && is_array($images["name"])) {
@@ -84,10 +113,7 @@ class Vehicle {
                     $tmp_name = $images["tmp_name"][$key];
                     $uniqueName = time() . "_" . uniqid() . "_" . basename($filename);
                     
-                    // Physical storage path (unchanged)
                     $physicalPath = $uploadDir . $uniqueName;
-                    
-                    // Database storage path (modified)
                     $dbPath = "/Assignment/uploads/" . $uniqueName;
                     
                     $is_main = $isFirst ? 1 : 0;
@@ -99,7 +125,7 @@ class Vehicle {
 
                     $imageQueue[] = [
                         "tmp_name" => $tmp_name,
-                        "target" => $physicalPath  // Still using ./uploads/ for actual storage
+                        "target" => $physicalPath
                     ];
                     $isFirst = false;
                 }
@@ -108,7 +134,7 @@ class Vehicle {
 
             $this->conn->commit();
 
-            // Move uploaded files (using original ./uploads/ location)
+            // Move uploaded files
             foreach ($imageQueue as $img) {
                 if (!move_uploaded_file($img["tmp_name"], $img["target"])) {
                     error_log("Warning: Failed to move file to " . $img["target"]);
@@ -122,7 +148,20 @@ class Vehicle {
             error_log("Transaction failed: " . $e->getMessage());
             return false;
         }
+    }
+
+    private function extractSrcFromEmbed($embedCode) {
+    if (empty($embedCode)) return '';
+    
+    // Use regex to extract src attribute
+    if (preg_match('/src="([^"]+)"/', $embedCode, $matches)) {
+        return $matches[1];
+    }
+    
+    // If no match found, return original (might be already a URL)
+    return $embedCode;
 }
+
 
     //  method to get the vehicle details with the main image
     public function Get_details_with_mainImage(){
@@ -168,7 +207,18 @@ class Vehicle {
         $imgStmt->close();
         $vehicle['images'] = $images;
 
-        // Step 3: Get seller details (from seller and users tables)
+        // Step 3: Get location details
+        $locationQuery = "SELECT * FROM locations WHERE VehicleID = ?";
+        $locationStmt = $this->conn->prepare($locationQuery);
+        $locationStmt->bind_param("i", $id);
+        $locationStmt->execute();
+        $locationResult = $locationStmt->get_result();
+        $location = $locationResult->fetch_assoc();
+        $locationStmt->close();
+
+        $vehicle['location'] = $location;
+
+        // Step 4: Get seller details (from seller and users tables)
         $sellerQuery = "
             SELECT 
                 u.id AS user_id,
@@ -193,6 +243,12 @@ class Vehicle {
 
         return $vehicle;
     }
+
+
+
+    
+
+
 
 
 

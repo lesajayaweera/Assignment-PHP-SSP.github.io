@@ -53,6 +53,7 @@ $links = array(
     "Assignment/Seller/Negotiations"=>"./src/pages/Seller/Negotiation.php",
     "Assignment/Seller/Dashboard" =>"./src/pages/Seller/SellerDashboard.php",
     "Assignment/Seller/Account/Edit" =>"./src/pages/Seller/EditAccounts.php",
+    "Assignment/Seller/ViewProducts"=> "./src/pages/Seller/ViewProductDetails.php",
 
 
     "Assignment/Logout"=>"./src/pages/Logout.php"

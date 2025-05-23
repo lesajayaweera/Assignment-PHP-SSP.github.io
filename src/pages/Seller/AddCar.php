@@ -32,10 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         htmlspecialchars($_POST['height']),
         htmlspecialchars($_POST['description']),
         htmlspecialchars($_POST['price']),
-
+        htmlspecialchars($_POST['street']),
+        htmlspecialchars($_POST['city']),
+        htmlspecialchars($_POST['address']),
+        htmlspecialchars($_POST['link']),
         $sellerID,
         $images // not 'images'
    );
+
+   
 }
    
 ?>
@@ -284,17 +289,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div>
                                     <h2 class="text-2xl font-semibold mb-4">Locations</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="flex flex-col">
+                                            <label class="font-semibold" for="street">Street No</label>
+                                            <input type="text" name="street"
+                                                class="border border-gray-300 rounded p-2" placeholder="329 Kent Ave" required>
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <label class="font-semibold" for="city">City</label>
+                                            <input type="text" name="city" class="border border-gray-300 rounded p-2"
+                                                placeholder="Brooklyn" required>
+                                        </div>
 
                                         <div class="flex flex-col">
                                             <label class="font-semibold" for="address">Embedded Link</label>
                                             <input type="text" name="address"
-                                                class="border border-gray-300 rounded p-2" placeholder="4950" required>
+                                                class="border border-gray-300 rounded p-2" placeholder="Embedded Link" required>
                                         </div>
 
                                         <div class="flex flex-col">
                                             <label class="font-semibold" for="link">Direction Link</label>
                                             <input type="text" name="link" class="border border-gray-300 rounded p-2"
-                                                placeholder="2100" required>
+                                                placeholder="Direction Link" required>
                                         </div>
                                     </div>
                                 </div>

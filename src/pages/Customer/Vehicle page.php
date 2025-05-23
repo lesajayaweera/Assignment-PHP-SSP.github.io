@@ -7,9 +7,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
   $vehicle = new VehicleController;
   $vehicleData = $vehicle->Load_everything_by_Id($id);
 
-//  echo '<pre>';
-// print_r($vehicleData);
-// echo '</pre>'; 
+
 
   $mainImage = null;
   foreach ($vehicleData['images'] as $img) {
@@ -205,10 +203,10 @@ $script = "vehicle";
 <section class="px-6 py-10 font-family-montserrat bg-white border-t max-w-7xl mx-auto">
     <!-- Location Heading & Address -->
     <h2 class="text-lg font-semibold text-gray-900 mb-1">Location</h2>
-    <p class="text-sm text-gray-600 mb-1">329 Kent Ave, Brooklyn</p>
+    <p class="text-sm text-gray-600 mb-1"><?php echo  htmlspecialchars($vehicleData['location']['street_no']) ?>, <?php echo  htmlspecialchars($vehicleData['location']['city']) ?></p>
 
     <!-- Get Direction Link -->
-    <a rel="noopener" href="https://www.google.com/maps?q=329+Kent+Ave,+Brooklyn" target="_blank"
+    <a rel="noopener" href="<?php echo  htmlspecialchars($vehicleData['location']['directionLink']) ?>" target="_blank"
         class="text-sm text-blue-600 hover:underline inline-flex items-center gap-1 mb-4">
         Get Direction
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -219,7 +217,7 @@ $script = "vehicle";
     <!-- Google Map -->
     <div class="w-full h-80 rounded-lg overflow-hidden shadow">
         <iframe class="w-full h-full" frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.7054555030996!2d-73.96848268487805!3d40.71277697933112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a5a7b64fef7%3A0x5a8bb3a8727ed3f6!2s329%20Kent%20Ave%2C%20Brooklyn%2C%20NY%2011211%2C%20USA!5e0!3m2!1sen!2s!4v1610000000000!5m2!1sen!2s"
+            src="<?php echo htmlspecialchars($vehicleData['location']['embededLink']) ?>"
             allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
@@ -269,7 +267,7 @@ $script = "vehicle";
 <section class="px-6 py-10 font-family-montserrat bg-white border-t max-w-5xl mx-auto">
     <div class="flex items-center justify-between mb-4">
         <h2 class="text-xl font-semibold text-gray-900">Related Listings</h2>
-        <a href="#" class="text-sm text-blue-600 hover:underline flex items-center gap-1">
+        <a href="/Assignment/Listing" class="text-sm text-blue-600 hover:underline flex items-center gap-1">
             View All
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">

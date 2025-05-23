@@ -13,8 +13,8 @@ class VehicleController{
     
 
 
-    public function AddCar($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$seller_id,$images){
-        $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price);
+    public function AddCar($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$street,$city,$embeded_link,$direction_link,$seller_id,$images){
+        $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$street,$city,$embeded_link,$direction_link);
         
         
         
@@ -27,6 +27,10 @@ class VehicleController{
         }
     }
 
+    public function EditCar(){
+
+    }
+
     public function Load_all_with_main_Image(){
        return $this->vehicle->Get_details_with_mainImage();
     }
@@ -34,4 +38,6 @@ class VehicleController{
     public function Load_everything_by_Id($vehicle_id){
         return $this->vehicle->Get_everyThing_by_ID($vehicle_id);
     }
+
+    
 }
