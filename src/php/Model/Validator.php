@@ -48,4 +48,6 @@ class Validator{
     public static function ValidateCredentials($first_name,$last_name,$email,$password) {
         return self::ValidateEmail($email) && self::ValidateNames($first_name,$last_name) && self::ValidatePassword($password);
     }
+
+    
 }

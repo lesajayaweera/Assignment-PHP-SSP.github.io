@@ -100,7 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="flex items-center space-x-3">
                         <span
                             class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
+                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                            alt="profile" class="w-10 h-10 rounded-full" />
                     </div>
                 </div>
                 <section class="px-4 py-6">
@@ -164,81 +165,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label class="text-sm font-semibold">Make</label>
-                                        <input title="input" type="text" class="border p-2 rounded w-full" name="make"
-                                            required>
+                                        <select name="make" class="border border-gray-300 rounded p-2 w-full">
+                                            <option value="">Select a Brand</option>
+                                            <option value="BMW">BMW</option>
+                                            <option value="Audi">Audi</option>
+                                            <option value="Ferarri">Ferarri</option>
+                                            <option value="Mclern">Mclern</option>
+                                            <option value="Lamborghini">Lamborghini</option>
+                                            <option value="Aston Martin">Aston Martin</option>
+                                            <option value="Rolls Royce">Rolls Royce</option>
+                                            <option value="Bentley">Bentley</option>
+                                            <option value="Mercedes Benz">Mercedes Benz</option>
+                                        </select>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Model</label>
-                                        <input title="input" type="text" class="border p-2 rounded w-full" name="model"
+                                        <input title="input" type="text" class="border border-gray-300 rounded p-2 w-full" name="model"
                                             required>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Year</label>
-                                        <input title="input" type="number" class="border p-2 rounded w-full" name="year"
+                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full" name="year"
                                             required>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Condition</label>
-                                        <select name="condition" class="border p-2 rounded w-full" id="">
+                                        <select name="condition" class="border border-gray-300 rounded p-2 w-full" id="">
                                             <option value="New">New</option>
                                             <option value="Used">Used</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Price</label>
-                                        <input title="input" type="number" class="border p-2 rounded w-full"
+                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full"
                                             name="price" required>
                                     </div>
 
                                     <div>
                                         <label class="text-sm font-semibold">Seating Capacity</label>
-                                        <input title="input" type="number" class="border p-2 rounded w-full"
+                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full"
                                             name="seating_capacity" required>
                                     </div>
                                 </div>
 
                                 <div>
                                     <label class="text-sm font-semibold">Description</label>
-                                    <textarea title="textarea" class="border p-2 rounded w-full" rows="4"
+                                    <textarea title="textarea" class="border border-gray-300 rounded p-2 w-full" rows="4"
                                         name="description" required></textarea>
                                 </div>
-                                <div>
-                                    <label class="text-sm font-semibold">Fuel Type</label>
-                                    <select name="fuelType" class="border p-2 rounded w-full">
-                                        <option value="Petrol">Petrol</option>
-                                        <option value="Diesel">Diesel</option>
-                                        <option value="Electric">Electric</option>
-                                        <option value="Hybrid">Hybrid</option>
-                                    </select>
-                                </div>
+                                <div class="grid grid-cols-2 space-x-4 space-y-4 w-full">
+                                    <div>
+                                        <label class="text-sm font-semibold">Fuel Type</label>
+                                        <select name="fuelType" class="border border-gray-300 rounded p-2 w-full">
+                                            <option value="Petrol">Petrol</option>
+                                            <option value="Diesel">Diesel</option>
+                                            <option value="Electric">Electric</option>
+                                            <option value="Hybrid">Hybrid</option>
+                                        </select>
+                                    </div>
 
-                                <div>
-                                    <label class="text-sm font-semibold">Category</label>
-                                    <select name="category" class="border p-2 rounded w-full">
-                                        <option value="Sedan">Sedan</option>
-                                        <option value="SUV">SUV</option>
-                                        <option value="Truck">Truck</option>
-                                        <option value="Hatchback">Hatchback</option>
-                                    </select>
-                                </div>
+                                    <div>
+                                        <label class="text-sm font-semibold w-full">Category</label>
+                                        <select name="category" class="border border-gray-300 rounded p-2 w-full">
+                                            <option value="Sedan">Sedan</option>
+                                            <option value="SUV">SUV</option>
+                                            <option value="Coupe">Coupe</option>
+                                            <option value="Truck">Truck</option>
+                                            <option value="Sports">Sports</option>
+                                            <option value="Hatchback">Hatchback</option>
+                                            <option value="Convertible">Convertible</option>
+                                        </select>
+                                    </div>
 
-                                <div>
-                                    <label class="text-sm font-semibold">Transmission</label>
-                                    <select name="transmission" class="border p-2 rounded w-full">
-                                        <option value="Automatic">Automatic</option>
-                                        <option value="Manual">Manual</option>
-                                    </select>
-                                </div>
+                                    <div>
+                                        <label class="text-sm font-semibold">Transmission</label>
+                                        <select name="transmission" class="border border-gray-300 rounded p-2 w-full">
+                                            <option value="Automatic">Automatic</option>
+                                            <option value="Manual">Manual</option>
+                                        </select>
+                                    </div>
 
-                                <div>
-                                    <label class="text-sm font-semibold">Engine (cc)</label>
-                                    <input type="number" class="border p-2 rounded w-full" name="engine">
+                                    <div>
+                                        <label class="text-sm font-semibold">Engine (cc)</label>
+                                        <input type="number" class="border border-gray-300 rounded p-2 w-full" name="engine">
+                                    </div>
                                 </div>
 
                             </div>
-                            
+
                             <div>
-                                
+
                                 <div>
                                     <h2 class="text-2xl font-semibold mb-4">Dimensions & Capacity</h2>
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -265,9 +281,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Engine and Transmission -->
+                                <div>
+                                    <h2 class="text-2xl font-semibold mb-4">Locations</h2>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
+                                        <div class="flex flex-col">
+                                            <label class="font-semibold" for="address">Embedded Link</label>
+                                            <input type="text" name="address"
+                                                class="border border-gray-300 rounded p-2" placeholder="4950" required>
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <label class="font-semibold" for="link">Direction Link</label>
+                                            <input type="text" name="link" class="border border-gray-300 rounded p-2"
+                                                placeholder="2100" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="my-6 space-y-8 ">
                                 <div class="mt-6">
                                     <button type="submit" name="submit"
@@ -307,65 +338,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    
-document.addEventListener('DOMContentLoaded', function() {
-    const uploadSlots = document.querySelectorAll('.upload-slot');
 
-    uploadSlots.forEach(slot => {
-        const input = slot.querySelector('.image-input');
-        const uploadText = slot.querySelector('.upload-text');
-        
-        // Create preview container (initially hidden)
-        const previewContainer = document.createElement('div');
-        previewContainer.className = 'absolute inset-0 hidden';
-        slot.appendChild(previewContainer);
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadSlots = document.querySelectorAll('.upload-slot');
 
-        input.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+        uploadSlots.forEach(slot => {
+            const input = slot.querySelector('.image-input');
+            const uploadText = slot.querySelector('.upload-text');
 
-            const reader = new FileReader();
+            // Create preview container (initially hidden)
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'absolute inset-0 hidden';
+            slot.appendChild(previewContainer);
 
-            reader.onload = function(event) {
-                // Create preview elements using Tailwind classes
-                const previewWrapper = document.createElement('div');
-                previewWrapper.className = 'relative w-full h-full';
-                
-                const previewImg = document.createElement('img');
-                previewImg.src = event.target.result;
-                previewImg.className = 'w-full h-full object-cover rounded';
-                
-                const removeBtn = document.createElement('button');
-                removeBtn.type = 'button';
-                removeBtn.className = 'absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center hover:bg-red-700 transition-colors';
-                removeBtn.innerHTML = '×';
-                removeBtn.title = 'Remove image';
-                
-                // Build the preview structure
-                previewWrapper.appendChild(previewImg);
-                previewWrapper.appendChild(removeBtn);
-                previewContainer.innerHTML = '';
-                previewContainer.appendChild(previewWrapper);
-                
-                // Toggle visibility
-                previewContainer.classList.remove('hidden');
-                if (uploadText) uploadText.classList.add('hidden');
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
 
-                // Remove button functionality
-                removeBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    input.value = '';
-                    previewContainer.classList.add('hidden');
-                    if (uploadText) uploadText.classList.remove('hidden');
-                });
-            };
+                const reader = new FileReader();
 
-            reader.readAsDataURL(file);
+                reader.onload = function(event) {
+                    // Create preview elements using Tailwind classes
+                    const previewWrapper = document.createElement('div');
+                    previewWrapper.className = 'relative w-full h-full';
+
+                    const previewImg = document.createElement('img');
+                    previewImg.src = event.target.result;
+                    previewImg.className = 'w-full h-full object-cover rounded';
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className =
+                        'absolute top-1 right-1 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center hover:bg-red-700 transition-colors';
+                    removeBtn.innerHTML = '×';
+                    removeBtn.title = 'Remove image';
+
+                    // Build the preview structure
+                    previewWrapper.appendChild(previewImg);
+                    previewWrapper.appendChild(removeBtn);
+                    previewContainer.innerHTML = '';
+                    previewContainer.appendChild(previewWrapper);
+
+                    // Toggle visibility
+                    previewContainer.classList.remove('hidden');
+                    if (uploadText) uploadText.classList.add('hidden');
+
+                    // Remove button functionality
+                    removeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        input.value = '';
+                        previewContainer.classList.add('hidden');
+                        if (uploadText) uploadText.classList.remove('hidden');
+                    });
+                };
+
+                reader.readAsDataURL(file);
+            });
         });
     });
-});
-
-
     </script>
 
 </body>

@@ -139,36 +139,61 @@ class Vehicle {
     }
 
     //  function to load car details inside the veiwDetails page
-    public function Get_everyThing_by_ID($id){
-        $query ="SELECT * FROM vehicles WHERE VehicleID = ?";
-        $stmt =$this->conn->prepare($query);
-        $stmt->bind_param("i",$id);
+    public function Get_everyThing_by_ID($id) {
+        // Step 1: Get vehicle data
+        $query = "SELECT * FROM vehicles WHERE VehicleID = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
-
-        $v_result =$stmt->get_result();
+        $v_result = $stmt->get_result();
         $vehicle = $v_result->fetch_assoc();
         $stmt->close();
 
-        if(!$vehicle){
+        if (!$vehicle) {
             return null;
         }
+
+        // Step 2: Get vehicle images
         $imagesQuery = "SELECT * FROM vehicle_images WHERE vehicle_id = ? ORDER BY is_main DESC";
         $imgStmt = $this->conn->prepare($imagesQuery);
-        $imgStmt->bind_param("i", $vehicleId);
+        $imgStmt->bind_param("i", $id);
         $imgStmt->execute();
         $imagesResult = $imgStmt->get_result();
         $images = [];
-        
+
         while ($imgRow = $imagesResult->fetch_assoc()) {
             $images[] = $imgRow;
         }
-        
+
         $imgStmt->close();
         $vehicle['images'] = $images;
+
+        // Step 3: Get seller details (from seller and users tables)
+        $sellerQuery = "
+            SELECT 
+                u.id AS user_id,
+                u.firstName,
+                u.lastName,
+                u.email,
+                s.Description,
+                s.Image_path
+            FROM seller s
+            JOIN users u ON s.userID = u.id
+            WHERE s.userID = ?
+        ";
+
+        $sellerStmt = $this->conn->prepare($sellerQuery);
+        $sellerStmt->bind_param("i", $vehicle['sellerID']);
+        $sellerStmt->execute();
+        $sellerResult = $sellerStmt->get_result();
+        $seller = $sellerResult->fetch_assoc();
+        $sellerStmt->close();
+
+        $vehicle['seller'] = $seller;
+
         return $vehicle;
-
-
     }
+
 
 
 }
