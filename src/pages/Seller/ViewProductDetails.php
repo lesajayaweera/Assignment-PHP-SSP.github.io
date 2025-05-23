@@ -10,20 +10,28 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 <?php 
 if($_SERVER['REQUEST_METHOD']==="GET"){
   require_once("./src/php/Controller/VehicleController.php");
-  $id = htmlspecialchars($_GET['id']);
+  if(isset($_GET['id'])){
+    $id = htmlspecialchars($_GET['id']);
+    $vehicle = new VehicleController;
+    $vehicleData = $vehicle->Load_everything_by_Id($id);
 
-  $vehicle = new VehicleController;
-  $vehicleData = $vehicle->Load_everything_by_Id($id);
 
 
-
-  $mainImage = null;
-  foreach ($vehicleData['images'] as $img) {
-    if ($img['is_main']) {
-      $mainImage = $img;
-      break;
+    $mainImage = null;
+    foreach ($vehicleData['images'] as $img) {
+      if ($img['is_main']) {
+        $mainImage = $img;
+        break;
+      }
     }
+  }else{
+    header("Location:/Assignment/Seller/ManageProducts");
+    exit;
+    
   }
+  
+
+  
   
 }
 ?>
