@@ -1,15 +1,20 @@
 <?php 
-if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
-  header("Location:/Assignment/Login");
+session_start();
+require_once("./src/php/Controller/VehicleController.php");
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header("Location: /Assignment/Login");
+    exit;
 }
- ?>
+$vehicle  = new VehicleController();
+$vehicle = $vehicle->Load_all_with_main_Image();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title> Admin-View Listings</title>
-  <link rel="stylesheet" href="../../output.css">
+  <link rel="stylesheet" href="/Assignment/src/output.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
 <body class="bg-gray-100 font-family-montserrat">
@@ -61,47 +66,61 @@ if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
         </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100">
-        <!-- Card -->
-        <div class="max-w-xs bg-white rounded-lg font-family-montserrat shadow-md p-6 text-center">
-          <!-- Title -->
-          <h3 class="text-lg font-semibold text-gray-900 mb-1">Porshe 718 Cayman S</h3>
-          <p class="text-gray-500 mb-4">Coupe</p>
-        
-          <!-- Car Image -->
-          <img src="../../../assets/images/land rover.png" 
-               alt="Car" 
-               class="w-full h-40 object-contain mb-4" />
-        
-          <!-- Icons and Info -->
-          <div class="flex justify-center items-center gap-6 mb-4 text-gray-600">
-            <div class="flex items-center gap-1">
-              <img src="../../../assets/icons/seats.png" class="w-[30px] object-contain" alt="">
-              <span class="text-sm">4</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100 font-sans">
+                <!-- Card -->
+                <?php foreach($vehicle as $car): ?>
+                <div class="max-w-xs bg-white rounded-lg shadow-md text-center font-sans overflow-hidden">
+                    <!-- Car Image (full width) -->
+                    <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="Car"
+                        class="h-40 w-full object-cover rounded-t-lg" />
+
+                    <!-- Card Content -->
+                    <div class="p-6">
+                        <!-- Title -->
+                        <h3 class="text-lg font-semibold text-gray-900 mb-1">
+                            <?= htmlspecialchars($car['Make']) . " " . htmlspecialchars($car['Model']) ?>
+                        </h3>
+                        <p class="text-gray-500 mb-4">
+                            <?= ucfirst(htmlspecialchars($car['cateogory'])) ?>
+                        </p>
+
+                        <!-- Icons and Info -->
+                        <div class="flex justify-center items-center gap-6 mb-4 text-gray-600">
+                            <div class="flex items-center gap-1">
+                                <img src="/Assignment/assets/icons/seats.png" class="w-[30px] object-contain" alt="">
+                                <span class="text-sm"><?= htmlspecialchars($car['Seats']) ?></span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <img src="/Assignment/assets/icons/transmission.png" class="w-[30px] object-contain"
+                                    alt="">
+                                <span
+                                    class="text-sm"><?= htmlspecialchars($car['Transmission'] ?? 'default-car.jpg') ?></span>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <img src="/Assignment/assets/icons/fuel.png" class="w-[30px] object-contain" alt="">
+                                <span class="text-sm"><?= htmlspecialchars($car['FuelType']) ?> </span>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex justify-center gap-4">
+                            
+                            <button
+                                class="flex-1 bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600 capitalize transition">
+                                <a href="/Assignment/Admin/ViewProducts?id=<?= htmlspecialchars($car['VehicleID']) ?>">Veiw</a>
+                            </button>
+                            <button
+                                class="flex-1 bg-red-600 text-white px-5 py-2 rounded hover:bg-red-700 capitalize transition">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <?php endforeach;?>
+                <!-- Repeat the card as needed -->
             </div>
-            <div class="flex items-center gap-1">
-              <img src="../../../assets/icons/transmission.png" class="w-[30px] object-contain" alt="">
-              <span class="text-sm">Manual</span>
-            </div>
-          </div>
-        
-          <!-- Buttons -->
-          <div class="flex justify-center gap-4">
-            <button class="bg-green-500 text-white px-5 py-2 w-full rounded hover:bg-green-600 capitalize transition">
-              view
-            </button>
-            <button class="bg-red-600 text-white px-5 py-2 rounded hover:bg-red-700 capitalize transition">
-              Delete
-            </button>
-            <button class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 capitalize transition">
-              View  
-            </button>
-          </div>
-        </div>
-        
-      
-        <!-- Repeat the card as needed -->
-      </div>
       
     </section>
   </div>

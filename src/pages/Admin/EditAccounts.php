@@ -1,8 +1,12 @@
 <?php 
-if(!isset($_SESSION['email']) || $_SESSION['role']==="admin" ){
-  header("Location:/Assignment/Login");
+session_start();
+
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header("Location: /Assignment/Login");
+    exit;
 }
- ?>
+
+?>
 
 
 <!DOCTYPE html>
