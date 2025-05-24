@@ -1,10 +1,20 @@
 <?php
 session_start();
+require_once("./src/php/Controller/SellerController.php");
 
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
     header("Location: /Assignment/Login");
     exit;
 }
+
+$controller = new SellerController();
+$result =$controller->getNegotiatedDeals();
+
+
+// echo "<pre>";
+// print_r($result);
+// echo "<pre>";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,40 +82,82 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                 <h3 class="capitalize text-2xl font-semibold px-6">Deals</h3>
                 <!-- offer main Container -->
                 <div class="flex flex-col gap-6 items-center justify-center p-6">
+                <?php if(!empty($result)): ?>
+                    <?php foreach($result as $car):?>
                     <!-- Offer Card -->
-                    <div class="w-full  bg-white rounded-lg shadow-lg p-6 gap-6 text-center flex flex-col md:flex-row items-center justify-around">
+                    <div
+                        class="w-full bg-white rounded-2xl shadow-xl p-6 flex flex-col lg:flex-row gap-8 items-start max-w-6xl mx-auto">
 
-                        <!-- Image -->
-                        <img src="/Assignment/assets/images/products/Audi-a6.jpg" alt="Car"
-                            class="w-full md:w-1/2 object-contain mb-4 md:mb-0 rounded">
-
-                        <!-- Offer Details -->
-                        <div class="">
-                            <div class="w-full  flex flex-col items-center ">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-1">Porshe 718 Cayman S</h3>
-                                <p class="text-gray-500 mb-4">Coupe</p>
-                                <p id="carPrice" class="text-xl font-bold text-gray-900 mb-2">Price: $50,000</p>
-
-                                <!-- Quantity Controls (Initially Hidden) -->
-                                
-                            </div>
-
-
-                            <!-- Quantity Controls (Initially Hidden) -->
-
-
-                            <!-- Action Buttons -->
-                            <div class="flex flex-col sm:flex-row gap-2 mt-2 items-center justify-center">
-                                
-                                <button id="acceptOffer"
-                                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Accept</button>
-                                <button id="rejectOffer"
-                                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Reject</button>
-                            </div>
+                        <!-- Vehicle Image -->
+                        <div class="w-full lg:w-1/2">
+                            <img src="<?= $car['vehicle']['main_image'] ?>" alt="Car Image"
+                                class="w-full  h-auto  md:w-[800px] md:h-[400px] rounded-xl object-cover shadow-md">
                         </div>
+
+                        <!-- Info Section -->
+                        <div class="w-full lg:w-1/2 flex flex-col space-y-4">
+
+                            <!-- Vehicle Title -->
+                            <h3 class="text-3xl font-bold text-gray-800">
+                                <?= $car['vehicle']['Make'] ?> <?= $car['vehicle']['Model'] ?>
+                                (<?= $car['vehicle']['Year'] ?>)
+                            </h3>
+                            <p class="text-sm uppercase tracking-wide text-gray-500">
+                                <?= ucfirst($car['vehicle']['cateogory']) ?>
+                            </p>
+
+                            <!-- Price Info -->
+                            <div class="space-y-1">
+                                <p class="text-gray-600">Original Price:
+                                    <span class="font-semibold text-gray-800">
+                                        $<?= number_format($car['vehicle']['price']) ?>
+                                    </span>
+                                </p>
+                                <p class="text-green-700 font-bold text-lg">
+                                    Negotiated Price: $<?= number_format($car['negotiation']['negotiatedPrice']) ?>
+                                </p>
+                            </div>
+
+                            <!-- Buyer Info -->
+                            <div class="flex items-center gap-4 pt-2">
+                                <img src="<?= $car['buyer']['buyer_image'] ?>" alt="Buyer Profile"
+                                    class="w-12 h-12 rounded-full object-cover border border-gray-300 shadow">
+                                <p class="text-gray-800 text-sm font-medium">
+                                    Buyer: <?= $car['buyer']['firstName'] ?> <?= $car['buyer']['lastName'] ?>
+                                </p>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex gap-4 pt-4">
+                                <a
+                                    href="/Assignment/Seller/Manage/Accept/Negotiations?id=<?= $car['negotiation']['id'] ?>">
+                                    <button
+                                        class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg shadow transition-all duration-300">
+                                        Accept
+                                    </button>
+                                </a>
+
+                                <a
+                                    href="/Assignment/Seller/Manage/Reject/Negotiations?id=<?= $car['negotiation']['id'] ?>">
+                                    <button
+                                        class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow transition-all duration-300">
+                                        Reject
+                                    </button>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <div class="text-center text-gray-500 text-lg mt-10">
+                        No negotiated deals available at the moment.
                     </div>
 
                 </div>
+                <?php endif;?>
+
+                
 
             </section>
 
@@ -123,10 +175,6 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
         const sidebar = document.getElementById("mobileSidebar");
         sidebar.classList.toggle("-translate-x-full");
     }
-
-
-
-   
     </script>
 
 </body>

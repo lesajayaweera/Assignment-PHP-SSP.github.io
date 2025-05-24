@@ -256,4 +256,191 @@ class Seller{
     }
 
 
+    // get the negotiation details
+    public function getAllNegotiationsWithDetails() {
+        $query = "
+            SELECT 
+                n.*,
+                v.*,
+                u.id as buyer_id,
+                u.firstName as buyer_firstName,
+                u.lastName as buyer_lastName,
+                u.email as buyer_email,
+                u.image_path as buyer_image,
+                vi.image_path as vehicle_main_image
+            FROM 
+                negotiations n
+            JOIN 
+                vehicles v ON n.vehicleID = v.VehicleID
+            JOIN 
+                users u ON n.buyerID = u.id
+            LEFT JOIN 
+                vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+            WHERE 
+                n.status = 'pending'
+            ORDER BY 
+                n.id DESC
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $this->conn->error);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $negotiations = [];
+        while ($row = $result->fetch_assoc()) {
+            $negotiations[] = [
+                'negotiation' => [
+                    'id' => $row['id'],
+                    'vehicleID' => $row['vehicleID'],
+                    'buyerID' => $row['buyerID'],
+                    'negotiatedPrice' => $row['negotiatedPrice'],
+                    'status' => $row['status'],
+                    // Include timestamps if you added them
+                    // 'createdAt' => $row['createdAt'],
+                    // 'updatedAt' => $row['updatedAt']
+                ],
+                'vehicle' => [
+                    'VehicleID' => $row['VehicleID'],
+                    'sellerID' => $row['sellerID'],
+                    'Make' => $row['Make'],
+                    'Model' => $row['Model'],
+                    'Year' => $row['Year'],
+                    'FuelType' => $row['FuelType'],
+                    'cateogory' => $row['cateogory'],
+                    'Transmission' => $row['Transmission'],
+                    'Engine' => $row['Engine'],
+                    'Seats' => $row['Seats'],
+                    'condition' => $row['veh_condition'],
+                    'width' => $row['width'],
+                    'length' => $row['length'],
+                    'height' => $row['height'],
+                    'description' => $row['description'],
+                    'price' => $row['price'],
+                    'CreatedAt' => $row['CreatedAt'],
+                    'main_image' => $row['vehicle_main_image']
+                ],
+                'buyer' => [
+                    'id' => $row['buyer_id'],
+                    'firstName' => $row['buyer_firstName'],
+                    'lastName' => $row['buyer_lastName'],
+                    'email' => $row['buyer_email'],
+                    'buyer_image'=>$row['buyer_image']
+
+                ]
+            ];
+        }
+
+        $stmt->close();
+        return $negotiations;
+    }
+
+
+
+    /**
+ * Handles negotiation response (accept/reject) and performs all related updates
+
+ */
+    public function handleNegotiationResponse( $negotiationID, $accept) {
+        // Begin transaction to ensure data consistency
+        $this->conn->begin_transaction();
+        
+        try {
+            // 1. First get the negotiation details
+            $negotiation = $this->getNegotiationDetails($negotiationID);
+            if (!$negotiation) {
+                throw new Exception("Negotiation not found");
+            }
+            
+            if ($accept) {
+                // 2. If accepting, update negotiation status to approved
+                $this->updateNegotiationStatus($negotiationID, 'approved');
+                
+                // 3. Create order record
+                $this->createOrder(
+ 
+                    $negotiation['vehicleID'],
+                    $negotiation['buyerID'],
+                    $negotiation['sellerID'],
+                    $negotiation['negotiatedPrice']
+                );
+                
+                // 4. Update vehicle price
+                $this->updateVehiclePrice(
+
+                    $negotiation['vehicleID'],
+                    $negotiation['negotiatedPrice']
+                );
+            } else {
+                // 2. If rejecting, delete the negotiation
+                $this->deleteNegotiation($negotiationID);
+            }
+            
+            // Commit all changes if everything succeeded
+            $this->conn->commit();
+            return true;
+            
+        } catch (Exception $e) {
+            // Rollback on any error
+            $this->conn->rollback();
+            error_log("Negotiation handling failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // Helper function to get negotiation details
+    function getNegotiationDetails($negotiationID) {
+        $stmt = $this->conn->prepare("
+            SELECT n.*, v.sellerID 
+            FROM negotiations n
+            JOIN vehicles v ON n.vehicleID = v.VehicleID
+            WHERE n.id = ?
+        ");
+        $stmt->bind_param("i", $negotiationID);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Helper function to update negotiation status
+    function updateNegotiationStatus($negotiationID, $status) {
+        $stmt = $this->conn->prepare("
+            UPDATE negotiations SET status = ? WHERE id = ?
+        ");
+        $stmt->bind_param("si", $status, $negotiationID);
+        return $stmt->execute();
+    }
+
+    // Helper function to create order
+    function createOrder($vehicleID, $buyerID, $sellerID, $price) {
+        $stmt = $this->conn->prepare("
+            INSERT INTO orders 
+            (vehicleID, buyerID, sellerID, price, status) 
+            VALUES (?, ?, ?, ?, 'pending')
+        ");
+        $stmt->bind_param("iiii", $vehicleID, $buyerID, $sellerID, $price);
+        return $stmt->execute();
+    }
+
+    // Helper function to update vehicle price
+    function updateVehiclePrice($vehicleID, $newPrice) {
+        $stmt = $this->conn->prepare("
+            UPDATE vehicles SET price = ? WHERE VehicleID = ?
+        ");
+        $stmt->bind_param("di", $newPrice, $vehicleID);
+        return $stmt->execute();
+    }
+
+    // Helper function to delete negotiation
+    function deleteNegotiation($negotiationID) {
+        $stmt = $this->conn->prepare("
+            DELETE FROM negotiations WHERE id = ?
+        ");
+        $stmt->bind_param("i", $negotiationID);
+        return $stmt->execute();
+    }
+
+
 }

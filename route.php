@@ -59,6 +59,8 @@ $links = array(
     "Assignment/Seller/Account/Edit" =>"./src/pages/Seller/EditAccounts.php",
     "Assignment/Seller/ViewProducts"=> "./src/pages/Seller/ViewProductDetails.php",
     "Assignment/Seller/DeleteProducts"=> "./src/pages/Seller/DeleteProducts.php",
+    "Assignment/Seller/Manage/Accept/Negotiations"=>"./src/pages/Seller/AcceptNegotiations.php",
+    "Assignment/Seller/Manage/Reject/Negotiations"=>"./src/pages/Seller/RejectNegotitations.php",
 
 
 

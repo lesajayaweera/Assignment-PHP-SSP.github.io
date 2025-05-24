@@ -40,7 +40,7 @@ class VehicleController{
     }
 
     public function Load_all_with_main_Image(){
-       return $this->vehicle->Get_details_with_mainImage();
+       return $this->vehicle->Get_available_vehicles_with_mainImage();
     }
 
     public function Load_everything_by_Id($vehicle_id){

@@ -1,6 +1,5 @@
 <?php
+session_start();
 
-if ($_SERVER['REQUEST_METHOD']==="GET"){
-    echo $_GET['number'];
-    
-}
+require_once("/Assignment/src/php/Controller/BuyerController.php");
+

@@ -76,15 +76,15 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                     <p class="text-2xl font-bold">40,689</p>
                 </div>
                 <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Total Revenue</p>
+                    <p class="text-sm text-gray-500">Total Deals</p>
                     <p class="text-2xl font-bold">10,293</p>
                 </div>
                 <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Total Sales</p>
+                    <p class="text-sm text-gray-500">Approved Deals</p>
                     <p class="text-2xl font-bold">$89,000</p>
                 </div>
                 <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Inventory</p>
+                    <p class="text-sm text-gray-500">Total Sales</p>
                     <p class="text-2xl font-bold">2040</p>
                 </div>
             </div>

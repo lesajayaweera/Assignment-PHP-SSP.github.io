@@ -18,6 +18,17 @@ class BuyerController{
     public function GetBuyerDetails($email){
         return $this->buyer->GetUserDetails($email);
     }
+    public function Negotiate($vehicleID, $buyerID, $negotiatedPrice){
+        $result =$this->buyer->insertNegotiation($vehicleID, $buyerID, $negotiatedPrice);
+        if ($result){
+            echo "<script>alert('Negotiation is sent !')</script>";
+           
+        }
+        else{
+            echo "<script>alert('Negotiation didnt sent !')</script>";
+           
+        }
+    }
 }
 
 

@@ -2,8 +2,11 @@
 include_once("./src/private/initialize.php");
 require_once("./src/php/Controller/VehicleController.php");
 require_once("./src/php/Controller/SellerController.php");
+require_once("./src/php/Controller/BuyerController.php");
 ?>
-<?php session_start(); ?>
+<?php session_start();
+
+ ?>
 <?php 
 $vehicleData =null;
 $id = null;
@@ -41,6 +44,23 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
     //   echo "<pre>";
   
 }
+
+if ($_SERVER['REQUEST_METHOD']==="POST"){
+    $price= (int)$_POST['number']  ;
+    $VehicleID= $_POST['vehicleID'];
+    $buyerID=$_SESSION['buyerID'];
+
+
+
+    $controller = new BuyerController();
+    $controller->Negotiate($VehicleID,$buyerID,$price);
+    header("Location:/Assignment/ViewDetails?id=$VehicleID");
+
+
+     
+    
+}
+
 
 
 $pageTitle = "Vehicle Details";
@@ -126,14 +146,14 @@ $script = "vehicle";
                         class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out" id="buyBtn">Buy
                         Now</button>
                     <button class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out" id="wishBtn" >WishList</button>
-                    <form method="get" action="./src/pages/Customer/Negotiate.php">
+                    <form method="post" >
                         <button type="button" class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out" id="negotiate">Negotiate</button>
                         <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
                             <div class="flex w-full space-x-2">
                                 
                                 <input type="number" name="number" class="w-full border p-2 outline-none rounded border-gray-300 text-center" min="<?php echo ((int)($vehicleData['price']) *0.9) ?>" max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
                                 <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
-                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['id']; ?>">
+                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['buyerID']; ?>">
                                 <input type="hidden" name="status" value="pending">
                                 
                             </div>

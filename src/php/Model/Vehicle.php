@@ -343,18 +343,23 @@ class Vehicle {
 
 
 
-    //  method to get the vehicle details with the main image
-    public function Get_details_with_mainImage(){
-        $query = "SELECT v.*, vi.image_path as main_image FROM vehicles v LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1 ORDER BY v.VehicleID DESC";
-        $result =$this->conn->query($query);
-        $vehicle =[];
+    //  method to get the vehicle details with the main image  if the vehicle is not in the orders table
+    public function Get_available_vehicles_with_mainImage() {
+        $query = "SELECT v.*, vi.image_path as main_image 
+                FROM vehicles v 
+                LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+                WHERE v.VehicleID NOT IN (SELECT vehicleID FROM orders)
+                ORDER BY v.VehicleID DESC";
+        
+        $result = $this->conn->query($query);
+        $vehicles = [];
 
-        if($result && $result->num_rows >0){
-            while ($row = $result->fetch_assoc()){
-                $vehicle[] =$row;
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $vehicles[] = $row;
             }
         }
-        return $vehicle;
+        return $vehicles;
     }
 
     //  function to load car details inside the veiwDetails page

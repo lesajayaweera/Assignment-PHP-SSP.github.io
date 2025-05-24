@@ -73,7 +73,9 @@ class UserController{
                  $image =$buyer->GetBuyerDetails($user_data['email'])['image_path'];
                  $id =$buyer->GetBuyerDetails($user_data['email'])['id'];
                 $_SESSION['image'] = $image;
-                $_SESSION['id'] = $id;
+                $_SESSION['buyerID'] = $id;
+
+
 
                 header("Location:/Assignment/Listing");
                 exit;

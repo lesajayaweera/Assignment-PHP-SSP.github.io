@@ -25,6 +25,7 @@ class SellerController{
 
     }
 
+    // in the seller page
     public function returnAllSellerCars($sellerId){
         $seller = new Seller();
         return $seller->getVehiclesWithMainImagesBySeller($sellerId);
@@ -35,4 +36,16 @@ class SellerController{
         return $seller->getOtherVehiclesFromSameSeller($vehicleID);
     }
 
+    public function getNegotiatedDeals(){
+        $seller =new Seller();
+        return $seller->getAllNegotiationsWithDetails();
+    }
+
+    public function handleNegotiations($negotiationId,$Response){
+        $seller = new Seller();
+        $result= $seller->handleNegotiationResponse($negotiationId,$Response);
+        if(!$result){
+            echo "Error in handling the Negotiations";
+        }
+    }
 }
