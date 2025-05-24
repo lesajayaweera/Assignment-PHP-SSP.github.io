@@ -1,4 +1,5 @@
 <?php include("./src/private/initialize.php");?>
+<?php session_start(); ?>
 <?php $pageTitle = "Checkout Payment";
 $script = "Checkout-payment";
 ?>

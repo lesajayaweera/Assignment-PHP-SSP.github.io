@@ -1,16 +1,29 @@
-<?php include_once("./src/private/initialize.php");?>
 <?php 
+include_once("./src/private/initialize.php");
+require_once("./src/php/Controller/VehicleController.php");
+?>
+<?php session_start(); ?>
+<?php 
+$vehicleData =null;
+$id = null;
+
 if($_SERVER['REQUEST_METHOD']==="GET"){
-  require_once("./src/php/Controller/VehicleController.php");
-  $id = htmlspecialchars($_GET['id']);
+    if(isset($_GET['id'])){
+        $id = htmlspecialchars($_GET['id']);
+    }
+    else{
+        header("Location:/Assignment/Login");
+        exit;
+    }
+  
 
   $vehicle = new VehicleController;
   $vehicleData = $vehicle->Load_everything_by_Id($id);
 
 
-//   echo "<pre>";
-//   print_r($vehicleData);
-//   echo "<pre>";
+    //   echo "<pre>";
+    //   print_r($vehicleData);
+    //   echo "<pre>";
 
   $mainImage = null;
   foreach ($vehicleData['images'] as $img) {
@@ -21,6 +34,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
   }
   
 }
+
 
 $pageTitle = "Vehicle Details";
 $script = "vehicle";

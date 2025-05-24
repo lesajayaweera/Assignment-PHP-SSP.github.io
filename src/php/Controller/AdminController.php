@@ -32,4 +32,14 @@ class AdminController{
         }
         
     }
+
+    public function EditAdmin($fname,$lname,$email,$password,$image){
+        $conn= new Admin;
+        $conn->EditUser($fname,$lname,$email,$password,$image);
+
+    }
+
+    public function GetAdminDetails($email){
+        return $this->admin->GetUserDetails($email);
+    }
 }

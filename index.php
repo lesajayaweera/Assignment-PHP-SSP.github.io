@@ -1,6 +1,14 @@
 <?php include_once("./src/private/initialize.php") ?>
 
+<?php 
+session_start();
 
+
+
+
+
+
+?>
 <?php
 $pageTitle = "Home";
 $script ="";

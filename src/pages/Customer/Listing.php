@@ -2,7 +2,7 @@
 require_once("./src/php/Controller/VehicleController.php")
 ?>
 
-
+<?php session_start(); ?>
 <?php $pageTitle = "Listing";
 $script = "Listing";
 

@@ -51,6 +51,12 @@ class UserController{
 
             // Redirect to dashboard
             if($user_data['role'] ==="admin"){
+                 require_once("./src/php/Controller/AdminController.php");
+                 $admin = new AdminController();
+                 $image =$admin->GetAdminDetails($user_data['email'])['image_path'];
+                $_SESSION['image'] = $image;
+
+
 
                 header("Location:/Assignment/Admin/Dashboard");
                 exit;
@@ -62,6 +68,10 @@ class UserController{
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
             }else if ($user_data['role'] =="buyer"){
+                require_once("./src/php/Controller/BuyerController.php");
+                 $buyer = new BuyerController();
+                 $image =$buyer->GetBuyerDetails($user_data['email'])['image_path'];
+                $_SESSION['image'] = $image;
                 header("Location:/Assignment/Listing");
                 exit;
             }

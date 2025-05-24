@@ -1,6 +1,7 @@
-<?php include("./src/private/initialize.php");
-      
+<?php include("./src/private/initialize.php");     
+session_start(); 
 ?>
+
 <?php $pageTitle = "Sign Up";
 $script = "SignUp";
 ?>

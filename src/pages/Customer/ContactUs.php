@@ -1,4 +1,5 @@
 <?php require_once("./src/private/initialize.php");?>
+<?php session_start(); ?>
 <?php
 $pageTitle = "Contact Us";
 $script = "Listing";?>

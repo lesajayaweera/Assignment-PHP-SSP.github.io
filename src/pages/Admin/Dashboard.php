@@ -59,7 +59,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
         </div>
         <div class="flex items-center space-x-3">
           <span class="text-sm"><?php echo $_SESSION['name']?$_SESSION['name']: "Guest User"  ?></span>
-          <img src="/Assignment/assets/images/profile pic.jpg" alt="profile" class="w-10 h-10 rounded-full" />
+          <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
         </div>
       </div>
 

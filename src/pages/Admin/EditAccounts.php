@@ -68,8 +68,8 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                     <h2 class="text-2xl font-semibold">Edit Accounts</h2>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <span class="text-sm">Mevi Roy</span>
-                    <img src="../../../assets/images/profile pic3.jpg" alt="profile" class="w-10 h-10 rounded-full" />
+                    <span class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
+                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
                 </div>
             </div>
             <section>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                     <div class="flex flex-col md:flex-row items-start justify-center md:items-center gap-8">
                         <!-- Profile Picture -->
                         <div class="flex-shrink-0 items-center justify-center ">
-                            <img src="https://i.pravatar.cc/150?img=5" alt="Profile Photo"
+                            <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="Profile Photo"
                                 class="h-32 w-32 rounded-full object-cover shadow">
                         </div>
 

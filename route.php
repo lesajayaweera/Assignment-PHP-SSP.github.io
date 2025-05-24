@@ -31,6 +31,7 @@ $links = array(
     "Assignment/Listing"=>"./src/pages/Customer/Listing.php",
     "Assignment/Seller"=>"./src/pages/Customer/Seller page.php",
     "Assignment/Service"=>"./src/pages/Customer/Service.php",
+    "Assignment/Customer/Account/Edit"=>"./src/pages/Customer/EditAccounts.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
     "Assignment/payments"=>"./src/pages/Customer/Checkout-payment.php",
 
@@ -43,6 +44,7 @@ $links = array(
     "Assignment/Admin/Tables"=>"./src/pages/Admin/Tables.php",
     "Assignment/Admin/ViewProducts"=> "./src/pages/Admin/ViewProductDetails.php",
     "Assignment/Admin/ManageListings"=> "./src/pages/Admin/ManageListings.php",
+    "Assignment/Admin/Account/Edit"=> "./src/pages/Admin/EditUserAccount.php",
 
 
 

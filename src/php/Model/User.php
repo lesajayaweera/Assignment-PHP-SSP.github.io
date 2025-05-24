@@ -69,7 +69,67 @@ require_once("./src/php/Model/Validator.php");
         }
         return false;
     }
-    
+    public static function EditUser($conn,$fname, $lname, $email, $password,$image) {
+        if (Validator::ValidateCredentials($fname, $lname, $email, $password)) {
+            $conn->begin_transaction();
+            try {
+                // Hash the password
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+                // Handle image upload
+                $imagePath = null;
+                if (!empty($image['name'])) {
+                    $uploadDir = "/Assignment/uploads/";
+                    $imageName = time() . '_' . basename($image['name']); // Add timestamp for uniqueness
+                    $targetPath = $_SERVER['DOCUMENT_ROOT'] . $uploadDir . $imageName;
+                    $relativePath = $uploadDir . $imageName;
+
+                    // Check if upload directory exists, create if not
+                    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $uploadDir)) {
+                        mkdir($_SERVER['DOCUMENT_ROOT'] . $uploadDir, 0755, true);
+                    }
+
+                    // Validate image file
+                    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+                    $fileType = mime_content_type($image['tmp_name']);
+                    
+                    if (!in_array($fileType, $allowedTypes)) {
+                        throw new Exception("Only JPG, PNG, and GIF images are allowed.");
+                    }
+
+                    if (move_uploaded_file($image['tmp_name'], $targetPath)) {
+                        $imagePath = $relativePath;
+                    } else {
+                        throw new Exception("Failed to upload image.");
+                    }
+                }
+
+                // Update user details (including image path if uploaded)
+                $updateUser = $conn->prepare("UPDATE users SET firstName=?, lastName=?, password=?, image_path=? WHERE email=?");
+                $updateUser->bind_param("sssss", $fname, $lname, $hashed_password, $imagePath, $email);
+                $updateUser->execute();
+
+                if ($updateUser->affected_rows < 0) {
+                    throw new Exception("Failed to update user details.");
+                }
+
+                
+
+                // Commit transaction if all operations succeeded
+                $conn->commit();
+                return true;
+
+            } catch (Exception $e) {
+                // Rollback transaction on error
+                $conn->rollback();
+                error_log("Transaction failed: " . $e->getMessage());
+                // Consider returning the error message for display
+                return $e->getMessage();
+            }
+        } else {
+            return "Invalid input data.";
+        }
+    }
     
 
 

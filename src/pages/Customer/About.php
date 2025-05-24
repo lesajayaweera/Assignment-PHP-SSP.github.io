@@ -1,4 +1,5 @@
 <?php include("./src/private/initialize.php");?>
+<?php session_start(); ?>
 <?php $pageTitle = "About Us";
 $script = "AboutUs";
 ?>

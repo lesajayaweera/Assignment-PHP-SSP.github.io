@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34,8 +39,10 @@
             </button>
         </div>
         <div class="flex items-center space-x-4">
-            <i class="material-icons hidden sm:block" style="font-size: 30px;">search</i>
-            <i class="material-icons" style="font-size: 30px;">account_circle</i>
+            <a href="<?php echo ($_SESSION['role'] == 'buyer') ? '/Assignment/Customer/Account/Edit' : '/Assignment/Login'; ?>">
+
+                <img src="<?php echo isset($_SESSION['email']) ? $_SESSION['image'] :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-10': 'w-8'?>" alt="">
+            </a>
 
         </div>
     </header>
