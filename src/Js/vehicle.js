@@ -31,10 +31,9 @@ window.addEventListener("DOMContentLoaded",function(){
     const cartBtn = this.document.getElementById('cartBtn');
     const buyBtn = this.document.getElementById('buyBtn');
     const wishBtn = this.document.getElementById('wishBtn');
-    console.log(cancelBtn);
     const hiddenContainer = this.document.getElementById('hiddenContainer');
-    hiddenContainer.classList.remove('hidden')
-    nbtn.classList.add('hidden');
+    
+    hiddenContainer.classList.add('hidden')
     nbtn.addEventListener("click",function(){
         hiddenContainer.classList.remove('hidden');
         nbtn.classList.add('hidden');

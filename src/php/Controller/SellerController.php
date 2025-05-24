@@ -25,4 +25,14 @@ class SellerController{
 
     }
 
+    public function returnAllSellerCars($sellerId){
+        $seller = new Seller();
+        return $seller->getVehiclesWithMainImagesBySeller($sellerId);
+    }
+
+    public function getSellerOtherCars($vehicleID){
+        $seller = new Seller();
+        return $seller->getOtherVehiclesFromSameSeller($vehicleID);
+    }
+
 }

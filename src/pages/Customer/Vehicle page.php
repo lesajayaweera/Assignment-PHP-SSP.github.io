@@ -1,6 +1,7 @@
 <?php 
 include_once("./src/private/initialize.php");
 require_once("./src/php/Controller/VehicleController.php");
+require_once("./src/php/Controller/SellerController.php");
 ?>
 <?php session_start(); ?>
 <?php 
@@ -25,13 +26,19 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
     //   print_r($vehicleData);
     //   echo "<pre>";
 
-  $mainImage = null;
-  foreach ($vehicleData['images'] as $img) {
-    if ($img['is_main']) {
-      $mainImage = $img;
-      break;
+    $mainImage = null;
+    foreach ($vehicleData['images'] as $img) {
+        if ($img['is_main']) {
+        $mainImage = $img;
+        break;
+        }
     }
-  }
+
+    $seller = new SellerController();
+    $sellerVehicles =  $seller->getSellerOtherCars($id);
+    //  echo "<pre>";
+    //   print_r($sellerVehicles);
+    //   echo "<pre>";
   
 }
 
@@ -127,6 +134,7 @@ $script = "vehicle";
                                 <input type="number" name="number" class="w-full border p-2 outline-none rounded border-gray-300 text-center" min="<?php echo ((int)($vehicleData['price']) *0.9) ?>" max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
                                 <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
                                 <input type="hidden" name="buyerID" value="<?php echo $_SESSION['id']; ?>">
+                                <input type="hidden" name="status" value="pending">
                                 
                             </div>
                             <div class="w-full space-x-2 flex items-center justify-around">
@@ -306,60 +314,33 @@ $script = "vehicle";
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Card Item -->
-        <div class="bg-white shadow rounded-xl overflow-hidden">
+        <?php foreach($sellerVehicles as $car):?>
+          <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-                <img src="/Assignment/assets/images/products/porsche_911.png" alt="Car"
-                    class="w-full h-48 object-contain" />
-                <span
-                    class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great
-                    Price</span>
-                <button
-                    class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
+              <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full  object-cover" />
+              <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
+              <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
+              <button class="absolute top-2 right-2 bg-white p-1 w-6 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
             <div class="p-4 space-y-2">
-                <h3 class="text-sm font-semibold text-gray-800">Mercedes-Benz, C Class</h3>
-                <p class="text-xs text-gray-500">2.0D PowerAuto Momentum 5dr Auto</p>
-                <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
-                    <span>100 Miles</span>
-                    <span>Petrol</span>
-                    <span>Automatic</span>
-                </div>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-lg font-bold text-gray-900">$35,000</span>
-                    <a href="#" class="text-sm text-blue-600 hover:underline">View Details</a>
-                </div>
+              <h3 class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
+              <p class="text-xs text-gray-500"><?= htmlspecialchars($car['cateogory']); ?></p>
+              <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
+                <span><?= htmlspecialchars($car['Engine']. "cc");?></span>
+                <span><?= htmlspecialchars($car['FuelType']);?></span>
+                <span><?= htmlspecialchars($car['Transmission']);?></span>
+              </div>
+              <div class="flex items-center justify-between mt-4">
+                <span class="text-lg font-bold text-gray-900"><?= "$".number_format(htmlspecialchars($car['price'])); ?></span>
+                <a href="/Assignment/ViewDetails?id=<?=$car['VehicleID'] ?>" class="text-sm text-blue-600 hover:underline">View Details</a>
+              </div>
             </div>
-        </div>
+          </div>
+          <?php endforeach?>
 
         <!-- Duplicate and change details for more cards -->
         <!-- Card 2 -->
-        <div class="bg-white shadow rounded-xl overflow-hidden">
-            <div class="relative">
-                <img src="/Assignment/assets/images/products/porsche_new.png" alt="Car"
-                    class="w-full h-48 object-contain" />
-                <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded">Low
-                    Mileage</span>
-                <button
-                    class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>
-            </div>
-            <div class="p-4 space-y-2">
-                <h3 class="text-sm font-semibold text-gray-800">Ranger White – 2022</h3>
-                <p class="text-xs text-gray-500">2.0D PowerAuto Momentum 5dr Auto</p>
-                <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
-                    <span>30,000 Miles</span>
-                    <span>Diesel</span>
-                    <span>Manual</span>
-                </div>
-                <div class="flex items-center justify-between mt-4">
-                    <span class="text-lg font-bold text-gray-900">$25,000</span>
-                    <a href="#" class="text-sm text-blue-600 hover:underline">View Details</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add more cards below like above -->
-        <!-- Card 3 -->
-        <!-- Card 4 -->
+        
     </div>
     <div class="mt-10 flex justify-center items-center space-x-2">
         <!-- Previous Button -->

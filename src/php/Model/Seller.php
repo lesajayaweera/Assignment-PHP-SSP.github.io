@@ -122,6 +122,7 @@ class Seller{
         }
     }
 
+    // to get the seller details
     public function getSellerDetails($email) {
         try {
             $query = "
@@ -161,6 +162,97 @@ class Seller{
             error_log("Failed to fetch seller details: " . $e->getMessage());
             return false;
         }
+    }
+
+    // to get the seller listed vehicles
+        /**
+     * Fetches all vehicles with their main images for a specific seller
+     * 
+     * @param mysqli $connection MySQLi database connection
+     * @param int $sellerId The ID of the seller
+     * @return array Array of vehicles with their main images
+     * @throws Exception If query fails
+     */
+    function getVehiclesWithMainImagesBySeller( $sellerId) {
+        // Validate input
+        if (!is_numeric($sellerId)) {
+            throw new InvalidArgumentException("Seller ID must be numeric");
+        }
+
+        // Prepare the query
+        $query = "
+            SELECT 
+                v.*,
+                vi.image_path AS main_image
+            FROM 
+                vehicles v
+            LEFT JOIN 
+                vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+            WHERE 
+                v.sellerID = ?
+            ORDER BY 
+                v.CreatedAt DESC
+        ";
+
+        // Prepare and execute the statement
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $sellerId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Fetch all results as associative array
+        $vehicles = [];
+        while ($row = $result->fetch_assoc()) {
+            $vehicles[] = $row;
+        }
+
+        $stmt->close();
+        return $vehicles;
+    }
+    function getOtherVehiclesFromSameSeller($vehicleId) {
+        // Validate input
+        if (!is_numeric($vehicleId)) {
+            throw new InvalidArgumentException("Vehicle ID must be numeric");
+        }
+
+        // Prepare the query
+        $query = "
+            SELECT 
+                v.*,
+                vi.image_path AS main_image
+            FROM 
+                vehicles v
+            LEFT JOIN 
+                vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+            WHERE 
+                v.sellerID = (SELECT sellerID FROM vehicles WHERE VehicleID = ?)
+                AND v.VehicleID != ?
+            ORDER BY 
+                v.CreatedAt DESC
+        ";
+
+        // Prepare and execute the statement
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            throw new Exception("Prepare failed: " . $this->conn->error);
+        }
+
+        $stmt->bind_param("ii", $vehicleId, $vehicleId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Fetch all results as associative array
+        $vehicles = [];
+        while ($row = $result->fetch_assoc()) {
+            $vehicles[] = $row;
+        }
+
+        $stmt->close();
+        return $vehicles;
     }
 
 
