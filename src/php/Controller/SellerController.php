@@ -33,7 +33,7 @@ class SellerController{
 
     public function getSellerOtherCars($vehicleID){
         $seller = new Seller();
-        return $seller->getOtherVehiclesFromSameSeller($vehicleID);
+        return $seller->getOtherAvailableVehiclesFromSameSeller($vehicleID);
     }
 
     public function getNegotiatedDeals(){

@@ -331,7 +331,7 @@ $script = "vehicle";
             </svg>
         </a>
     </div>
-
+<?php if(!empty($sellerVehicles)): ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Card Item -->
         <?php foreach($sellerVehicles as $car):?>
@@ -356,7 +356,12 @@ $script = "vehicle";
               </div>
             </div>
           </div>
-          <?php endforeach?>
+          <?php endforeach;?>
+
+
+          <?php else: ?>
+            <div class="flex w-full items-center text-gray-400 text-xl">No More Products Available from this Dealer</div>
+            <?php endif;?>
 
         <!-- Duplicate and change details for more cards -->
         <!-- Card 2 -->

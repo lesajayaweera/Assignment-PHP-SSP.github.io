@@ -213,7 +213,7 @@ class Seller{
         $stmt->close();
         return $vehicles;
     }
-    function getOtherVehiclesFromSameSeller($vehicleId) {
+    function getOtherAvailableVehiclesFromSameSeller($vehicleId) {
         // Validate input
         if (!is_numeric($vehicleId)) {
             throw new InvalidArgumentException("Vehicle ID must be numeric");
@@ -231,6 +231,7 @@ class Seller{
             WHERE 
                 v.sellerID = (SELECT sellerID FROM vehicles WHERE VehicleID = ?)
                 AND v.VehicleID != ?
+                AND v.VehicleID NOT IN (SELECT vehicleID FROM orders)
             ORDER BY 
                 v.CreatedAt DESC
         ";
