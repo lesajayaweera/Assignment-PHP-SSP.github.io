@@ -71,7 +71,10 @@ class UserController{
                 require_once("./src/php/Controller/BuyerController.php");
                  $buyer = new BuyerController();
                  $image =$buyer->GetBuyerDetails($user_data['email'])['image_path'];
+                 $id =$buyer->GetBuyerDetails($user_data['email'])['id'];
                 $_SESSION['image'] = $image;
+                $_SESSION['id'] = $id;
+
                 header("Location:/Assignment/Listing");
                 exit;
             }

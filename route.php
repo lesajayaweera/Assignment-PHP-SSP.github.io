@@ -34,6 +34,7 @@ $links = array(
     "Assignment/Customer/Account/Edit"=>"./src/pages/Customer/EditAccounts.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
     "Assignment/payments"=>"./src/pages/Customer/Checkout-payment.php",
+    "/Assignment/Customer/Negotiate"=>"./src/pages/Customer/Negotiate.php",
 
 
     // Admin pages

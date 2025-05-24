@@ -116,18 +116,29 @@ $script = "vehicle";
                 <p class="text-sm">📞<?php echo htmlspecialchars($vehicleData['seller']['email']);?></p>
                 <div class="space-y-2">
                     <button
-                        class="w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out">Buy
+                        class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out" id="buyBtn">Buy
                         Now</button>
-                    <button
-                        class="w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out">WishList</button>
-                    <button
-                        class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out">Negotiate</button>
-                    <button
-                        class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out">Add
-                        To Cart </button>
-                </div>
-                <a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>" class="block text-sm text-blue-600 hover:underline text-center">View All stock at this
-                    dealer →</a>
+                    <button class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out" id="wishBtn" >WishList</button>
+                    <form method="get" action="./src/pages/Customer/Negotiate.php">
+                        <button type="button" class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out" id="negotiate">Negotiate</button>
+                        <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
+                            <div class="flex w-full space-x-2">
+                                
+                                <input type="number" name="number" class="w-full border p-2 outline-none rounded border-gray-300 text-center" min="<?php echo ((int)($vehicleData['price']) *0.9) ?>" max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
+                                <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
+                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['id']; ?>">
+                                
+                            </div>
+                            <div class="w-full space-x-2 flex items-center justify-around">
+                                <button type="submit" class="bg-green-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-green-600">Send Offer</button>
+                                <button type="button" id="cancelBtn" class="bg-red-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-red-600">Cancel</button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                    <button class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out" id="cartBtn">Add To Cart </button>
+                </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>" class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
             </div>
         </div>
     </div>
