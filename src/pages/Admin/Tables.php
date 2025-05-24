@@ -23,13 +23,12 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
-        <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">View Products</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+        <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
+        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+        <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
+        <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+        <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
       </nav>
     </div>
   </div>
@@ -39,13 +38,12 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
-        <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-        <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">View Products</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-        <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-        <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+        <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
+        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+        <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
+        <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+        <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
       </nav>
     </aside>
 

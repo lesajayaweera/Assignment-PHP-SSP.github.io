@@ -88,7 +88,7 @@ class Vehicle {
             $locationStmt = $this->conn->prepare($locationQuery);
             if (!$locationStmt) throw new Exception("Location prepare failed: " . $this->conn->error);
 
-            $url =$this->extractSrcFromEmbed($this->embeded_link);
+            $url = $this->extractSrcFromEmbed($this->embeded_link);
             $locationStmt->bind_param(
                 "issss",
                 $vehicleID,
@@ -150,17 +150,197 @@ class Vehicle {
         }
     }
 
-    private function extractSrcFromEmbed($embedCode) {
-    if (empty($embedCode)) return '';
-    
-    // Use regex to extract src attribute
-    if (preg_match('/src="([^"]+)"/', $embedCode, $matches)) {
-        return $matches[1];
+    public function extractSrcFromEmbed($embedCode) {
+        if (empty(trim($embedCode))) {
+            return '';
+        }
+
+        // Decode HTML entities (e.g., &quot; → ")
+        $decoded = htmlspecialchars_decode($embedCode);
+
+        // Normalize quotes and whitespace
+        $normalized = preg_replace('/\s+/', ' ', $decoded);
+        $normalized = str_replace(["'"], '"', $normalized);
+
+        // Extract src attribute
+        if (preg_match('/src="([^"]+)"/i', $normalized, $matches)) {
+            return trim($matches[1]);
+        }
+
+        // Fallback: Check if input is already a URL
+        if (filter_var(trim($embedCode), FILTER_VALIDATE_URL)) {
+            return trim($embedCode);
+        }
+
+        return ''; // Return empty if no match
     }
-    
-    // If no match found, return original (might be already a URL)
-    return $embedCode;
-}
+
+    public function EditCar($vehicleId, $newImages) {
+        // Start transaction
+        $this->conn->begin_transaction();
+
+        try {
+            // 1. Update vehicle table
+            $stmt = $this->conn->prepare("UPDATE vehicles SET 
+                Make = ?, 
+                Model = ?, 
+                Year = ?, 
+                FuelType = ?, 
+                category = ?, 
+                Transmission = ?, 
+                Seats = ?, 
+                veh_condition = ?, 
+                Engine = ?, 
+                width = ?, 
+                length = ?, 
+                height = ?, 
+                description = ?, 
+                price = ? 
+                WHERE VehicleID = ?");
+
+            if (!$stmt) {
+                throw new Exception("Prepare failed for vehicle update: " . $this->conn->error);
+            }
+
+            $stmt->bind_param("ssisssssisddssi", 
+                $this->make,
+                $this->model,
+                $this->year,
+                $this->fuel_type,
+                $this->cateogory,
+                $this->transmission,
+                $this->seats,
+                $this->vehicle_condition,
+                $this->engine,
+                $this->width,
+                $this->length,
+                $this->height,
+                $this->description,
+                $this->price,
+                $vehicleId
+            );
+
+            if (!$stmt->execute()) {
+                throw new Exception("Vehicle update failed: " . $stmt->error);
+            }
+            $stmt->close();
+
+            // 2. Handle location update/insert
+            $locationStmt = $this->conn->prepare("SELECT LocationID FROM locations WHERE VehicleID = ?");
+            $locationStmt->bind_param("i", $vehicleId);
+            $locationStmt->execute();
+            $result = $locationStmt->get_result();
+            $locationExists = $result->num_rows > 0;
+            $locationStmt->close();
+
+            if ($locationExists) {
+                $locationStmt = $this->conn->prepare("UPDATE locations SET 
+                    street_no = ?, 
+                    city = ?, 
+                    embeddedLink = ?, 
+                    directionLink = ? 
+                    WHERE VehicleID = ?");
+                
+                if (!$locationStmt) {
+                    throw new Exception("Prepare failed for location update: " . $this->conn->error);
+                }
+
+                $locationStmt->bind_param("ssssi",
+                    $this->street,
+                    $this->city,
+                    $this->embeded_link,
+                    $this->direction_link,
+                    $vehicleId
+                );
+            } else {
+                $locationStmt = $this->conn->prepare("INSERT INTO locations 
+                    (VehicleID, street_no, city, embeddedLink, directionLink) 
+                    VALUES (?, ?, ?, ?, ?)");
+
+                if (!$locationStmt) {
+                    throw new Exception("Prepare failed for location insert: " . $this->conn->error);
+                }
+
+                $locationStmt->bind_param("issss",
+                    $vehicleId,
+                    $this->street,
+                    $this->city,
+                    $this->embeded_link,
+                    $this->direction_link
+                );
+            }
+
+            if (!$locationStmt->execute()) {
+                throw new Exception("Location operation failed: " . $locationStmt->error);
+            }
+            $locationStmt->close();
+
+            // 3. Handle image updates
+            if (!empty($newImages['name'][0])) {
+                // Delete existing images (database + filesystem)
+                $existingImages = [];
+                $selectStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
+                $selectStmt->bind_param("i", $vehicleId);
+                $selectStmt->execute();
+                $result = $selectStmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $existingImages[] = $row['image_path'];
+                }
+                $selectStmt->close();
+
+                $deleteStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
+                $deleteStmt->bind_param("i", $vehicleId);
+                if (!$deleteStmt->execute()) {
+                    throw new Exception("Failed to delete existing images: " . $deleteStmt->error);
+                }
+                $deleteStmt->close();
+
+                foreach ($existingImages as $oldImage) {
+                    if (file_exists($oldImage)) {
+                        unlink($oldImage);
+                    }
+                }
+
+                // Insert new images
+                $uploadDir = './uploads/';
+                $imageStmt = $this->conn->prepare("INSERT INTO vehicle_images (vehicle_id, image_path, is_main) VALUES (?, ?, ?)");
+
+                if (!$imageStmt) {
+                    throw new Exception("Prepare failed for image insert: " . $this->conn->error);
+                }
+
+                for ($i = 0; $i < count($newImages['name']); $i++) {
+                    if ($newImages['error'][$i] === UPLOAD_ERR_OK) {
+                        $tmpName = $newImages['tmp_name'][$i];
+                        $fileName = uniqid() . '_' . basename($newImages['name'][$i]);
+                        $targetPath = $uploadDir . $fileName;
+
+                        if (move_uploaded_file($tmpName, $targetPath)) {
+                            $isMain = ($i === 0) ? 1 : 0;
+                            $imageStmt->bind_param("isi", $vehicleId, $targetPath, $isMain);
+                            if (!$imageStmt->execute()) {
+                                throw new Exception("Failed to insert image: " . $imageStmt->error);
+                            }
+                        } else {
+                            throw new Exception("Failed to upload image: " . $newImages['name'][$i]);
+                        }
+                    }
+                }
+                $imageStmt->close();
+            }
+
+            // Commit transaction if all operations succeeded
+            $this->conn->commit();
+            return true;
+
+        } catch (Exception $e) {
+            // Rollback on error
+            $this->conn->rollback();
+            error_log("Edit car failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
 
 
     //  method to get the vehicle details with the main image
@@ -179,73 +359,108 @@ class Vehicle {
 
     //  function to load car details inside the veiwDetails page
     public function Get_everyThing_by_ID($id) {
-        // Step 1: Get vehicle data
-        $query = "SELECT * FROM vehicles WHERE VehicleID = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $v_result = $stmt->get_result();
-        $vehicle = $v_result->fetch_assoc();
-        $stmt->close();
+        try {
+            // Verify database connection first
+            if (!$this->conn) {
+                throw new Exception("Database connection failed");
+            }
 
-        if (!$vehicle) {
-            return null;
-        }
+            // Step 1: Get vehicle data
+            $query = "SELECT * FROM vehicles WHERE VehicleID = ?";
+            $stmt = $this->conn->prepare($query);
+            
+            if ($stmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $v_result = $stmt->get_result();
+            $vehicle = $v_result->fetch_assoc();
+            $stmt->close();
 
-        // Step 2: Get vehicle images
-        $imagesQuery = "SELECT * FROM vehicle_images WHERE vehicle_id = ? ORDER BY is_main DESC";
-        $imgStmt = $this->conn->prepare($imagesQuery);
-        $imgStmt->bind_param("i", $id);
-        $imgStmt->execute();
-        $imagesResult = $imgStmt->get_result();
-        $images = [];
+            if (!$vehicle) {
+                return null;
+            }
 
-        while ($imgRow = $imagesResult->fetch_assoc()) {
-            $images[] = $imgRow;
-        }
+            // Step 2: Get vehicle images
+            $imagesQuery = "SELECT * FROM vehicle_images WHERE vehicle_id = ? ORDER BY is_main DESC";
+            $imgStmt = $this->conn->prepare($imagesQuery);
+            
+            if ($imgStmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $imgStmt->bind_param("i", $id);
+            $imgStmt->execute();
+            $imagesResult = $imgStmt->get_result();
+            $images = [];
 
-        $imgStmt->close();
-        $vehicle['images'] = $images;
+            while ($imgRow = $imagesResult->fetch_assoc()) {
+                $images[] = $imgRow;
+            }
 
-        // Step 3: Get location details
-        $locationQuery = "SELECT * FROM locations WHERE VehicleID = ?";
-        $locationStmt = $this->conn->prepare($locationQuery);
-        $locationStmt->bind_param("i", $id);
-        $locationStmt->execute();
-        $locationResult = $locationStmt->get_result();
-        $location = $locationResult->fetch_assoc();
-        $locationStmt->close();
+            $imgStmt->close();
+            $vehicle['images'] = $images;
 
-        $vehicle['location'] = $location;
+            // Step 3: Get location details
+            $locationQuery = "SELECT * FROM locations WHERE VehicleID = ?";
+            $locationStmt = $this->conn->prepare($locationQuery);
+            
+            if ($locationStmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $locationStmt->bind_param("i", $id);
+            $locationStmt->execute();
+            $locationResult = $locationStmt->get_result();
+            $location = $locationResult->fetch_assoc();
+            $locationStmt->close();
 
-        // Step 4: Get seller details (from seller and users tables)
-        $sellerQuery = "
+            $vehicle['location'] = $location;
+
+            // Step 4: Get seller details
+            $sellerQuery = "
             SELECT 
                 u.id AS user_id,
                 u.firstName,
                 u.lastName,
                 u.email,
-                s.Description,
-                s.Image_path
-            FROM seller s
-            JOIN users u ON s.userID = u.id
-            WHERE s.userID = ?
-        ";
+                u.image_path,
+                s.Description
+                FROM seller s
+                JOIN users u ON s.userID = u.id
+                WHERE s.userID = ?
+            ";
 
-        $sellerStmt = $this->conn->prepare($sellerQuery);
-        $sellerStmt->bind_param("i", $vehicle['sellerID']);
-        $sellerStmt->execute();
-        $sellerResult = $sellerStmt->get_result();
-        $seller = $sellerResult->fetch_assoc();
-        $sellerStmt->close();
+            $sellerStmt = $this->conn->prepare($sellerQuery);
+            
+            if ($sellerStmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $sellerStmt->bind_param("i", $vehicle['sellerID']);
+            $sellerStmt->execute();
+            $sellerResult = $sellerStmt->get_result();
+            $seller = $sellerResult->fetch_assoc();
+            $sellerStmt->close();
 
-        $vehicle['seller'] = $seller;
+            $vehicle['seller'] = $seller;
 
-        return $vehicle;
+            return $vehicle;
+
+        } catch (Exception $e) {
+            error_log("Error in Get_everyThing_by_ID: " . $e->getMessage());
+            return [
+                'error' => true,
+                'message' => 'Failed to load vehicle details',
+                'system_message' => $e->getMessage()
+            ];
+        }
     }
 
     public function DeleteCar($vehicleID, $uploadDir = "./uploads/") {
-    // Validate input
+        // Validate input
         if (!is_numeric($vehicleID) || $vehicleID <= 0) {
             throw new InvalidArgumentException("Invalid vehicle ID");
         }

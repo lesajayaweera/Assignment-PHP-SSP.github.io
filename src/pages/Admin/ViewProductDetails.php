@@ -47,13 +47,15 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2  bg-gray-800 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Listings</a>
+                <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Accounts</a>
+                <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>
     </div>
@@ -63,13 +65,15 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
         <aside class="hidden lg:block lg:w-1/5 bg-black text-white font-sans p-6">
             <h1 class="text-3xl font-bold mb-8 font-family-montserrat ">LuxCars</h1>
             <nav class="space-y-3">
-                <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Listings</a>
+                <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Accounts</a>
+                <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </aside>
 
@@ -84,10 +88,11 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
                 </div>
                 <div class="flex items-center space-x-3">
                     <span class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
+                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                        alt="profile" class="w-10 h-10 rounded-full" />
                 </div>
             </div>
-            
+
             <!-- Title & Subheading -->
             <div class="flex items-center justify-between mb-6">
                 <div>
@@ -138,23 +143,27 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
                 <!-- Sidebar -->
                 <div class="space-y-6">
                     <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-semibold"><?php echo "$". number_format(htmlspecialchars($vehicleData['price'])) ?></h2>
-                        
+                        <h2 class="text-2xl font-semibold">
+                            <?php echo "$". number_format(htmlspecialchars($vehicleData['price'])) ?></h2>
+
                     </div>
-                    
+
 
                     <!-- Dealer Info -->
                     <div class="border rounded-lg p-4 space-y-4">
                         <div class="flex items-center space-x-4">
-                            <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['Image_path']) ?? '' ?>"
+                            <img title="images"
+                                src="<?php echo htmlspecialchars($vehicleData['seller']['image_path']) ?? '' ?>"
                                 class="w-12 rounded-full">
                             <div>
-                                <p class="font-medium"><?php echo (htmlspecialchars($vehicleData['seller']['firstName']) ." ".htmlspecialchars($vehicleData['seller']['lastName'])) ?? '';?></p>
+                                <p class="font-medium">
+                                    <?php echo (htmlspecialchars($vehicleData['seller']['firstName']) ." ".htmlspecialchars($vehicleData['seller']['lastName'])) ?? '';?>
+                                </p>
                                 <p class="text-sm">📞<?php echo htmlspecialchars($vehicleData['seller']['email']);?></p>
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
@@ -245,7 +254,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
 
 
             </section>
-            <section class="px-6 py-10 font-family-montserrat bg-white border-t max-w-7xl mx-auto">
+            <section class="px-6 py-10  border-t max-w-7xl mx-auto">
                 <!-- Location Heading & Address -->
                 <h2 class="text-lg font-semibold text-gray-900 mb-1">Location</h2>
                 <p class="text-sm text-gray-600 mb-1">

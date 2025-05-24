@@ -57,7 +57,7 @@ class UserController{
             }else if ($user_data['role'] ==="seller"){
                 require_once("./src/php/Controller/SellerController.php");
                 $seller = new SellerController();
-                $image =$seller->GetSellerDetails($user_data['email'])['Image_path'];
+                $image =$seller->GetSellerDetails($user_data['email'])['image_path'];
                 $_SESSION['image'] = $image;
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;

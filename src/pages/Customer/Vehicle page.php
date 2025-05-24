@@ -8,6 +8,9 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
   $vehicleData = $vehicle->Load_everything_by_Id($id);
 
 
+//   echo "<pre>";
+//   print_r($vehicleData);
+//   echo "<pre>";
 
   $mainImage = null;
   foreach ($vehicleData['images'] as $img) {
@@ -88,8 +91,8 @@ $script = "vehicle";
             <!-- Dealer Info -->
             <div class="border rounded-lg p-4 space-y-4">
                 <div class="flex items-center space-x-4">
-                    <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['Image_path']) ?? '' ?>"
-                        class="w-[30px] object-contain  rounded-full">
+                    <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['image_path']) ?? '' ?>"
+                        class="w-10 object-contain  rounded-full">
                     <div>
                         <p class="font-medium">
                             <?php echo (htmlspecialchars($vehicleData['seller']['firstName']) ." ".htmlspecialchars($vehicleData['seller']['lastName'])) ?? '';?>

@@ -34,7 +34,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
           <?php foreach($vehicle as $car):?>
           <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full h-48 object-contain" />
+              <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full  object-cover" />
               <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
               <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
               <button class="absolute top-2 right-2 bg-white p-1 rounded-full shadow text-gray-600 hover:text-black">♥</button>

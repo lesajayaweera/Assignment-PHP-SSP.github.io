@@ -5,12 +5,31 @@ require_once("./src/php/Model/Admin.php"); ?>
 <?php
 
 class AdminController{
-    
+    private $admin;
 
-    public function Register($first_name,$last_name,$email,$password,$role){
-        $admin = new Admin($first_name,$last_name,$email,$password,$role);
+    public function __construct()
+    {
+        $this->admin = new Admin;
+    }
 
-        print_r($admin);
-        $admin->Register();
+    public function LoadAllUsers(){
+        return $this->admin->getNonAdminUsers();
+    }
+
+    public function deleteAccounts($id, $location){
+        $result = $this->admin->deleteNonAdminUsers($id);
+
+        if($result){
+            echo "<script>alert('user deleted successfully!');</script>";
+            header($location);
+            exit;
+
+        }
+        else{
+            echo "<script>alert('failed to delete user!');</script>";
+            header($location);
+            exit;
+        }
+        
     }
 }

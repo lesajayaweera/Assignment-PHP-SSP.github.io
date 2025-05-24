@@ -27,7 +27,15 @@ class VehicleController{
         }
     }
 
-    public function EditCar(){
+    public function EditCar($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$street,$city,$embeded_link,$direction_link,$vehicle_id,$images){
+        $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$street,$city,$embeded_link,$direction_link);
+        $vehicle->EditCar($vehicle_id,$images);
+        if($vehicle){
+            echo "<script> alert('$make $model is sucessfully edited ')</script>" ;
+
+        }else{
+            echo "<script> ('Listing is Unscessful') </script>" ;
+        }
 
     }
 

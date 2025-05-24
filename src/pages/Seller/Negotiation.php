@@ -73,7 +73,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                 <!-- offer main Container -->
                 <div class="flex flex-col gap-6 items-center justify-center p-6">
                     <!-- Offer Card -->
-                    <div class="w-full md:w-6/12 bg-white rounded-lg shadow-lg p-6 gap-6 text-center flex flex-col md:flex-row items-center justify-around">
+                    <div class="w-full  bg-white rounded-lg shadow-lg p-6 gap-6 text-center flex flex-col md:flex-row items-center justify-around">
 
                         <!-- Image -->
                         <img src="/Assignment/assets/images/products/Audi-a6.jpg" alt="Car"
@@ -87,14 +87,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
                                 <p id="carPrice" class="text-xl font-bold text-gray-900 mb-2">Price: $50,000</p>
 
                                 <!-- Quantity Controls (Initially Hidden) -->
-                                <div id="hidden" class="flex my-4 gap-4 hidden  ">
-                                    <button id="increaseBtn"
-                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+</button>
-                                    <input id="offerInput" title="number" type="number" min="1"
-                                        class="w-16 text-center ring-1 ring-gray-400 rounded w-full">
-                                    <button id=""
-                                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">-</button>
-                                </div>
+                                
                             </div>
 
 
@@ -103,9 +96,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 
                             <!-- Action Buttons -->
                             <div class="flex flex-col sm:flex-row gap-2 mt-2 items-center justify-center">
-                                <button id="counterOffer"
-                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Counter
-                                    Offer</button>
+                                
                                 <button id="acceptOffer"
                                     class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Accept</button>
                                 <button id="rejectOffer"
@@ -135,28 +126,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 
 
 
-    const counterOfferButton = document.getElementById('counterOffer');
-    counterOfferButton.addEventListener("click", function() {
-        const hiddenContainer = document.getElementById('hidden');
-        const acceptOfferButton = document.getElementById('acceptOffer');
-        const rejectOfferButton = document.getElementById('rejectOffer');
-
-        hiddenContainer.classList.toggle('hidden');
-        if (hiddenContainer.classList.contains('hidden')) {
-            counterOfferButton.innerText = "Counter Offer";
-            rejectOfferButton.classList.remove('hidden');
-
-
-
-        } else {
-
-            counterOfferButton.innerText = "Cancel";
-            acceptOfferButton.innerText = "Send Offer";
-            rejectOfferButton.classList.add('hidden');
-
-
-        }
-    })
+   
     </script>
 
 </body>

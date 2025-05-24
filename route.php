@@ -39,9 +39,10 @@ $links = array(
     "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php",
     "Assignment/Admin/EditAccounts"=>"./src/pages/Admin/EditAccounts.php",
     "Assignment/Admin/ManageAccounts"=>"./src/pages/Admin/ManageAccounts.php",
-    "Assignment/Admin/ManageListings"=>"./src/pages/Admin/ManageListings.php",
+    "Assignment/Admin/ManageProducts"=>"./src/pages/Admin/ManageProducts.php",
     "Assignment/Admin/Tables"=>"./src/pages/Admin/Tables.php",
     "Assignment/Admin/ViewProducts"=> "./src/pages/Admin/ViewProductDetails.php",
+    "Assignment/Admin/ManageListings"=> "./src/pages/Admin/ManageListings.php",
 
 
 

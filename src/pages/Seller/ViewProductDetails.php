@@ -154,7 +154,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
                     <!-- Dealer Info -->
                     <div class="border rounded-lg p-4 space-y-4">
                         <div class="flex items-center space-x-4">
-                            <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['Image_path']) ?? '' ?>"
+                            <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['image_path']) ?? '' ?>"
                                 class="w-12 rounded-full">
                             <div>
                                 <p class="font-medium"><?php echo (htmlspecialchars($vehicleData['seller']['firstName']) ." ".htmlspecialchars($vehicleData['seller']['lastName'])) ?? '';?></p>

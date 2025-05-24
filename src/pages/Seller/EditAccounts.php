@@ -25,7 +25,12 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
 
     $seller = new SellerController();
     $seller->edit_SellerDetails($fname,$lname,$email,$password,$description,$image);
-    $details_image = $seller->GetSellerDetails($email)['Image_path'];
+
+    $details_image = $seller->GetSellerDetails($email)['image_path'];
+
+
+
+   
 
     $_SESSION['image'] = $details_image;
 
@@ -98,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                         <form class="flex items-start justify-around w-full space-x-6" enctype="multipart/form-data" method="post">
                             <!-- Profile Picture -->
                             <div class="flex-shrink-0 items-center justify-start relative">
-                                <img src="https://i.pravatar.cc/150?img=5" id="profile-preview" alt="Profile Photo"
+                                <img src="<?php echo $_SESSION['image'] ?>" id="profile-preview" alt="Profile Photo"
                                     class="h-32 w-32 rounded-full object-cover shadow">
 
                                 <!-- Upload Icon/Button -->
