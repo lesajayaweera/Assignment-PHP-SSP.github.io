@@ -175,171 +175,135 @@ class Vehicle {
         return ''; // Return empty if no match
     }
 
-    public function EditCar($vehicleId, $newImages) {
-        // Start transaction
+    public function EditCar($vehicleID, $images = [], $uploadDir = "./uploads/") {
         $this->conn->begin_transaction();
+        $imageQueue = [];
 
         try {
-            // 1. Update vehicle table
-            $stmt = $this->conn->prepare("UPDATE vehicles SET 
-                Make = ?, 
-                Model = ?, 
-                Year = ?, 
-                FuelType = ?, 
-                category = ?, 
-                Transmission = ?, 
-                Seats = ?, 
-                veh_condition = ?, 
-                Engine = ?, 
-                width = ?, 
-                length = ?, 
-                height = ?, 
-                description = ?, 
-                price = ? 
-                WHERE VehicleID = ?");
+            // 1. Always update vehicle details
+            $vehicleQuery = "UPDATE vehicles SET 
+                Make = ?, Model = ?, Year = ?, FuelType = ?, 
+                cateogory = ?, Transmission = ?, Engine = ?, 
+                Seats = ?, veh_condition = ?, width = ?, 
+                length = ?, height = ?, description = ?, price = ? 
+                WHERE VehicleID = ?";
+                
+            $vehicleStmt = $this->conn->prepare($vehicleQuery);
+            if (!$vehicleStmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
 
-            if (!$stmt) {
-                throw new Exception("Prepare failed for vehicle update: " . $this->conn->error);
-            }
-
-            $stmt->bind_param("ssisssssisddssi", 
-                $this->make,
-                $this->model,
-                $this->year,
-                $this->fuel_type,
-                $this->cateogory,
-                $this->transmission,
-                $this->seats,
-                $this->vehicle_condition,
-                $this->engine,
-                $this->width,
-                $this->length,
-                $this->height,
-                $this->description,
-                $this->price,
-                $vehicleId
+            $vehicleStmt->bind_param(
+                "ssissssisssssdi",
+                $this->make, $this->model, $this->year,
+                $this->fuel_type, $this->cateogory, $this->transmission,
+                $this->engine, $this->seats, $this->vehicle_condition,
+                $this->width, $this->length, $this->height,
+                $this->description, $this->price, $vehicleID
             );
 
-            if (!$stmt->execute()) {
-                throw new Exception("Vehicle update failed: " . $stmt->error);
-            }
-            $stmt->close();
+            if (!$vehicleStmt->execute()) throw new Exception("Vehicle update failed: " . $vehicleStmt->error);
+            $vehicleStmt->close();
 
-            // 2. Handle location update/insert
-            $locationStmt = $this->conn->prepare("SELECT LocationID FROM locations WHERE VehicleID = ?");
-            $locationStmt->bind_param("i", $vehicleId);
-            $locationStmt->execute();
-            $result = $locationStmt->get_result();
-            $locationExists = $result->num_rows > 0;
-            $locationStmt->close();
-
-            if ($locationExists) {
-                $locationStmt = $this->conn->prepare("UPDATE locations SET 
-                    street_no = ?, 
-                    city = ?, 
-                    embeddedLink = ?, 
-                    directionLink = ? 
-                    WHERE VehicleID = ?");
+            // 2. Always update location details
+            $url = $this->extractSrcFromEmbed($this->embeded_link);
+            $locationQuery = "UPDATE locations SET 
+                street_no = ?, city = ?, 
+                embededLink = ?, directionLink = ? 
+                WHERE VehicleID = ?";
                 
-                if (!$locationStmt) {
-                    throw new Exception("Prepare failed for location update: " . $this->conn->error);
-                }
+            $locationStmt = $this->conn->prepare($locationQuery);
+            if (!$locationStmt) throw new Exception("Location prepare failed: " . $this->conn->error);
 
-                $locationStmt->bind_param("ssssi",
-                    $this->street,
-                    $this->city,
-                    $this->embeded_link,
-                    $this->direction_link,
-                    $vehicleId
-                );
-            } else {
-                $locationStmt = $this->conn->prepare("INSERT INTO locations 
-                    (VehicleID, street_no, city, embeddedLink, directionLink) 
-                    VALUES (?, ?, ?, ?, ?)");
+            $locationStmt->bind_param(
+                "ssssi",
+                $this->street, $this->city,
+                $url, $this->direction_link, $vehicleID
+            );
 
-                if (!$locationStmt) {
-                    throw new Exception("Prepare failed for location insert: " . $this->conn->error);
-                }
-
-                $locationStmt->bind_param("issss",
-                    $vehicleId,
-                    $this->street,
-                    $this->city,
-                    $this->embeded_link,
-                    $this->direction_link
-                );
-            }
-
-            if (!$locationStmt->execute()) {
-                throw new Exception("Location operation failed: " . $locationStmt->error);
-            }
+            if (!$locationStmt->execute()) throw new Exception("Location update failed: " . $locationStmt->error);
             $locationStmt->close();
 
-            // 3. Handle image updates
-            if (!empty($newImages['name'][0])) {
-                // Delete existing images (database + filesystem)
+            // 3. Only process images if actual new files are uploaded
+            $validUploads = array_filter($images["tmp_name"] ?? [], function ($tmp) {
+                return !empty($tmp);
+            });
+
+            if (!empty($validUploads)) {
+                // Get existing images for cleanup
                 $existingImages = [];
-                $selectStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
-                $selectStmt->bind_param("i", $vehicleId);
-                $selectStmt->execute();
-                $result = $selectStmt->get_result();
-                while ($row = $result->fetch_assoc()) {
-                    $existingImages[] = $row['image_path'];
-                }
-                $selectStmt->close();
-
-                $deleteStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
-                $deleteStmt->bind_param("i", $vehicleId);
-                if (!$deleteStmt->execute()) {
-                    throw new Exception("Failed to delete existing images: " . $deleteStmt->error);
-                }
-                $deleteStmt->close();
-
-                foreach ($existingImages as $oldImage) {
-                    if (file_exists($oldImage)) {
-                        unlink($oldImage);
+                $getImagesStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
+                if ($getImagesStmt) {
+                    $getImagesStmt->bind_param("i", $vehicleID);
+                    if ($getImagesStmt->execute()) {
+                        $result = $getImagesStmt->get_result();
+                        while ($row = $result->fetch_assoc()) {
+                            $existingImages[] = $row['image_path'];
+                        }
                     }
+                    $getImagesStmt->close();
+                }
+
+                // Delete existing image records
+                $deleteStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
+                if ($deleteStmt) {
+                    $deleteStmt->bind_param("i", $vehicleID);
+                    $deleteStmt->execute();
+                    $deleteStmt->close();
                 }
 
                 // Insert new images
-                $uploadDir = './uploads/';
-                $imageStmt = $this->conn->prepare("INSERT INTO vehicle_images (vehicle_id, image_path, is_main) VALUES (?, ?, ?)");
+                $imgStmt = $this->conn->prepare("INSERT INTO vehicle_images (vehicle_id, image_path, is_main) VALUES (?, ?, ?)");
+                if ($imgStmt) {
+                    $isFirst = true;
+                    foreach ($images["name"] as $key => $filename) {
+                        if (empty($images["tmp_name"][$key])) continue;
 
-                if (!$imageStmt) {
-                    throw new Exception("Prepare failed for image insert: " . $this->conn->error);
+                        $tmp_name = $images["tmp_name"][$key];
+                        $uniqueName = time() . "_" . uniqid() . "_" . basename($filename);
+                        
+                        $physicalPath = $uploadDir . $uniqueName;
+                        $dbPath = "/Assignment/uploads/" . $uniqueName;
+                        
+                        $is_main = $isFirst ? 1 : 0;
+
+                        $imgStmt->bind_param("isi", $vehicleID, $dbPath, $is_main);
+                        $imgStmt->execute();
+
+                        $imageQueue[] = [
+                            "tmp_name" => $tmp_name,
+                            "target" => $physicalPath
+                        ];
+                        $isFirst = false;
+                    }
+                    $imgStmt->close();
                 }
 
-                for ($i = 0; $i < count($newImages['name']); $i++) {
-                    if ($newImages['error'][$i] === UPLOAD_ERR_OK) {
-                        $tmpName = $newImages['tmp_name'][$i];
-                        $fileName = uniqid() . '_' . basename($newImages['name'][$i]);
-                        $targetPath = $uploadDir . $fileName;
-
-                        if (move_uploaded_file($tmpName, $targetPath)) {
-                            $isMain = ($i === 0) ? 1 : 0;
-                            $imageStmt->bind_param("isi", $vehicleId, $targetPath, $isMain);
-                            if (!$imageStmt->execute()) {
-                                throw new Exception("Failed to insert image: " . $imageStmt->error);
-                            }
-                        } else {
-                            throw new Exception("Failed to upload image: " . $newImages['name'][$i]);
-                        }
+                // Delete old physical files after DB operations succeed
+                foreach ($existingImages as $oldImage) {
+                    $oldPath = str_replace('/Assignment/uploads/', $uploadDir, $oldImage);
+                    if (file_exists($oldPath)) {
+                        @unlink($oldPath);
                     }
                 }
-                $imageStmt->close();
             }
 
-            // Commit transaction if all operations succeeded
             $this->conn->commit();
+
+            // Move new uploaded files (if any)
+            foreach ($imageQueue as $img) {
+                if (!move_uploaded_file($img["tmp_name"], $img["target"])) {
+                    error_log("Warning: Failed to move file to " . $img["target"]);
+                }
+            }
+
             return true;
 
         } catch (Exception $e) {
-            // Rollback on error
             $this->conn->rollback();
-            error_log("Edit car failed: " . $e->getMessage());
+            error_log("Transaction failed: " . $e->getMessage());
             return false;
         }
     }
+
 
 
 

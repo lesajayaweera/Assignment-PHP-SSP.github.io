@@ -21,7 +21,7 @@ if (!isset($_SESSION['email']) && $_SESSION['role'] !== 'seller') {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-        echo $_SESSION['v_id'];
+        // echo $_SESSION['v_id'];
             
             $images = $_FILES['image'];
             
@@ -51,13 +51,16 @@ if (!isset($_SESSION['email']) && $_SESSION['role'] !== 'seller') {
                 $images // not 'images'
             );
         
-
+            // echo "<pre>";
+            // print_r($images);
+            // echo "<pre>";
     }
     
 ?>
 
 <?php
 $vehicleData = $controller->Load_everything_by_Id($_SESSION['v_id']);
+
 
 ?>
 
@@ -271,7 +274,9 @@ $vehicleData = $controller->Load_everything_by_Id($_SESSION['v_id']);
                                     <div>
                                         <label class="text-sm font-semibold">Description</label>
                                         <textarea title="textarea" class="border border-gray-300 rounded p-2 w-full"
-                                            rows="4" name="description" value="<?php echo $vehicleData['description'] ?>" required></textarea>
+                                            rows="4" name="description" value="<?php echo $vehicleData['description'] ?>" required>
+                                            <?php echo $vehicleData['description'] ?>
+                                        </textarea>
                                     </div>
                                     <div class="grid grid-cols-2 space-x-4 space-y-4 w-full">
                                         <div>

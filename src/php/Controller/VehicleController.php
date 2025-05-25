@@ -31,7 +31,8 @@ class VehicleController{
         $vehicle  = new Vehicle($make,$model,$year,$fuel_type,$cateogory,$transmission,$seats,$vehicle_condition,$engine,$width,$length,$height,$description,$price,$street,$city,$embeded_link,$direction_link);
         $vehicle->EditCar($vehicle_id,$images);
         if($vehicle){
-            echo "<script> alert('$make $model is sucessfully edited ')</script>" ;
+            header("Location:/Assignment/Seller/ManageProducts");
+            exit;
 
         }else{
             echo "<script> ('Listing is Unscessful') </script>" ;
