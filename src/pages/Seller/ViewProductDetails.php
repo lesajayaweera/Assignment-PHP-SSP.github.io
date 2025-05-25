@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
 
     <div class="flex min-h-screen ">
         <!-- Desktop Sidebar -->
-        <aside class="hidden lg:block lg:w-1/5 bg-black text-white font-sans p-6">
+        <aside class="hidden lg:block lg:w-1/5 bg-black text-white font-sans p-6 fixed top-0 left-0 bottom-0 z-10">
             <h1 class="text-3xl font-bold mb-8 font-family-montserrat ">LuxCars</h1>
             <nav class="space-y-3">
                 <a href="./Dashboard.html" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
@@ -84,7 +84,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6  space-y-6 w-full lg:pl-[-20%] font-sans">
+        <main class="flex-1 p-6  space-y-6 w-4/5 lg:ml-[20%] font-sans">
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">

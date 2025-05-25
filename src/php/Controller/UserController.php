@@ -62,21 +62,26 @@ class UserController{
                 exit;
             }else if ($user_data['role'] ==="seller"){
                 require_once("./src/php/Controller/SellerController.php");
+
                 $seller = new SellerController();
                 $image =$seller->GetSellerDetails($user_data['email'])['image_path'];
+
                 $_SESSION['image'] = $image;
                 $_SESSION['seller_id'] =$user_data['id'];
+
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
+
             }else if ($user_data['role'] =="buyer"){
                 require_once("./src/php/Controller/BuyerController.php");
+
                  $buyer = new BuyerController();
+
                  $image =$buyer->GetBuyerDetails($user_data['email'])['image_path'];
                  $id =$buyer->GetBuyerDetails($user_data['email'])['id'];
+                 
                 $_SESSION['image'] = $image;
                 $_SESSION['buyerID'] = $id;
-
-
 
                 header("Location:/Assignment/Listing");
                 exit;

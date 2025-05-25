@@ -42,4 +42,13 @@ class AdminController{
     public function GetAdminDetails($email){
         return $this->admin->GetUserDetails($email);
     }
+
+
+    public function Get_total_($tablename){
+        return $this->admin->getTotals($tablename);
+    }
+
+    public function GetTotalSales(){
+        return $this->admin->getCompletedOrdersSum();
+    }
 }

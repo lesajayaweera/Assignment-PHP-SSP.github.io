@@ -256,4 +256,40 @@ class Admin {
             return false;
         }
     }
+
+    public function getTotals($tablename){
+        $query = "SELECT COUNT(*) AS TotalProducts FROM  " .$tablename;
+
+        $stmt = $this->conn->prepare($query);
+        if ($stmt->execute()) {
+        $stmt->bind_result($total);
+        $stmt->fetch();
+        $stmt->close();
+        return $total;
+    } else {
+        $stmt->close();
+        return 0;
+    }
+    }
+
+
+    function getCompletedOrdersSum() {
+        $sql = "SELECT SUM(price) AS total_completed FROM orders WHERE status = ?";
+        $stmt = $this->conn->prepare($sql);
+        
+        $status = 'completed';
+        $stmt->bind_param("s", $status); // "s" for string
+        
+        if ($stmt->execute()) {
+            $totalCompleted = 0;
+            $stmt->bind_result($totalCompleted);
+            $stmt->fetch();
+            $stmt->close();
+            return $totalCompleted !== null ? $totalCompleted : 0;
+        } else {
+            $stmt->close();
+            return 0;
+        }
+    }
+
 }
