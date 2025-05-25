@@ -143,30 +143,44 @@ $script = "vehicle";
                 <p class="text-sm">📞<?php echo htmlspecialchars($vehicleData['seller']['email']);?></p>
                 <div class="space-y-2">
                     <button
-                        class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out" id="buyBtn">Buy
+                        class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out"
+                        id="buyBtn">Buy
                         Now</button>
-                    <button class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out" id="wishBtn" >WishList</button>
-                    <form method="post" >
-                        <button type="button" class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out" id="negotiate">Negotiate</button>
+                    <button
+                        class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out"
+                        id="wishBtn">WishList</button>
+                    <form method="post">
+                        <button type="button"
+                            class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out"
+                            id="negotiate" <?php if (!isset($_SESSION['email'])): ?>
+                            onclick="alert('Need to Logged in or Register!'); window.location.href='/Assignment/Login';" <?php endif; ?>>Negotiate</button>
                         <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
                             <div class="flex w-full space-x-2">
-                                
-                                <input type="number" name="number" class="w-full border p-2 outline-none rounded border-gray-300 text-center" min="<?php echo ((int)($vehicleData['price']) *0.9) ?>" max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
+
+                                <input type="number" name="number"
+                                    class="w-full border p-2 outline-none rounded border-gray-300 text-center"
+                                    min="<?php echo ((int)($vehicleData['price']) *0.9) ?>"
+                                    max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
                                 <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
                                 <input type="hidden" name="buyerID" value="<?php echo $_SESSION['buyerID']; ?>">
                                 <input type="hidden" name="status" value="pending">
-                                
+
                             </div>
                             <div class="w-full space-x-2 flex items-center justify-around">
-                                <button type="submit" class="bg-green-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-green-600">Send Offer</button>
-                                <button type="button" id="cancelBtn" class="bg-red-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-red-600">Cancel</button>
+                                <button type="submit"
+                                    class="bg-green-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-green-600">Send
+                                    Offer</button>
+                                <button type="button" id="cancelBtn"
+                                    class="bg-red-500 p-2 rounded w-full text-white transition-colors duration-150 ease-in-out hover:bg-red-600">Cancel</button>
                             </div>
 
                         </div>
 
                     </form>
+                    <a href=""></a>
                     <button class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out" id="cartBtn">Add To Cart </button>
-                </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>" class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
+                </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>"
+                    class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
             </div>
         </div>
     </div>
@@ -259,7 +273,8 @@ $script = "vehicle";
 <section class="px-6 py-10 font-family-montserrat bg-white border-t max-w-7xl mx-auto">
     <!-- Location Heading & Address -->
     <h2 class="text-lg font-semibold text-gray-900 mb-1">Location</h2>
-    <p class="text-sm text-gray-600 mb-1"><?php echo  htmlspecialchars($vehicleData['location']['street_no']) ?>, <?php echo  htmlspecialchars($vehicleData['location']['city']) ?></p>
+    <p class="text-sm text-gray-600 mb-1"><?php echo  htmlspecialchars($vehicleData['location']['street_no']) ?>,
+        <?php echo  htmlspecialchars($vehicleData['location']['city']) ?></p>
 
     <!-- Get Direction Link -->
     <a rel="noopener" href="<?php echo  htmlspecialchars($vehicleData['location']['directionLink']) ?>" target="_blank"
@@ -273,8 +288,8 @@ $script = "vehicle";
     <!-- Google Map -->
     <div class="w-full h-80 rounded-lg overflow-hidden shadow">
         <iframe class="w-full h-full" frameborder="0" style="border:0"
-            src="<?php echo htmlspecialchars($vehicleData['location']['embededLink']) ?>"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            src="<?php echo htmlspecialchars($vehicleData['location']['embededLink']) ?>" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
 </section>
@@ -331,41 +346,49 @@ $script = "vehicle";
             </svg>
         </a>
     </div>
-<?php if(!empty($sellerVehicles)): ?>
+    <?php if(!empty($sellerVehicles)): ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         <!-- Card Item -->
         <?php foreach($sellerVehicles as $car):?>
-          <div class="bg-white shadow rounded-xl overflow-hidden">
+        <div class="bg-white shadow rounded-xl overflow-hidden">
             <div class="relative">
-              <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full  object-cover" />
-              <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
-              <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
-              <button class="absolute top-2 right-2 bg-white p-1 w-6 rounded-full shadow text-gray-600 hover:text-black">♥</button>
+                <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>"
+                    alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full  object-cover" />
+                <span
+                    class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great
+                    Price</span>
+                <span
+                    class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
+                <button
+                    class="absolute top-2 right-2 bg-white p-1 w-6 rounded-full shadow text-gray-600 hover:text-black">♥</button>
             </div>
             <div class="p-4 space-y-2">
-              <h3 class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
-              <p class="text-xs text-gray-500"><?= htmlspecialchars($car['cateogory']); ?></p>
-              <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
-                <span><?= htmlspecialchars($car['Engine']. "cc");?></span>
-                <span><?= htmlspecialchars($car['FuelType']);?></span>
-                <span><?= htmlspecialchars($car['Transmission']);?></span>
-              </div>
-              <div class="flex items-center justify-between mt-4">
-                <span class="text-lg font-bold text-gray-900"><?= "$".number_format(htmlspecialchars($car['price'])); ?></span>
-                <a href="/Assignment/ViewDetails?id=<?=$car['VehicleID'] ?>" class="text-sm text-blue-600 hover:underline">View Details</a>
-              </div>
+                <h3 class="text-sm font-semibold text-gray-800">
+                    <?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
+                <p class="text-xs text-gray-500"><?= htmlspecialchars($car['cateogory']); ?></p>
+                <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
+                    <span><?= htmlspecialchars($car['Engine']. "cc");?></span>
+                    <span><?= htmlspecialchars($car['FuelType']);?></span>
+                    <span><?= htmlspecialchars($car['Transmission']);?></span>
+                </div>
+                <div class="flex items-center justify-between mt-4">
+                    <span
+                        class="text-lg font-bold text-gray-900"><?= "$".number_format(htmlspecialchars($car['price'])); ?></span>
+                    <a href="/Assignment/ViewDetails?id=<?=$car['VehicleID'] ?>"
+                        class="text-sm text-blue-600 hover:underline">View Details</a>
+                </div>
             </div>
-          </div>
-          <?php endforeach;?>
+        </div>
+        <?php endforeach;?>
 
 
-          <?php else: ?>
-            <div class="flex w-full items-center text-gray-400 text-xl">No More Products Available from this Dealer</div>
-            <?php endif;?>
+        <?php else: ?>
+        <div class="flex w-full items-center text-gray-400 text-xl">No More Products Available from this Dealer</div>
+        <?php endif;?>
 
         <!-- Duplicate and change details for more cards -->
         <!-- Card 2 -->
-        
+
     </div>
     <div class="mt-10 flex justify-center items-center space-x-2">
         <!-- Previous Button -->

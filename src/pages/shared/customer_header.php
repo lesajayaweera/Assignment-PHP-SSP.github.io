@@ -38,8 +38,16 @@
                 <span class="block w-full h-0.5 bg-white"></span>   
             </button>
         </div>
-        <div class="flex items-center space-x-4">
-            <a href="<?php echo ($_SESSION['role'] == 'buyer') ? '/Assignment/Customer/Account/Edit' : '/Assignment/Login'; ?>">
+        <div class="flex items-center space-x-6">
+            <?php if(isset($_SESSION['email'])): ?>
+                <a href="/Assignment/Cart">
+                    <img src="/Assignment/assets/icons/cart.svg" class="w-6 h-6" alt="">
+                </a>
+                <a href="/Assignment/Favourites">
+                    <img src="/Assignment/assets/icons/favourites.svg" class="w-6 h-6" alt="">
+                </a>
+            <?php endif;?>
+            <a href="<?php echo (isset($_SESSION['role']) && $_SESSION['role'] === 'buyer') ? '/Assignment/Customer/Account/Edit' : '/Assignment/Login'; ?>">
 
                 <img src="<?php echo isset($_SESSION['email']) ? $_SESSION['image'] :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-10': 'w-8'?>" alt="">
             </a>

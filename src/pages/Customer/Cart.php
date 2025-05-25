@@ -1,8 +1,30 @@
-<?php include("./src/private/initialize.php");?>
-<?php session_start(); ?>
+<?php include("./src/private/initialize.php");
+require_once("./src/php/Controller/BuyerController.php");
+?>
+<?php session_start(); 
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'buyer') {
+    header("Location: /Assignment/Login");
+    exit;
+}
+
+
+?>
+ 
+
 <?php $pageTitle = "Cart";
 $script = "Cart";
 ?>
+
+<?php
+$controller = new BuyerController();
+$cartItems=$controller->LoadCart($_SESSION['buyerID']);
+
+// echo "<pre>";
+// print_r($cartItems);
+// echo "<pre>";
+?>
+
 <?php include_once (SHARED_PATH . '/customer_header.php'); ?>   
     <section class="bg-gray-100 py-30 font-family-montserrat">
         <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-10">
@@ -10,34 +32,28 @@ $script = "Cart";
           <!-- Left Column: Cart Items + Order Info -->
           <div class="md:col-span-2 space-y-10">
             <!-- Cart Items -->
+             
             <div>
               <h2 class="text-2xl font-semibold">Your cart</h2>
-              <p class="text-sm text-gray-500 mt-1">Not ready to checkout? <a href="/Assignment/" class="underline">Continue Shopping</a></p>
+              <p class="text-sm text-gray-500 mt-1">Not ready to checkout? <a href="/Assignment/Listing" class="underline">Continue Shopping</a></p>
     
               <div class="mt-6 border-b pb-6 space-y-6">
                 <!-- Item -->
+                 <?php foreach($cartItems as $items) :?>
                 <div class="flex items-start gap-4">
-                  <img src="/Assignment/assets/images/products/range-rover.jpg" alt="Car" class="w-24 h-20 object-cover rounded" />
+                  <img src="<?= $items['vehicle']['image'] ?>" alt="Car" class="w-60 object-cover rounded" />
                   <div class="flex-1">
-                    <h3 class="font-semibold">Car Name</h3>
-                    <p class="text-sm text-gray-500">Model: Name</p>
-                    <p class="mt-1 text-sm">Quantity: 1</p>
-                    <p class="mt-1 font-semibold">$99</p>
+                    <h3 class="font-semibold"><?= $items['vehicle']['Make']?> <?= $items['vehicle']['Model']?></h3>
+                    <p class="text-sm text-gray-500">Model: <?= $items['vehicle']['Model'] ?></p>
+                    <p class="mt-1 text-sm">Dealer: <?= $items['seller']['firstName'] ?> <?= $items['seller']['lastName'] ?></p>
+                    <p class="mt-1 font-semibold">$ <?= number_format($items['vehicle']['price']) ?></p>
                   </div>
-                  <button class="text-sm text-gray-500 underline">Remove</button>
+                  <a href="/Assignment/Customer/CartRemove?id=<?= $items['cart']['id']?>">
+                    <button class="text-sm text-gray-500 underline">Remove</button>
+                  </a>
                 </div>
-    
-                <!-- Another Item -->
-                <div class="flex items-start gap-4">
-                  <img src="/Assignment/assets/images/products/range-rover.jpg" alt="Car" class="w-24 h-20 object-cover rounded" />
-                  <div class="flex-1">
-                    <h3 class="font-semibold">Car Name</h3>
-                    <p class="text-sm text-gray-500">Model: Name</p>
-                    <p class="mt-1 text-sm">Quantity: 1</p>
-                    <p class="mt-1 font-semibold">$99</p>
-                  </div>
-                  <button class="text-sm text-gray-500 underline">Remove</button>
-                </div>
+              <?php endforeach;?>
+                
               </div>
             </div>
     

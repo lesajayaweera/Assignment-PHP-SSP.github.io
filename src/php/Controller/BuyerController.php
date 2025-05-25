@@ -29,6 +29,21 @@ class BuyerController{
            
         }
     }
+
+    public function LoadCart($buyerID){
+        return $this->buyer->getBuyerCartWithDetails($buyerID);
+    }
+
+    public function removeItemFromCart($cartID){
+        $result =$this->buyer->removeFromCart($cartID);
+        if($result){
+            header("Location:/Assignment/Cart");
+            exit;
+        }
+        else{
+            echo "<script>alert('the item didnt deleted')</script>";
+        }
+    }
 }
 
 
