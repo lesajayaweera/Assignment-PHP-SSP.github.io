@@ -1,10 +1,23 @@
 <?php
 session_start();
+require_once("./src/php/Controller/SellerController.php");
 
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
     header("Location: /Assignment/Login");
     exit;
 }
+
+
+$controller = new SellerController();
+
+$total_products = $controller->GetTotal_ProductsOf_Seller($_SESSION['seller_id']);
+$total_deals =$controller->Get_total_negotiation_deals($_SESSION['seller_id']);
+$total_sales =$controller->getTotal_done_sales($_SESSION['seller_id']);
+$pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
+
+// echo $total_deals;
+
+// 
 ?>
 
 
@@ -71,22 +84,52 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 <!-- https://i.pravatar.cc/150?img=4 -->
             <!-- Statistics -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Total Products</p>
-                    <p class="text-2xl font-bold">40,689</p>
+                <div class="flex items-center justify-between bg-white p-4 rounded shadow">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Products</p>
+                        <p class="text-2xl font-bold"><?php echo isset($total_products) ? $total_products : 0 ?></p>
+                    </div>
+                    
+                    <div class="rounded-xl m-w-20 bg-yellow-100 p-2">
+                        <img src="/Assignment/assets/icons/products.svg" class="w-10 h-10  object-cover" alt="">
+                    </div>
                 </div>
-                <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Total Deals</p>
-                    <p class="text-2xl font-bold">10,293</p>
+                <div class="flex items-center justify-between bg-white p-4 rounded shadow">
+                    <div>
+                        <p class="text-sm text-gray-500">Pending Orders</p>
+                        <p class="text-2xl font-bold"><?php echo isset($pending_orders) ? $pending_orders : 0 ?></p>
+                    </div>
+                    
+                    <div class="rounded-xl m-w-20 bg-emerald-50 p-2">
+                        <img src="/Assignment/assets/icons/orders.svg" class="  h-10 object-cover" alt="">
+                    </div>
                 </div>
-                <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Approved Deals</p>
-                    <p class="text-2xl font-bold">$89,000</p>
+                <div class="flex items-center justify-between bg-white p-4 rounded shadow">
+                    <div>
+                        <p class="text-sm text-gray-500">Approved Deals</p>
+                        <p class="text-2xl font-bold">$<?php echo isset($total_deals) ? number_format((int)$total_deals) : 0 ?></p>
+                    </div>
+                    
+                    <div class="rounded-xl m-w-20 bg-purple-100 p-2">
+                        <img src="/Assignment/assets/icons/Approved.svg" class="  h-10 object-cover" alt="">
+                    </div>
                 </div>
-                <div class="bg-white p-4 rounded shadow">
-                    <p class="text-sm text-gray-500">Total Sales</p>
-                    <p class="text-2xl font-bold">2040</p>
+                <div class="flex items-center justify-between bg-white p-4 rounded shadow">
+                    <div>
+                        <p class="text-sm text-gray-500">Total Sales</p>
+                        <p class="text-2xl font-bold">$<?php echo isset($total_sales) ? number_format((int)$total_sales) : 0 ?></p>
+                    </div>
+                    
+                    <div class="rounded-xl m-w-20 bg-blue-100 p-2">
+                        <img src="/Assignment/assets/icons/money.svg" class="  h-10 object-cover" alt="">
+                    </div>
                 </div>
+                <!-- <div class="bg-white p-4 rounded shadow">
+                    <p class="text-sm text-gray-500">Pending Orders</p>
+                    <p class="text-2xl font-bold"></p>
+                </div> -->
+                
+               
             </div>
 
             <!-- Listings -->

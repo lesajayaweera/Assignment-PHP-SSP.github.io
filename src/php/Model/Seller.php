@@ -126,7 +126,8 @@ class Seller{
     public function getSellerDetails($email) {
         try {
             $query = "
-                SELECT 
+                SELECT
+                    u.id, 
                     u.firstName, 
                     u.lastName, 
                     u.email, 
@@ -481,6 +482,148 @@ function updateOrderPrice($vehicleID, $newPrice) {
         $stmt->bind_param("i", $negotiationID);
         return $stmt->execute();
     }
+
+    // METHOD TO GET THE TOTAL PRODUCTS LISTED BY THE USER
+    public function Get_Sellers_Product_Count($user_id) {
+   
+        if (!is_numeric($user_id) || $user_id <= 0) {
+            return "Invalid seller ID";
+        }
+
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS total_vehicles FROM vehicles WHERE sellerID = ?");
+        
+        if (!$stmt) {
+            return "Database error: " . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        
+        if ($stmt->error) {
+            $error = $stmt->error;
+            $stmt->close();
+            return "Database error: " . $error;
+        }
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        return (int)$row['total_vehicles'];
+    }
+
+    //  returns the total of the negotiated price of the seller
+
+     public function getTotalNegotiationsofPrice($sellerID) {
+        // Validate input
+        if (!is_numeric($sellerID)) {
+            return "Invalid seller ID";
+        }
+
+        // Prepare the query with joins to connect negotiations to seller's vehicles
+        $query = "SELECT SUM(n.negotiatedPrice) AS total_amount
+                  FROM negotiations n
+                  JOIN vehicles v ON n.vehicleID = v.VehicleID
+                  WHERE v.sellerID = ? AND n.status = 'approved'";
+
+        $stmt = $this->conn->prepare($query);
+        
+        if (!$stmt) {
+            return "Database error: " . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $sellerID);
+        $stmt->execute();
+        
+        // Check for errors
+        if ($stmt->error) {
+            $error = $stmt->error;
+            $stmt->close();
+            return "Database error: " . $error;
+        }
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        // Return 0 if no results instead of NULL
+        return $row['total_amount'] ?? 0;
+    }
+
+    public function getTotal_done_sales($sellerID) {
+        // Validate input
+        if (!is_numeric($sellerID) || $sellerID <= 0) {
+            return "Invalid seller ID";
+        }
+
+        // Prepare the query
+        $query = "SELECT SUM(price) AS total_sales 
+                 FROM orders 
+                 WHERE sellerID = ? AND status = 'completed'";
+
+        $stmt = $this->conn->prepare($query);
+        
+        if (!$stmt) {
+            return "Database error: " . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $sellerID);
+        $stmt->execute();
+        
+        // Check for errors
+        if ($stmt->error) {
+            $error = $stmt->error;
+            $stmt->close();
+            return "Database error: " . $error;
+        }
+
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        // Return 0 if no results instead of NULL
+        return $row['total_sales'] ?? 0;
+    }
+
+     public function getTotal_PendingOrders($sellerID) {
+        // Validate input
+        if (!is_numeric($sellerID) || $sellerID <= 0) {
+            return "Invalid seller ID";
+        }
+
+        try {
+            // Prepare the query
+            $stmt = $this->conn->prepare(
+                "SELECT COUNT(*) AS pending_count 
+                 FROM orders 
+                 WHERE sellerID = ? AND status = 'pending'"
+            );
+            
+            if (!$stmt) {
+                throw new Exception("Database preparation error: " . $this->conn->error);
+            }
+
+            $stmt->bind_param("i", $sellerID);
+            
+            if (!$stmt->execute()) {
+                throw new Exception("Execution error: " . $stmt->error);
+            }
+
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            
+            return (int)$row['pending_count'];
+            
+        } catch (Exception $e) {
+            // Log error here if needed
+            return $e->getMessage();
+        } finally {
+            if (isset($stmt)) {
+                $stmt->close();
+            }
+        }
+    }
+
 
 
 }

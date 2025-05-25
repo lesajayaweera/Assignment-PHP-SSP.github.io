@@ -48,4 +48,24 @@ class SellerController{
             echo "Error in handling the Negotiations";
         }
     }
+
+    public function GetTotal_ProductsOf_Seller($user_id){
+        $seller = new Seller();
+        return $seller->Get_Sellers_Product_Count($user_id);
+    }
+
+    public function Get_total_negotiation_deals($sellerID){
+        $seller = new Seller();
+        return $seller->getTotalNegotiationsofPrice($sellerID);
+    }
+    
+    public function getTotal_done_sales($sellerID){
+        $seller = new Seller();
+        return $seller->getTotal_done_sales($sellerID);
+    }
+
+    public function getTotal_PendingOrders($sellerID){
+        $seller = new Seller();
+        return $seller->getTotal_PendingOrders($sellerID);
+    }
 }

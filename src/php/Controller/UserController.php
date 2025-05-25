@@ -65,6 +65,7 @@ class UserController{
                 $seller = new SellerController();
                 $image =$seller->GetSellerDetails($user_data['email'])['image_path'];
                 $_SESSION['image'] = $image;
+                $_SESSION['seller_id'] =$user_data['id'];
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
             }else if ($user_data['role'] =="buyer"){

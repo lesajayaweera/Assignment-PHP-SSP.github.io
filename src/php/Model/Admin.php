@@ -227,7 +227,7 @@ class Admin {
     }
     public function GetUserDetails($email) {
         try {
-            $query = "SELECT firstName, lastName, email, image_path FROM 
+            $query = "SELECT  id, firstName, lastName, email, image_path FROM 
                     users 
                 WHERE 
                     email = ?
