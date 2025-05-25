@@ -25,34 +25,20 @@ $script ="wishlist";
                     <p class="mt-1 text-sm">Quantity: 1</p>
                     <p class="mt-1 font-semibold">$99</p>
                   </div>
-                  <button class="text-sm text-gray-500 underline">Remove</button>
+                  <div class=" flex flex-wrap flex-col items-center space-y-10 justify-around">
+                    <button class="text-sm text-gray-500 underline hover:text-red-500 transition-colors duration-200 ease-in-out">Remove</button>
+                    <button class="text-sm text-gray-500 underline hover:text-gray-900 transition-colors duration-200 ease-in-out">Buy</button>
+                  </div>
+                  
                 </div>
     
                 <!-- Another Item -->
-                <div class="flex items-start gap-4">
-                  <img src="/Assignment/assets/images/products/range-rover.jpg" alt="Car" class="w-24 h-20 object-cover rounded" />
-                  <div class="flex-1">
-                    <h3 class="font-semibold">Car Name</h3>
-                    <p class="text-sm text-gray-500">Model: Name</p>
-                    <p class="mt-1 text-sm">Quantity: 1</p>
-                    <p class="mt-1 font-semibold">$99</p>
-                  </div>
-                  <button class="text-sm text-gray-500 underline">Remove</button>
-                </div>
+               
               </div>
             </div>
     
             <!-- Order Info -->
-            <div>
-              <h3 class="text-lg font-semibold border-b pb-1">Order Information</h3>
-              <div class="mt-4 bg-white border rounded p-4">
-                <button class="flex justify-between w-full items-center font-medium text-left">
-                  <span>Warrenty Policy</span>
-                  <span>−</span>
-                </button>
-                <p class="text-sm text-gray-600 mt-3">Answer</p>
-              </div>
-            </div>
+            
           </div>
     
           <!-- Right Column: Summary -->

@@ -11,6 +11,8 @@ require_once("./src/php/Controller/BuyerController.php");
 $vehicleData =null;
 $id = null;
 
+
+
 if($_SERVER['REQUEST_METHOD']==="GET"){
     if(isset($_GET['id'])){
         $id = htmlspecialchars($_GET['id']);
@@ -142,10 +144,10 @@ $script = "vehicle";
                 </div>
                 <p class="text-sm">📞<?php echo htmlspecialchars($vehicleData['seller']['email']);?></p>
                 <div class="space-y-2">
-                    <button
+                    <!-- <button
                         class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out"
                         id="buyBtn">Buy
-                        Now</button>
+                        Now</button> -->
                     <button
                         class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out"
                         id="wishBtn">WishList</button>
@@ -153,7 +155,8 @@ $script = "vehicle";
                         <button type="button"
                             class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out"
                             id="negotiate" <?php if (!isset($_SESSION['email'])): ?>
-                            onclick="alert('Need to Logged in or Register!'); window.location.href='/Assignment/Login';" <?php endif; ?>>Negotiate</button>
+                            onclick="alert('Need to Logged in or Register!'); window.location.href='/Assignment/Login';"
+                            <?php endif; ?>>Negotiate</button>
                         <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
                             <div class="flex w-full space-x-2">
 
@@ -177,8 +180,15 @@ $script = "vehicle";
                         </div>
 
                     </form>
-                    <a href=""></a>
-                    <button class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out" id="cartBtn">Add To Cart </button>
+                    <a
+                        href="/Assignment/Customer/AddCart?id=<?php echo $id; ?>">
+                        <button type="button"
+                            class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out"
+                            id="cartBtn">
+                            Add To Cart
+                        </button>
+                    </a>
+
                 </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>"
                     class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
             </div>

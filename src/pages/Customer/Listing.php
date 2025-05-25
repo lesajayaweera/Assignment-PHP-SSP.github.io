@@ -16,7 +16,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
     <section class="px-4 py-30 max-w-7xl mx-auto font-family-montserrat">
         <!-- Breadcrumb -->
         <nav class="text-sm text-gray-500 mb-4">
-          <a href="../../index.html" class="hover:underline">Home</a> / <span>Listing v1</span>
+          <a href="/Assignment/" class="hover:underline">Home</a> / <span>Listing v1</span>
         </nav>
       
         <!-- Header -->
@@ -25,8 +25,12 @@ $vehicle = $vehicle->Load_all_with_main_Image();
           
         </div>
       
-        
-      
+        <?php if(empty($vehicle)) :?>
+          <div class="flex w-full items-center justify-center">
+            <p>🚗 No vehicles found at the moment. Please check back later!</p>
+          </div>
+        <?php else:?>
+
         <!-- Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <!-- Card -->
@@ -37,7 +41,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
               <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>" alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>" class="w-full  object-cover" />
               <span class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great Price</span>
               <span class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
-              <button class="absolute top-2 right-2 bg-white p-1 w-6 rounded-full shadow text-gray-600 hover:text-black">♥</button>
+              
             </div>
             <div class="p-4 space-y-2">
               <h3 class="text-sm font-semibold text-gray-800"><?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
@@ -54,6 +58,9 @@ $vehicle = $vehicle->Load_all_with_main_Image();
             </div>
           </div>
           <?php endforeach?>
+
+          <?php endif;?>
+          
       
           <!-- Repeat the card above for other listings -->
         </div>

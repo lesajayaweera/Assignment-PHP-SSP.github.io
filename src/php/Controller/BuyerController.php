@@ -44,6 +44,34 @@ class BuyerController{
             echo "<script>alert('the item didnt deleted')</script>";
         }
     }
+
+    public function CreateOrder($vehicleId,$BuyerID){
+        $result =$this->buyer->createOrder($vehicleId,$BuyerID);
+        if($result){
+            header("Location:/Assignment/Listing");
+            exit;
+        }
+        else{
+            echo "<script>alert('vehicle didnt add to the cart')</script>";
+
+        }
+    }
+
+    public function getTheCartTotal($buyerID){
+        return $this->buyer->getCompleteCartSummary($buyerID);
+    }
+
+    
+
+    public function InsertBillingAndCompleteOrder($buyerID, $address, $apartment, $city, $country, $zipcode){
+        $result = $this->buyer->insertOrUpdateBillingInfo($buyerID, $address, $apartment, $city, $country, $zipcode);
+
+        if($result){
+            echo "<script>alert('the billing information is updated') </script>";
+            $this->buyer->completeBuyerOrders($buyerID);
+            header("Location:/Assignment/Checkout");
+        }else{
+            echo "<script>alert('the billing information is failed') </script>";
+        }
+    }
 }
-
-

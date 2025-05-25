@@ -129,8 +129,9 @@ class Buyer {
                 vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
             WHERE 
                 c.buyerID = ?
+                AND c.status = 'pending'
             ORDER BY 
-                c.status= 'pending'
+                c.id DESC
         ";
 
         $stmt = $this->conn->prepare($query);
@@ -145,11 +146,12 @@ class Buyer {
         $cartItems = [];
         while ($row = $result->fetch_assoc()) {
             $cartItems[] = [
-                'cart' => [
+                'order' => [
                     'id' => $row['id'],
                     'buyerID' => $row['buyerID'],
                     'vehicleID' => $row['vehicleID'],
-                    'status' => $row['status']
+                    'status' => $row['status'],
+                    'price' => $row['price']
                 ],
                 'vehicle' => [
                     'VehicleID' => $row['VehicleID'],
@@ -197,6 +199,330 @@ class Buyer {
         
         return ($success && $rowsAffected > 0);
     }
+
+    // function to let the user add a car to the cart
+    public function createOrder($vehicleID, $buyerID) {
+        // Validate inputs
+        if (!is_numeric($vehicleID) || $vehicleID <= 0) {
+            throw new InvalidArgumentException("Invalid Vehicle ID");
+        }
+        
+        if (!is_numeric($buyerID) || $buyerID <= 0) {
+            throw new InvalidArgumentException("Invalid Buyer ID");
+        }
+
+        // Begin transaction
+        $this->conn->begin_transaction();
+        
+        try {
+            // 1. Get vehicle details including sellerID and price
+            $vehicle = $this->getVehicleDetails($vehicleID);
+            if (!$vehicle) {
+                throw new Exception("Vehicle not found");
+            }
+
+            // 2. Check if vehicle is already ordered
+            if ($this->isVehicleOrdered($vehicleID)) {
+                throw new Exception("Vehicle already has an existing order");
+            }
+
+            // 3. Insert into orders table
+            $query = "
+                INSERT INTO orders 
+                (vehicleID, buyerID, sellerID, price, status) 
+                VALUES (?, ?, ?, ?, 'pending')
+            ";
+            
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+
+            $stmt->bind_param(
+                "iiid", 
+                $vehicleID, 
+                $buyerID, 
+                $vehicle['sellerID'], 
+                $vehicle['price']
+            );
+            
+            $success = $stmt->execute();
+            $orderID = $stmt->insert_id;
+            $stmt->close();
+            
+            if (!$success) {
+                throw new Exception("Order creation failed");
+            }
+
+            // 4. Optional: Mark vehicle as unavailable
+            // $this->markVehicleAsSold($vehicleID);
+
+            // Commit transaction
+            $this->conn->commit();
+            return $orderID;
+            
+        } catch (Exception $e) {
+            // Rollback on error
+            $this->conn->rollback();
+            error_log("Order creation error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+// Helper method to get vehicle details
+    private function getVehicleDetails($vehicleID) {
+        $stmt = $this->conn->prepare("
+            SELECT sellerID, price 
+            FROM vehicles 
+            WHERE VehicleID = ?
+        ");
+        $stmt->bind_param("i", $vehicleID);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Helper method to check if vehicle already has an order
+    private function isVehicleOrdered($vehicleID) {
+        $stmt = $this->conn->prepare("
+            SELECT id FROM orders WHERE vehicleID = ?
+        ");
+        $stmt->bind_param("i", $vehicleID);
+        $stmt->execute();
+        return $stmt->get_result()->num_rows > 0;
+    }
+
+    // function to get the total of the cart
+    public function getCompleteCartSummary($buyerID) {
+        // Validate input
+        if (!is_numeric($buyerID) || $buyerID <= 0) {
+            throw new InvalidArgumentException("Invalid Buyer ID: Must be a positive integer");
+        }
+
+        $this->conn->begin_transaction();
+        
+        try {
+            // 1. Get cart total and item count (only pending orders)
+            $summaryQuery = "
+                SELECT 
+                    COUNT(c.id) AS item_count,
+                    SUM(v.price) AS subtotal,
+                    SUM(v.price) * 0.1 AS tax,
+                    SUM(v.price) * 1.1 AS total
+                FROM orders c
+                JOIN vehicles v ON c.vehicleID = v.VehicleID
+                WHERE c.buyerID = ?
+                AND c.status = 'pending'
+            ";
+            
+            $stmt = $this->conn->prepare($summaryQuery);
+            if ($stmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $bindResult = $stmt->bind_param("i", $buyerID);
+            if ($bindResult === false) {
+                throw new Exception("Bind failed: " . $stmt->error);
+            }
+            
+            $executeResult = $stmt->execute();
+            if ($executeResult === false) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+            
+            $result = $stmt->get_result();
+            if ($result === false) {
+                throw new Exception("Get result failed: " . $stmt->error);
+            }
+            
+            $summary = $result->fetch_assoc();
+            $stmt->close();
+
+            // 2. Get detailed cart items (only pending orders)
+            $itemsQuery = "
+                SELECT 
+                    c.id AS order_id,
+                    c.price AS order_price,
+                    c.status,
+                    v.VehicleID,
+                    v.Make,
+                    v.Model,
+                    v.Year,
+                    v.price AS vehicle_price,
+                    vi.image_path AS main_image
+                FROM orders c
+                JOIN vehicles v ON c.vehicleID = v.VehicleID
+                LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+                WHERE c.buyerID = ?
+                AND c.status = 'pending'
+                ORDER BY c.id DESC
+            ";
+            
+            $stmt = $this->conn->prepare($itemsQuery);
+            if ($stmt === false) {
+                throw new Exception("Prepare failed: " . $this->conn->error);
+            }
+            
+            $bindResult = $stmt->bind_param("i", $buyerID);
+            if ($bindResult === false) {
+                throw new Exception("Bind failed: " . $stmt->error);
+            }
+            
+            $executeResult = $stmt->execute();
+            if ($executeResult === false) {
+                throw new Exception("Execute failed: " . $stmt->error);
+            }
+            
+            $result = $stmt->get_result();
+            $items = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            $this->conn->commit();
+            
+            return [
+                'summary' => [
+                    'item_count' => (int)($summary['item_count'] ?? 0),
+                    'subtotal' => (float)($summary['subtotal'] ?? 0.00),
+                    'tax' => (float)($summary['tax'] ?? 0.00),
+                    'total' => (float)($summary['total'] ?? 0.00),
+                    'currency' => 'USD'
+                ],
+                'items' => $items ?: []
+            ];
+            
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            error_log("Cart summary error for buyer {$buyerID}: " . $e->getMessage());
+            throw new Exception("Could not retrieve cart summary: " . $e->getMessage());
+        }
+    }
+
+    // method to insert the billing information of the user
+ 
+
+    public function insertOrUpdateBillingInfo($buyerID, $address, $apartment, $city, $country, $zipcode) {
+        // Validate inputs (same as before)
+        if (!is_numeric($buyerID) || $buyerID <= 0) {
+            throw new InvalidArgumentException("Invalid Buyer ID");
+        }
+        
+        if (empty($address) || strlen($address) > 65535) {
+            throw new InvalidArgumentException("Address is required and must be less than 65535 characters");
+        }
+        
+        if (empty($apartment) || strlen($apartment) > 255) {
+            throw new InvalidArgumentException("Apartment is required and must be less than 255 characters");
+        }
+        
+        if (empty($city) || strlen($city) > 255) {
+            throw new InvalidArgumentException("City is required and must be less than 255 characters");
+        }
+        
+        if (empty($country) || strlen($country) > 255) {
+            throw new InvalidArgumentException("Country is required and must be less than 255 characters");
+        }
+        
+        if (!is_numeric($zipcode) || $zipcode <= 0) {
+            throw new InvalidArgumentException("ZIP code must be a positive number");
+        }
+
+        // Check if billing info already exists for this buyer
+        $existingBilling = $this->getBillingInfo($buyerID);
+        
+        if ($existingBilling) {
+            // Update existing record
+            $query = "
+                UPDATE billing SET
+                    address = ?,
+                    apartment = ?,
+                    city = ?,
+                    country = ?,
+                    zipcode = ?,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE buyerID = ?
+            ";
+            
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                error_log("Prepare failed: " . $this->conn->error);
+                return false;
+            }
+            
+            $stmt->bind_param("ssssii", $address, $apartment, $city, $country, $zipcode, $buyerID);
+            $success = $stmt->execute();
+            $billingID = $existingBilling['id'];
+        } else {
+            // Insert new record
+            $query = "
+                INSERT INTO billing (
+                    buyerID, address, apartment, city, country, zipcode
+                ) VALUES (?, ?, ?, ?, ?, ?)
+            ";
+            
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                error_log("Prepare failed: " . $this->conn->error);
+                return false;
+            }
+            
+            $stmt->bind_param("issssi", $buyerID, $address, $apartment, $city, $country, $zipcode);
+            $success = $stmt->execute();
+            $billingID = $stmt->insert_id;
+        }
+
+        if (!$success) {
+            error_log("Database operation failed: " . $stmt->error);
+            return false;
+        }
+
+        $stmt->close();
+        return $billingID;
+    }
+
+    /**
+     * Helper method to get billing information by buyer ID
+     */
+    private function getBillingInfo($buyerID) {
+        $stmt = $this->conn->prepare("
+            SELECT * FROM billing WHERE buyerID = ?
+        ");
+        $stmt->bind_param("i", $buyerID);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // method to update the order table status to completed
+    
+ 
+    public function completeBuyerOrders($buyerID) {
+        // Validate input
+        if (!is_numeric($buyerID) || $buyerID <= 0) {
+            throw new InvalidArgumentException("Invalid Buyer ID: Must be a positive integer");
+        }
+
+        // Prepare the update statement
+        $query = "
+            UPDATE orders 
+            SET status = 'completed'
+            WHERE buyerID = ? 
+            AND status = 'pending'
+        ";
+
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            error_log("Prepare failed: " . $this->conn->error);
+            return false;
+        }
+
+        $stmt->bind_param("i", $buyerID);
+        
+        if (!$stmt->execute()) {
+            error_log("Update failed: " . $stmt->error);
+            return false;
+        }
+
+        $affectedRows = $stmt->affected_rows;
+        $stmt->close();
+        
+        return $affectedRows;
+    }
 }
-
-

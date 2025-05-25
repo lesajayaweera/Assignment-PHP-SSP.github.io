@@ -33,10 +33,10 @@ $links = array(
     "Assignment/Service"=>"./src/pages/Customer/Service.php",
     "Assignment/Customer/Account/Edit"=>"./src/pages/Customer/EditAccounts.php",
     "Assignment/ViewDetails"=>"./src/pages/Customer/Vehicle page.php",
-    "Assignment/payments"=>"./src/pages/Customer/Checkout-payment.php",
     "/Assignment/Customer/Negotiate"=>"./src/pages/Customer/Negotiate.php",
     "Assignment/Favourites"=>"./src/pages/Customer/Wishlist.php",
     "Assignment/Customer/CartRemove"=>"./src/pages/Customer/cart_remove.php",
+    "Assignment/Customer/AddCart"=>"./src/pages/Customer/cart_add.php",
 
 
     // Admin pages

@@ -33,41 +33,46 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
 }
 
 ?>
-  <!-- Sign Up Section -->
-  <section class="font-family-montserrat">
+<!-- Sign Up Section -->
+<section class="font-family-montserrat">
     <div class="grid grid-cols-1 md:grid-cols-2 h-screen">
-      <img src="/Assignment/assets/images/Login page/login-image.jpg" class="w-full h-full object-cover" alt="Login Visual"/>
+        <img src="/Assignment/assets/images/Login page/login-image.jpg" class="w-full h-full object-cover"
+            alt="Login Visual" />
 
-      <form class="flex flex-col justify-center items-start p-8 space-y-6 w-full" method="post">
-        <h2 class="text-3xl font-bold">Sign Up</h2>
+        <form class="flex flex-col justify-center items-start p-8 space-y-6 w-full" method="post">
+            <h2 class="text-3xl font-bold">Sign Up</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-          <input type="text" name="firstName" placeholder="First Name" class="p-2 border rounded  outline-none focus:ring-blue-500" required />
-          <input type="text" name="lastName" placeholder="Last Name" class="p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
-        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <input type="text" name="firstName" placeholder="First Name"
+                    class="p-2 border rounded  outline-none focus:ring-blue-500" required />
+                <input type="text" name="lastName" placeholder="Last Name"
+                    class="p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
+            </div>
 
-        <input type="email" name="email" placeholder="Email" class="w-full p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
+            <input type="email" name="email" placeholder="Email"
+                class="w-full p-2 border rounded  focus:outline-none focus:ring-blue-500" required />
 
 
-        <input type="password" name="password" placeholder="Password" class="w-full p-2 border  rounded  focus:ring-blue-500" required />
+            <input type="password" name="password" placeholder="Password"
+                class="w-full p-2 border  rounded  focus:ring-blue-500" required />
 
-        
-        <select title="role" name="role"  class="text-sm border px-2 py-2 rounded w-[200px] " required>
-          <option value="" disabled selected>Select Role</option>
-          <option value="buyer">Buyer</option>
-          <option value="seller">Seller</option>
-          <option value="admin">Admin</option>
-      </select>
 
-        <button type="submit" class="bg-black text-white p-4 w-full hover:bg-white hover:text-black hover:border transition duration-500">
-          Sign Up
-        </button>
+            <select title="role" name="role" class="text-sm border px-2 py-2 rounded w-[200px] " required>
+                <option value="" disabled selected>Select Role</option>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+            </select>
 
-        <p class="text-sm self-start">
-          Already have an account? 
-          <a href="/Assignment/Login" class="text-blue-500 hover:underline">Login</a>
-        </p>
-      </form>
+            <button type="submit"
+                class="bg-black text-white p-4 w-full hover:bg-white hover:text-black hover:border transition duration-500">
+                Sign Up
+            </button>
+
+            <p class="text-sm self-start">
+                Already have an account?
+                <a href="/Assignment/Login" class="text-blue-500 hover:underline">Login</a>
+            </p>
+        </form>
     </div>
-  </section>
-<?php include_once (SHARED_PATH . '/customer_footer.php'); ?> 
+</section>
+<?php include_once (SHARED_PATH . '/customer_footer.php'); ?>
