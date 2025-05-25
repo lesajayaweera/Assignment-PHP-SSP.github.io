@@ -23,7 +23,7 @@ $cartItems=$controller->LoadCart($_SESSION['buyerID']);
 $cartSummery = $controller->getTheCartTotal($_SESSION['buyerID']);
 
 // echo "<pre>";
-// print_r($cartSummery);
+// print_r($cartItems);
 // echo "<pre>";
 ?>
 
@@ -50,7 +50,7 @@ $cartSummery = $controller->getTheCartTotal($_SESSION['buyerID']);
                     <p class="mt-1 text-sm">Dealer: <?= $items['seller']['firstName'] ?> <?= $items['seller']['lastName'] ?></p>
                     <p class="mt-1 font-semibold">$ <?= number_format($items['vehicle']['price']) ?></p>
                   </div>
-                  <a href="/Assignment/Customer/CartRemove?id=<?= $items['cart']['id']?>">
+                  <a href="/Assignment/Customer/CartRemove?id=<?= $items['order']['id']?>">
                     <button class="text-sm text-gray-500 underline hover:text-red-400 transition-all duration-150 ease-in-out">Remove</button>
                   </a>
                 </div>
