@@ -15,6 +15,8 @@ $total_deals =$controller->Get_total_negotiation_deals($_SESSION['seller_id']);
 $total_sales =$controller->getTotal_done_sales($_SESSION['seller_id']);
 $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
 
+$vehicles = $controller->returnAllSellerCars($_SESSION['seller_id']);
+
 // echo $total_deals;
 
 // 
@@ -77,11 +79,12 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                     <div class="flex items-center space-x-3">
                         <span
                             class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
+                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                            alt="profile" class="w-10 h-10 rounded-full" />
                     </div>
                 </a>
             </div>
-<!-- https://i.pravatar.cc/150?img=4 -->
+            <!-- https://i.pravatar.cc/150?img=4 -->
             <!-- Statistics -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="flex items-center justify-between bg-white p-4 rounded shadow">
@@ -89,7 +92,7 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                         <p class="text-sm text-gray-500">Total Products</p>
                         <p class="text-2xl font-bold"><?php echo isset($total_products) ? $total_products : 0 ?></p>
                     </div>
-                    
+
                     <div class="rounded-xl m-w-20 bg-yellow-100 p-2">
                         <img src="/Assignment/assets/icons/products.svg" class="w-10 h-10  object-cover" alt="">
                     </div>
@@ -99,7 +102,7 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                         <p class="text-sm text-gray-500">Pending Orders</p>
                         <p class="text-2xl font-bold"><?php echo isset($pending_orders) ? $pending_orders : 0 ?></p>
                     </div>
-                    
+
                     <div class="rounded-xl m-w-20 bg-emerald-50 p-2">
                         <img src="/Assignment/assets/icons/orders.svg" class="  h-10 object-cover" alt="">
                     </div>
@@ -107,9 +110,10 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                 <div class="flex items-center justify-between bg-white p-4 rounded shadow">
                     <div>
                         <p class="text-sm text-gray-500">Approved Deals</p>
-                        <p class="text-2xl font-bold">$<?php echo isset($total_deals) ? number_format((int)$total_deals) : 0 ?></p>
+                        <p class="text-2xl font-bold">
+                            $<?php echo isset($total_deals) ? number_format((int)$total_deals) : 0 ?></p>
                     </div>
-                    
+
                     <div class="rounded-xl m-w-20 bg-purple-100 p-2">
                         <img src="/Assignment/assets/icons/Approved.svg" class="  h-10 object-cover" alt="">
                     </div>
@@ -117,9 +121,10 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                 <div class="flex items-center justify-between bg-white p-4 rounded shadow">
                     <div>
                         <p class="text-sm text-gray-500">Total Sales</p>
-                        <p class="text-2xl font-bold">$<?php echo isset($total_sales) ? number_format((int)$total_sales) : 0 ?></p>
+                        <p class="text-2xl font-bold">
+                            $<?php echo isset($total_sales) ? number_format((int)$total_sales) : 0 ?></p>
                     </div>
-                    
+
                     <div class="rounded-xl m-w-20 bg-blue-100 p-2">
                         <img src="/Assignment/assets/icons/money.svg" class="  h-10 object-cover" alt="">
                     </div>
@@ -128,8 +133,8 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
                     <p class="text-sm text-gray-500">Pending Orders</p>
                     <p class="text-2xl font-bold"></p>
                 </div> -->
-                
-               
+
+
             </div>
 
             <!-- Listings -->
@@ -137,72 +142,38 @@ $pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
 
             <h1 class="px-6 py-2 text-3xl font-bold   ">Popular Products</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 ">
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+
+            <?php foreach($vehicles as $car):?>
+                <div class="bg-white shadow rounded-xl overflow-hidden">
                     <div class="relative">
-                        <img class="w-full h-48 object-cover" src="/Assignment/assets/images/rolls-royce-black.jpg"
-                            alt="Car">
+                        <img src="<?= htmlspecialchars($car['main_image'] ?? 'default-car.jpg') ?>"
+                            alt="<?= htmlspecialchars($car['Make'] . ' ' . $car['Model']) ?>"
+                            class="w-full h-40  object-cover" />
                         <span
-                            class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
-                            Great Price
-                        </span>
+                            class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">Great
+                            Price</span>
+                        <span
+                            class="absolute bottom-4 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded"><?= htmlspecialchars($car['veh_condition']);?></span>
+
                     </div>
-                    <div class="p-4">
-                        <h3 class="text-gray-800 font-semibold text-lg">Mercedes-Benz, C Class</h3>
-                        <p class="text-sm text-gray-500">2.0 D5 PowerPulse Momentum 5dr AWD</p>
-                        <div class="flex justify-between text-sm text-gray-600 mt-4">
-                            <div class="flex items-center gap-1">
-                                <span>100 Miles</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span>Petrol</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span>Automatic</span>
-                            </div>
+                    <div class="p-4 space-y-2">
+                        <h3 class="text-sm font-semibold text-gray-800">
+                            <?= htmlspecialchars($car['Make'] . ' ' . $car['Model'] . ' (' . $car['Year'] . ')') ?></h3>
+                        <p class="text-xs text-gray-500"><?= htmlspecialchars($car['cateogory']); ?></p>
+                        <div class="flex flex-wrap text-xs text-gray-500 gap-4 mt-2">
+                            <span><?= htmlspecialchars($car['Engine']. "cc");?></span>
+                            <span><?= htmlspecialchars($car['FuelType']);?></span>
+                            <span><?= htmlspecialchars($car['Transmission']);?></span>
                         </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <div>
-                                <p class="line-through text-gray-400 text-sm">$40,000</p>
-                                <p class="text-xl font-bold text-gray-800">$35,000</p>
-                            </div>
-                            <a href="./ViewProductDetails.html"
-                                class="text-indigo-600 hover:underline font-medium text-sm">View Details</a>
+                        <div class="flex items-center justify-between mt-4">
+                            <span
+                                class="text-lg font-bold text-gray-900"><?= "$".number_format(htmlspecialchars($car['price'])); ?></span>
+                            <a href="/Assignment/Seller/ViewProducts?id=<?=$car['VehicleID'] ?>"
+                                class="text-sm text-blue-600 hover:underline">View Details</a>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <div class="relative">
-                        <img class="w-full h-48 object-cover" src="/Assignment/assets/images/rolls-royce-black.jpg"
-                            alt="Car">
-                        <span
-                            class="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
-                            Great Price
-                        </span>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-gray-800 font-semibold text-lg">Mercedes-Benz, C Class</h3>
-                        <p class="text-sm text-gray-500">2.0 D5 PowerPulse Momentum 5dr AWD</p>
-                        <div class="flex justify-between text-sm text-gray-600 mt-4">
-                            <div class="flex items-center gap-1">
-                                <span>100 Miles</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span>Petrol</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span>Automatic</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center">
-                            <div>
-                                <p class="line-through text-gray-400 text-sm">$40,000</p>
-                                <p class="text-xl font-bold text-gray-800">$35,000</p>
-                            </div>
-                            <a href="./ViewProductDetails.html"
-                                class="text-indigo-600 hover:underline font-medium text-sm">View Details</a>
-                        </div>
-                    </div>
-                </div>
+            <?php endforeach;?>
             </div>
         </main>
     </div>
