@@ -399,97 +399,29 @@ class Buyer {
     // method to insert the billing information of the user
  
 
-    public function insertOrUpdateBillingInfo($buyerID, $address, $apartment, $city, $country, $zipcode) {
-        // Validate inputs (same as before)
-        if (!is_numeric($buyerID) || $buyerID <= 0) {
-            throw new InvalidArgumentException("Invalid Buyer ID");
-        }
-        
-        if (empty($address) || strlen($address) > 65535) {
-            throw new InvalidArgumentException("Address is required and must be less than 65535 characters");
-        }
-        
-        if (empty($apartment) || strlen($apartment) > 255) {
-            throw new InvalidArgumentException("Apartment is required and must be less than 255 characters");
-        }
-        
-        if (empty($city) || strlen($city) > 255) {
-            throw new InvalidArgumentException("City is required and must be less than 255 characters");
-        }
-        
-        if (empty($country) || strlen($country) > 255) {
-            throw new InvalidArgumentException("Country is required and must be less than 255 characters");
-        }
-        
-        if (!is_numeric($zipcode) || $zipcode <= 0) {
-            throw new InvalidArgumentException("ZIP code must be a positive number");
-        }
+    
 
-        // Check if billing info already exists for this buyer
-        $existingBilling = $this->getBillingInfo($buyerID);
+    function insertOrUpdateBillingInfo( $buyerID, $address, $apartment, $city, $country, $zipcode) {
         
-        if ($existingBilling) {
-            // Update existing record
-            $query = "
-                UPDATE billing SET
-                    address = ?,
-                    apartment = ?,
-                    city = ?,
-                    country = ?,
-                    zipcode = ?,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE buyerID = ?
-            ";
-            
-            $stmt = $this->conn->prepare($query);
-            if (!$stmt) {
-                error_log("Prepare failed: " . $this->conn->error);
-                return false;
-            }
-            
-            $stmt->bind_param("ssssii", $address, $apartment, $city, $country, $zipcode, $buyerID);
-            $success = $stmt->execute();
-            $billingID = $existingBilling['id'];
+        
+
+        $query = "INSERT INTO billing (buyerID, address, apartment, city, country, zipcode)
+                VALUES ('$buyerID', '$address', '$apartment', '$city', '$country', '$zipcode')
+                ON DUPLICATE KEY UPDATE
+                address = VALUES(address),
+                apartment = VALUES(apartment),
+                city = VALUES(city),
+                country = VALUES(country),
+                zipcode = VALUES(zipcode)";
+        
+        if ($this->conn->query($query)) {
+            return $this->conn->affected_rows > 0 
+                ? "Billing information processed successfully" 
+                : "No changes made to billing information";
         } else {
-            // Insert new record
-            $query = "
-                INSERT INTO billing (
-                    buyerID, address, apartment, city, country, zipcode
-                ) VALUES (?, ?, ?, ?, ?, ?)
-            ";
-            
-            $stmt = $this->conn->prepare($query);
-            if (!$stmt) {
-                error_log("Prepare failed: " . $this->conn->error);
-                return false;
-            }
-            
-            $stmt->bind_param("issssi", $buyerID, $address, $apartment, $city, $country, $zipcode);
-            $success = $stmt->execute();
-            $billingID = $stmt->insert_id;
+            return "Error processing billing information: " . $this->conn->error;
         }
-
-        if (!$success) {
-            error_log("Database operation failed: " . $stmt->error);
-            return false;
-        }
-
-        $stmt->close();
-        return $billingID;
     }
-
-    /**
-     * Helper method to get billing information by buyer ID
-     */
-    private function getBillingInfo($buyerID) {
-        $stmt = $this->conn->prepare("
-            SELECT * FROM billing WHERE buyerID = ?
-        ");
-        $stmt->bind_param("i", $buyerID);
-        $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
-    }
-
     // method to update the order table status to completed
     
  

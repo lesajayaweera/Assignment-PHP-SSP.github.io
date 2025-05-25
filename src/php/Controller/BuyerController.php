@@ -64,14 +64,14 @@ class BuyerController{
     
 
     public function InsertBillingAndCompleteOrder($buyerID, $address, $apartment, $city, $country, $zipcode){
-        $result = $this->buyer->insertOrUpdateBillingInfo($buyerID, $address, $apartment, $city, $country, $zipcode);
+         $this->buyer->insertOrUpdateBillingInfo($buyerID, $address, $apartment, $city, $country, $zipcode);
+         $result =$this->buyer->completeBuyerOrders($buyerID);
 
-        if($result){
-            echo "<script>alert('the billing information is updated') </script>";
-            $this->buyer->completeBuyerOrders($buyerID);
+         if ($result){
             header("Location:/Assignment/Checkout");
-        }else{
-            echo "<script>alert('the billing information is failed') </script>";
-        }
+         }else{
+            echo "<script>alert('failed to complete the order')</script>";
+         }
     }
+
 }
