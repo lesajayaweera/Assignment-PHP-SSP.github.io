@@ -61,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
                 <option value="" disabled selected>Select Role</option>
                 <option value="buyer">Buyer</option>
                 <option value="seller">Seller</option>
+                <option value="admin">Admin</option>
             </select>
 
             <button type="submit"

@@ -345,52 +345,91 @@ class Seller{
  * Handles negotiation response (accept/reject) and performs all related updates
 
  */
-    public function handleNegotiationResponse( $negotiationID, $accept) {
-        // Begin transaction to ensure data consistency
-        $this->conn->begin_transaction();
+    public function handleNegotiationResponse($negotiationID, $accept) {
+    // Begin transaction to ensure data consistency
+    $this->conn->begin_transaction();
+    
+    try {
+        // 1. First get the negotiation details
+        $negotiation = $this->getNegotiationDetails($negotiationID);
+        if (!$negotiation) {
+            throw new Exception("Negotiation not found");
+        }
         
-        try {
-            // 1. First get the negotiation details
-            $negotiation = $this->getNegotiationDetails($negotiationID);
-            if (!$negotiation) {
-                throw new Exception("Negotiation not found");
-            }
-            
-            if ($accept) {
-                // 2. If accepting, update negotiation status to approved
+        if ($accept) {
+            // 2. Check if vehicle already has an order
+            if ($this->vehicleHasOrder($negotiation['vehicleID'])) {
+                // Update existing order price and vehicle price
+                $this->updateOrderPrice(
+                    $negotiation['vehicleID'],
+                    $negotiation['negotiatedPrice']
+                );
+                
+                $this->updateVehiclePrice(
+                    $negotiation['vehicleID'],
+                    $negotiation['negotiatedPrice']
+                );
+                
+                // Update negotiation status to approved
+                $this->updateNegotiationStatus($negotiationID, 'approved');
+            } else {
+                // 3. If no existing order, proceed with normal flow
                 $this->updateNegotiationStatus($negotiationID, 'approved');
                 
-                // 3. Create order record
+                // 4. Create order record
                 $this->createOrder(
- 
                     $negotiation['vehicleID'],
                     $negotiation['buyerID'],
                     $negotiation['sellerID'],
                     $negotiation['negotiatedPrice']
                 );
                 
-                // 4. Update vehicle price
+                // 5. Update vehicle price
                 $this->updateVehiclePrice(
-
                     $negotiation['vehicleID'],
                     $negotiation['negotiatedPrice']
                 );
-            } else {
-                // 2. If rejecting, delete the negotiation
-                $this->deleteNegotiation($negotiationID);
             }
-            
-            // Commit all changes if everything succeeded
-            $this->conn->commit();
-            return true;
-            
-        } catch (Exception $e) {
-            // Rollback on any error
-            $this->conn->rollback();
-            error_log("Negotiation handling failed: " . $e->getMessage());
-            return false;
+        } else {
+            // 2. If rejecting, delete the negotiation
+            $this->deleteNegotiation($negotiationID);
         }
+        
+        // Commit all changes if everything succeeded
+        $this->conn->commit();
+        return true;
+        
+    } catch (Exception $e) {
+        // Rollback on any error
+        $this->conn->rollback();
+        error_log("Negotiation handling failed: " . $e->getMessage());
+        return false;
     }
+}
+
+// New helper function to check if vehicle has an existing order
+function vehicleHasOrder($vehicleID) {
+    $stmt = $this->conn->prepare("
+        SELECT COUNT(*) as order_count 
+        FROM orders 
+        WHERE vehicleID = ? AND status != 'cancelled'
+    ");
+    $stmt->bind_param("i", $vehicleID);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    return $result['order_count'] > 0;
+}
+
+// New helper function to update existing order price
+function updateOrderPrice($vehicleID, $newPrice) {
+    $stmt = $this->conn->prepare("
+        UPDATE orders 
+        SET price = ? 
+        WHERE vehicleID = ? AND status != 'cancelled'
+    ");
+    $stmt->bind_param("di", $newPrice, $vehicleID);
+    return $stmt->execute();
+}
 
     // Helper function to get negotiation details
     function getNegotiationDetails($negotiationID) {
