@@ -34,8 +34,8 @@ $vehicle = $vehicle->Load_all_with_main_Image();
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
                 <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 hover:bg-gray-700 rounded">Add Products</a>
+                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2  bg-gray-800 rounded">Manage
                     Products</a>
                 <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                 <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -45,12 +45,12 @@ $vehicle = $vehicle->Load_all_with_main_Image();
 
     <div class="flex min-h-screen font-sans">
         <!-- Desktop Sidebar -->
-        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0">
             <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
             <nav class="space-y-3">
                 <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add Products</a>
-                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 hover:bg-gray-700 rounded">Add Products</a>
+                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2  bg-gray-800 rounded">Manage
                     Products</a>
                 <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
                 <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -58,7 +58,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
         </aside>
 
         <!-- Main Content -->
-        <section class="flex-1 p-6 font-family-montserrat space-y-6 w-full font-sans">
+        <section class="flex-1 p-6 font-family-montserrat space-y-6 w-4/5 lg:ml-[20%] font-sans">
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
@@ -66,11 +66,14 @@ $vehicle = $vehicle->Load_all_with_main_Image();
                     <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
                     <h2 class="text-2xl font-semibold">All Listings</h2>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <span class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
-                        alt="profile" class="w-10 h-10 rounded-full" />
-                </div>
+                 <a href="/Assignment/Seller/Account/Edit">
+                    <div class="flex items-center space-x-3">
+                        <span
+                            class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
+                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                            alt="profile" class="w-10 h-10 rounded-full" />
+                    </div>
+                </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100 font-sans">

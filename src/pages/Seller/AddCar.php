@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Products</a>
                 <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>
     </div>
@@ -80,21 +80,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section>
         <div class="flex min-h-screen font-sans">
             <!-- Desktop Sidebar -->
-            <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+            <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0">
                 <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
-                <nav class="space-y-3 ">
+                <nav class="space-y-3">
                     <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                    <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 bg-gray-800  rounded">Add Products</a>
+                    <a href="/Assignment/Seller/AddCar" class="block px-4 py-2  bg-gray-800 rounded">Add
+                        Products</a>
                     <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                         Products</a>
                     <a href="/Assignment/Seller/Negotiations"
                         class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
-                    <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                    <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log
+                        out</a>
                 </nav>
             </aside>
 
             <!-- Main Content -->
-            <main class="flex-1 p-6 space-y-6 w-full ">
+            <main class="flex-1 p-6 space-y-6 w-4/5 lg:ml-[20%] ">
                 <!-- Header -->
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-4">
@@ -102,12 +104,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
                         <h2 class="text-4xl  font-bold  ">Add Products</h2>
                     </div>
-                    <div class="flex items-center space-x-3">
-                        <span
-                            class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                        <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
-                            alt="profile" class="w-10 h-10 rounded-full" />
-                    </div>
+                    <a href="/Assignment/Seller/Account/Edit">
+                        <div class="flex items-center space-x-3">
+                            <span
+                                class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
+                            <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                                alt="profile" class="w-10 h-10 rounded-full" />
+                        </div>
+                    </a>
                 </div>
                 <section class="px-4 py-6">
 
@@ -185,32 +189,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Model</label>
-                                        <input title="input" type="text" class="border border-gray-300 rounded p-2 w-full" name="model"
-                                            required>
+                                        <input title="input" type="text"
+                                            class="border border-gray-300 rounded p-2 w-full" name="model" required>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Year</label>
-                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full" min="<?php echo date("Y") -10 ?>" name="year"
-                                          max="<?php echo date("Y") ?>" maxlength="4" required>
+                                        <input title="input" type="number"
+                                            class="border border-gray-300 rounded p-2 w-full"
+                                            min="<?php echo date("Y") -10 ?>" name="year" max="<?php echo date("Y") ?>"
+                                            maxlength="4" required>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Condition</label>
-                                        <select name="condition" class="border border-gray-300 rounded p-2 w-full" id="">
+                                        <select name="condition" class="border border-gray-300 rounded p-2 w-full"
+                                            id="">
                                             <option value="New">New</option>
                                             <option value="Used">Used</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Price</label>
-                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full"
-                                            name="price" required>
+                                        <input title="input" type="number"
+                                            class="border border-gray-300 rounded p-2 w-full" name="price" required>
                                     </div>
 
                                     <div>
                                         <!-- seating_capacity -->
-                                         <!-- class="border border-gray-300 rounded p-2 w-full" -->
+                                        <!-- class="border border-gray-300 rounded p-2 w-full" -->
                                         <label class="text-sm font-semibold">Seating Capacity</label>
-                                        <select name="seating_capacity" id="" class="border border-gray-300 rounded p-2 w-full">
+                                        <select name="seating_capacity" id=""
+                                            class="border border-gray-300 rounded p-2 w-full">
                                             <option value="2">2</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
@@ -220,8 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 <div>
                                     <label class="text-sm font-semibold">Description</label>
-                                    <textarea title="textarea" class="border border-gray-300 rounded p-2 w-full" rows="4"
-                                        name="description" required></textarea>
+                                    <textarea title="textarea" class="border border-gray-300 rounded p-2 w-full"
+                                        rows="4" name="description" required></textarea>
                                 </div>
                                 <div class="grid grid-cols-2 space-x-4 space-y-4 w-full">
                                     <div>
@@ -257,7 +265,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <div>
                                         <label class="text-sm font-semibold">Engine (cc)</label>
-                                        <input type="number" class="border border-gray-300 rounded p-2 w-full" name="engine">
+                                        <input type="number" class="border border-gray-300 rounded p-2 w-full"
+                                            name="engine">
                                     </div>
                                 </div>
 
@@ -296,8 +305,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div class="flex flex-col">
                                             <label class="font-semibold" for="street">Street No</label>
-                                            <input type="text" name="street"
-                                                class="border border-gray-300 rounded p-2" placeholder="329 Kent Ave" required>
+                                            <input type="text" name="street" class="border border-gray-300 rounded p-2"
+                                                placeholder="329 Kent Ave" required>
                                         </div>
 
                                         <div class="flex flex-col">
@@ -308,8 +317,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                         <div class="flex flex-col">
                                             <label class="font-semibold" for="address">Embedded Link</label>
-                                            <input type="text" name="address"
-                                                class="border border-gray-300 rounded p-2" placeholder="Embedded Link" required>
+                                            <input type="text" name="address" class="border border-gray-300 rounded p-2"
+                                                placeholder="Embedded Link" required>
                                         </div>
 
                                         <div class="flex flex-col">

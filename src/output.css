@@ -1948,6 +1948,11 @@
       margin-left: 20%;
     }
   }
+  .lg\:ml-\[20\] {
+    @media (width >= 64rem) {
+      margin-left: 20;
+    }
+  }
   .lg\:block {
     @media (width >= 64rem) {
       display: block;
