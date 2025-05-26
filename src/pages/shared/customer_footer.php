@@ -8,98 +8,66 @@
 
 ?>     
       
-      <footer class="<?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? 'bg-black text-white' : 'bg-white'; ?>  py-10 text-sm font-family-montserrat ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid  grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 <?php echo ($pageTitle==="Sign Up" || $pageTitle==="Login") ? ' text-white' : 'text-gray-800'; ?> place-content-center px-4">
+      <footer class="<?php echo ($pageTitle === 'Sign Up' || $pageTitle === 'Login') ? 'bg-black text-white' : 'bg-white text-gray-800'; ?> py-10 text-sm font-family-montserrat">
+    <div class="w-full  mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 place-content-center items-center place-items-center" >
 
-                <!-- Company -->
-                <div>
-                <h3 class="font-semibold mb-3 text-center">Company</h3>
+            <!-- Company -->
+            <div class="    ">
+                <h3 class="font-semibold mb-4">Company</h3>
                 <ul class="space-y-2">
-                    <li><a href="/Assignment/" class="hover:underline">About Us</a></li>
-                    <li><a href="/Assignment/Login" class="hover:underline">Blog</a></li>
-                    <li><a href="/Assignment/Register" class="hover:underline">Services</a></li>
-                    <li><a href="/Assignment/Listing" class="hover:underline">FAQs</a></li>
-                    <li><a href="#" class="hover:underline">Terms</a></li>
-                    <li><a href="#" class="hover:underline">Contact Us</a></li>
+                    <li><a href="/Assignment/" class="hover:underline">Home</a></li>
+                    <li><a href="/Assignment/About" class="hover:underline">About Us</a></li>
+                    <li><a href="/Assignment/Login" class="hover:underline">Login</a></li>
+                    <li><a href="/Assignment/Register" class="hover:underline">Register</a></li>
+                    <li><a href="/Assignment/Listing" class="hover:underline">Listings</a></li>
+                    <li><a href="/Assignment/Contactus" class="hover:underline">Contact Us</a></li>
                 </ul>
-                </div>
-        
-                <!-- Quick Links -->
-                <div>
-                <h3 class="font-semibold mb-3 text-center">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:underline">Get in Touch</a></li>
-                    <li><a href="#" class="hover:underline">Help Center</a></li>
-                    <li><a href="#" class="hover:underline">Live Chat</a></li>
-                    <li><a href="#" class="hover:underline">How it Works</a></li>
-                </ul>
-                </div>
-        
-                <!-- Our Brands -->
-                <div>
-                <h3 class="font-semibold mb-3 text-center">Our Brands</h3>
-                <ul class="space-y-2">
-                    <?php
-                    if(!empty($result_brands)){
-                        foreach($result_brands as $brands){
-                            echo '<li><a href="/Assignment/Brands?id=' . $brands['Id'] . '" class="hover:underline">' . htmlspecialchars($brands["Make"]) . '</a></li>';
-                        }
-                    }
-                    ?>
-                   <!-- echo '<li><a href="/Assignment/Brands?id=' . $row_brand['Id'] . '" class="hover:underline">' . htmlspecialchars($row_brand["Make"]) . '</a></li>'; -->
-                    <!-- <li><a href="#" class="hover:underline">Toyota</a></li>
-                    <li><a href="#" class="hover:underline">Porsche</a></li>
-                    <li><a href="#" class="hover:underline">Audi</a></li>
-                    <li><a href="#" class="hover:underline">BMW</a></li>
-                    <li><a href="#" class="hover:underline">Ford</a></li> -->
+            </div>
 
-                </ul>
-                </div>
-        
-                <!-- Vehicle Types -->
-                <div>
-                <h3 class="font-semibold mb-3 text-center">Vehicles Type</h3>
+            <!-- Quick Links -->
+            <div>
+                <h3 class="font-semibold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="hover:underline">Sedan</a></li>
-                    <li><a href="#" class="hover:underline">Hatchback</a></li>
-                    <li><a href="#" class="hover:underline">SUV</a></li>
-                    <li><a href="#" class="hover:underline">Coupe</a></li>
-                    <li><a href="#" class="hover:underline">Truck</a></li>
-                    <li><a href="#" class="hover:underline">Convertible</a></li>
+                    <li><a href="/Assignment/Login" class="hover:underline">Login</a></li>
+                    <li><a href="/Assignment/Register" class="hover:underline">Register</a></li>
+                    <li><a href="/Assignment/Listing" class="hover:underline">Listings</a></li>
                 </ul>
-                </div>
-        
-                <!-- Sale Hours & Social -->
-                <div>
-                <h3 class="font-semibold mb-3 text-center">Sale Hours</h3>
+            </div>
+
+            <!-- Sale Hours -->
+            <div>
+                <h3 class="font-semibold mb-4">Sale Hours</h3>
                 <ul class="space-y-1">
                     <li>Mon – Fri: 09:00AM – 09:00 PM</li>
                     <li>Saturday: 09:00AM – 07:00PM</li>
                     <li>Sunday: Closed</li>
                 </ul>
-        
-                <h3 class="font-semibold mt-6 mb-3 text-center">Connect With Us</h3>
-                <div class="flex gap-4 text-gray-600">
-                    <img src="/Assignment/assets/images/socialMedia/whatsapp.png" class="w-8 object-contain" alt="">
-                    <img src="/Assignment/assets/images/socialMedia/facebook.png" class="w-8 object-contain" alt="">
-                    <img src="/Assignment/assets/images/socialMedia/instagram.png" class="w-8 object-contain" alt="">
-                    
-                </div>
-                </div>
-        
             </div>
-        
-            <!-- Bottom Line -->
-            <div class="mt-10 flex flex-col md:flex-row justify-between items-center text-gray-500 border-t pt-6 text-xs">
-                <p id="year">© 2024 exemple.com. All rights reserved.</p>
-                <div class="space-x-4 mt-2 md:mt-0">
+
+            <!-- Social Media -->
+            <div>
+                <h3 class="font-semibold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#"><img src="/Assignment/assets/images/socialMedia/whatsapp.png" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 transition" /></a>
+                    <a href="#"><img src="/Assignment/assets/images/socialMedia/facebook.png" alt="Facebook" class="w-8 h-8 hover:opacity-80 transition" /></a>
+                    <a href="#"><img src="/Assignment/assets/images/socialMedia/instagram.png" alt="Instagram" class="w-8 h-8 hover:opacity-80 transition" /></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Footer -->
+        <div class="mt-10 border-t pt-6 flex flex-col md:flex-row justify-between items-center text-xs <?php echo ($pageTitle === 'Sign Up' || $pageTitle === 'Login') ? 'text-gray-400' : 'text-gray-500'; ?>">
+            <p id="year">© <?php echo date("Y"); ?> exemple.com. All rights reserved.</p>
+            <div class="space-x-4 mt-2 md:mt-0">
                 <a href="#" class="hover:underline">Terms & Conditions</a>
                 <a href="#" class="hover:underline">Privacy Notice</a>
             </div>
         </div>
-        </div>
-      </footer>
+    </div>
+</footer>
+
       
       
     
