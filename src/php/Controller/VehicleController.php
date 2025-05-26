@@ -68,5 +68,9 @@ class VehicleController{
         }
     }
 
+    public function Get_pending_listing(){
+        return $this->vehicle->getPendingVehiclesWithDetails();
+    }
+
     
 }

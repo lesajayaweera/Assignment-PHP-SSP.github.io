@@ -1,12 +1,22 @@
 <?php 
 session_start();
 require_once("./src/php/Controller/AdminController.php");
+require_once("./src/php/Controller/VehicleController.php");
 
 $controller = new AdminController();
+$vehicleController = new VehicleController();
+
+$data =$vehicleController->Get_pending_listing();
+
+
+
 $total_products =$controller->Get_total_('vehicles');
 $total_user =$controller->Get_total_('users');
 $total_order = $controller->Get_total_('orders');
 $total_sales =$controller->GetTotalSales();
+
+
+  
 
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header("Location: /Assignment/Login");
@@ -49,6 +59,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 
     <div class="flex min-h-screen">
         <!-- Desktop Sidebar -->
+         <!--  -->
         <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 font-sans fixed top-0 left-0 bottom-0 z-10">
             <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
             <nav class="space-y-3">
@@ -139,54 +150,34 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
             <!-- Listings -->
             <div class="bg-white rounded shadow p-4 overflow-x-auto">
                 <div class="flex justify-between mb-4">
-                    <h3 class="text-lg font-semibold">Listings</h3>
-                    <select title="option" class="border rounded px-2 py-1 text-sm focus:outline-0">
-                        <option>Dealer</option>
-                        <option>Seller</option>
-                    </select>
+                    <h3 class="text-lg font-semibold">Pending Listings</h3>
+                    
                 </div>
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-100 text-left text-gray-600">
                         <tr>
                             <th class="px-4 py-2">Product Name</th>
                             <th class="px-4 py-2">Seller</th>
-                            <th class="px-4 py-2">Type</th>
+                            <th class="px-4 py-2">Year</th>
                             <th class="px-4 py-2 text-right">Amount</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
+
+                    <?php foreach($data as $car) :?>
                         <tr>
                             <td class="px-4 py-3 flex items-center space-x-2">
-                                <img title="image" src="../../../assets/images/porsche.png"
-                                    class="w-12 h-8 object-cover" />
-                                <span>Toyota Camry</span>
+                                <img title="image" src="<?= $car['images'][0]['path'] ?>"
+                                    class="w-20 object-cover rounded" />
+                                <span><?= $car['vehicle']['model'] ?> <?= $car['vehicle']['make'] ?></span>
                             </td>
-                            <td class="px-4 py-3">605N Madipakkam Landing</td>
-                            <td class="px-4 py-3">Sedan</td>
-                            <td class="px-4 py-3 text-right">$24,395</td>
+                            <td class="px-4 py-3"><?= $car['seller']['firstName'] ?> <?= $car['seller']['lastName'] ?></td>
+                            <td class="px-4 py-3"><?= $car['vehicle']['year'] ?></td>
+                            <td class="px-4 py-3 text-right">$<?=number_format( $car['vehicle']['price']) ?></td>
                         </tr>
-                        <tr>
-                            <td class="px-4 py-3 flex items-center space-x-2">
-                                <img title="image"
-                                    src="https://imgd.aeplcdn.com/600x337/n/cw/ec/131187/honda-civic-right-front-three-quarter0.jpeg?q=80"
-                                    class="w-12 h-8 object-cover" />
-                                <span>Honda Civic</span>
-                            </td>
-                            <td class="px-4 py-3">620G Madipakkam Landing</td>
-                            <td class="px-4 py-3">Hatchback</td>
-                            <td class="px-4 py-3 text-right">$26,395</td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-3 flex items-center space-x-2">
-                                <img title="image"
-                                    src="https://imgd.aeplcdn.com/600x337/n/cw/ec/140251/audi-rs5-right-front-three-quarter.jpeg?q=80"
-                                    class="w-12 h-8 object-cover" />
-                                <span>Audi Walsh</span>
-                            </td>
-                            <td class="px-4 py-3">650H Madipakkam Landing</td>
-                            <td class="px-4 py-3">Sports</td>
-                            <td class="px-4 py-3 text-right">$32,495</td>
-                        </tr>
+                        <?php endforeach;?>
+                        
+                        
                     </tbody>
                 </table>
             </div>

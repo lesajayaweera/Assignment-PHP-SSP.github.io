@@ -53,8 +53,8 @@ class Vehicle {
             // Insert into vehicles table
             $vehicleQuery = "INSERT INTO vehicles 
                 (sellerID, Make, Model, Year, FuelType, cateogory, Transmission, Engine, Seats, veh_condition, 
-                width, length, height, description, price) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                width, length, height, description, price, status) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending')";
             $vehicleStmt = $this->conn->prepare($vehicleQuery);
             if (!$vehicleStmt) throw new Exception("Vehicle prepare failed: " . $this->conn->error);
 
@@ -535,6 +535,70 @@ class Vehicle {
                 // Continue with other files even if one fails
             }
         }
+    }
+
+    public function getPendingVehiclesWithDetails() {
+        $query = "SELECT 
+                    v.*,
+                    u.id as seller_id,
+                    u.firstName as seller_first_name,
+                    u.lastName as seller_last_name,
+                    u.email as seller_email,
+                    u.role as seller_role,
+                    u.image_path as seller_image,
+                    GROUP_CONCAT(vi.image_path) as vehicle_images,
+                    GROUP_CONCAT(vi.is_main) as image_main_flags
+                FROM vehicles v
+                JOIN users u ON v.sellerID = u.id
+                LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id
+                WHERE v.status = 'pending'
+                GROUP BY v.VehicleID";
+
+        $result = $this->conn->query($query);
+        
+        if (!$result) {
+            error_log("Database error: " . $this->conn->error);
+            return [];
+        }
+
+        $vehicles = [];
+        while ($row = $result->fetch_assoc()) {
+            // Process vehicle images
+            $imagePaths = $row['vehicle_images'] ? explode(',', $row['vehicle_images']) : [];
+            $imageFlags = $row['image_main_flags'] ? explode(',', $row['image_main_flags']) : [];
+            $images = [];
+            
+            foreach ($imagePaths as $index => $path) {
+                $images[] = [
+                    'path' => $path,
+                    'is_main' => isset($imageFlags[$index]) ? (bool)$imageFlags[$index] : false
+                ];
+            }
+
+            // Structure the response
+            $vehicles[] = [
+                'vehicle' => [
+                    'id' => $row['VehicleID'],
+                    'make' => $row['Make'],
+                    'model' => $row['Model'],
+                    'year' => $row['Year'],
+                    'price' => $row['price'],
+                    'status' => $row['status'],
+                    // Include other vehicle fields as needed
+                ],
+                'seller' => [
+                    'id' => $row['seller_id'],
+                    'firstName' => $row['seller_first_name'],
+                    'lastName' => $row['seller_last_name'],
+                    'email' => $row['seller_email'],
+                    'role' => $row['seller_role'],
+                    'image' => $row['seller_image']
+                ],
+                'images' => $images
+            ];
+        }
+
+        return $vehicles;
     }
 
 
