@@ -610,7 +610,7 @@ class Vehicle {
         try {
             if ($approve) {
                 // APPROVE - Update status to 'approved'
-                $stmt = $this->conn->prepare("UPDATE vehicles SET status = 'approved' WHERE VehicleID = ?");
+                $stmt = $this->conn->prepare("UPDATE vehicles SET status = 'approve' WHERE VehicleID = ?");
                 if (!$stmt) throw new Exception("Prepare failed for approval: " . $this->conn->error);
                 
                 $stmt->bind_param("i", $vehicleID);
@@ -634,7 +634,7 @@ class Vehicle {
                 }
 
                 // 2. Delete from vehicle_images table
-                $deleteImagesStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
+                $deleteImagesStmt = $this->conn->prepare("DELETE FROM vehicle_image WHERE vehicle_id = ?");
                 if ($deleteImagesStmt) {
                     $deleteImagesStmt->bind_param("i", $vehicleID);
                     $deleteImagesStmt->execute();
