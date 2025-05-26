@@ -62,11 +62,13 @@
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2  bg-gray-800 rounded">Home</a>
-                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 hover:bg-gray-700 rounded">Add Products</a>
-                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
-                    Products</a>
-                <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assignment/" class="block px-4 py-2  bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/About" class="block px-4 py-2 hover:bg-gray-700 rounded">About us</a>
+                <a href="/Assignment/Listing" class="block px-4 py-2 hover:bg-gray-700 rounded">Listings</a>
+                <a href="/Assignment/Cart" class="block px-4 py-2 hover:bg-gray-700 rounded">Cart</a>
+                <a href="/Assignment/Favourites" class="block px-4 py-2 hover:bg-gray-700 rounded">Favourites</a>
+                <a href="/Assignment/Login" class="block px-4 py-2 hover:bg-gray-700 rounded">Login</a>
+                <a href="/Assignment/Register" class="block px-4 py-2 hover:bg-gray-700 rounded">Register</a>
                 <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>

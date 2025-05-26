@@ -68,7 +68,7 @@ class BuyerController{
          $result =$this->buyer->completeBuyerOrders($buyerID);
 
          if ($result){
-            header("Location:/Assignment/Checkout");
+            header("Location:/Assignment/Listing");
          }else{
             echo "<script>alert('failed to complete the order')</script>";
          }
