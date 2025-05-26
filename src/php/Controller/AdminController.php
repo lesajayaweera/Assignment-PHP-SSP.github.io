@@ -16,8 +16,8 @@ class AdminController{
         return $this->admin->getNonAdminUsers();
     }
 
-    public function deleteAccounts($id, $location){
-        $result = $this->admin->deleteNonAdminUsers($id);
+    public function deleteAccounts($id,$role,$location){
+        $result = $this->admin->DeleteUSer($id,$role);
 
         if($result){
             echo "<script>alert('user deleted successfully!');</script>";

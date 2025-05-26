@@ -10,7 +10,9 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 $admin = new AdminController;
 $users=$admin->LoadAllUsers();
 
-
+echo "<pre>";
+print_r($users);
+echo "<pre>";
 
 ?>
 
@@ -95,7 +97,7 @@ $users=$admin->LoadAllUsers();
                     
 
                     <div class="mt-6 flex justify-center space-x-3">
-                        <a href="/Assignment/Admin/DeleteAccount?uid=<?= htmlspecialchars($u['id']) ?>">
+                        <a href="/Assignment/Admin/DeleteAccount?uid=<?= htmlspecialchars($u['id']) ?>&role=<?= htmlspecialchars($u['role']) ?>">
                             <button
                                 class="rounded-xl bg-red-600 px-4 py-2 text-white text-sm font-medium hover:bg-red-700 w-full transition">Delete
                                 Account</button>

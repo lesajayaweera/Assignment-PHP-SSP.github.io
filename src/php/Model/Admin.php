@@ -292,4 +292,107 @@ class Admin {
         }
     }
 
+
+    public function DeleteUSer($userID, $userRole) {
+        $this->conn->begin_transaction();
+        
+        try {
+            // Common deletions for all users
+            $tablesToDeleteFrom = [];
+            
+            if ($userRole === 'buyer') {
+                // Buyer-specific deletions
+                $tablesToDeleteFrom = [
+                    'favourites' => 'buyerID',
+                    'negotiations' => 'buyerID',
+                    'billing' => 'buyerID',
+                    'orders' => 'buyerID'
+                ];
+            } elseif ($userRole === 'seller') {
+                // Seller-specific deletions
+                $tablesToDeleteFrom = [
+                     // Assuming sellerID exists in negotiations
+                    'orders' => 'sellerID'
+                ];
+                
+                // First get all vehicles by this seller to delete their images and locations
+                $vehicleIDs = [];
+                $getVehiclesStmt = $this->conn->prepare("SELECT VehicleID FROM vehicles WHERE sellerID = ?");
+                $getVehiclesStmt->bind_param("i", $userID);
+                $getVehiclesStmt->execute();
+                $result = $getVehiclesStmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $vehicleIDs[] = $row['VehicleID'];
+                }
+                $getVehiclesStmt->close();
+                
+                // Delete vehicle images and locations for each vehicle
+                foreach ($vehicleIDs as $vehicleID) {
+                    // Get image paths for physical file deletion
+                    $imagePaths = [];
+                    $getImagesStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
+                    $getImagesStmt->bind_param("i", $vehicleID);
+                    $getImagesStmt->execute();
+                    $imageResult = $getImagesStmt->get_result();
+                    while ($imageRow = $imageResult->fetch_assoc()) {
+                        $imagePaths[] = $imageRow['image_path'];
+                    }
+                    $getImagesStmt->close();
+                    
+                    // Delete from vehicle_images
+                    $deleteImagesStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
+                    $deleteImagesStmt->bind_param("i", $vehicleID);
+                    $deleteImagesStmt->execute();
+                    $deleteImagesStmt->close();
+                    
+                    // Delete from locations
+                    $deleteLocationStmt = $this->conn->prepare("DELETE FROM locations WHERE VehicleID = ?");
+                    $deleteLocationStmt->bind_param("i", $vehicleID);
+                    $deleteLocationStmt->execute();
+                    $deleteLocationStmt->close();
+                    
+                    // Delete physical image files
+                    foreach ($imagePaths as $imagePath) {
+                        $filePath = str_replace('/Assignment/uploads/', './uploads/', $imagePath);
+                        if (file_exists($filePath)) {
+                            @unlink($filePath);
+                        }
+                    }
+                }
+                
+                // Finally delete the vehicles themselves
+                $deleteVehiclesStmt = $this->conn->prepare("DELETE FROM vehicles WHERE sellerID = ?");
+                $deleteVehiclesStmt->bind_param("i", $userID);
+                $deleteVehiclesStmt->execute();
+                $deleteVehiclesStmt->close();
+            }
+            
+            // Delete from all relevant tables
+            foreach ($tablesToDeleteFrom as $table => $column) {
+                $deleteStmt = $this->conn->prepare("DELETE FROM $table WHERE $column = ?");
+                $deleteStmt->bind_param("i", $userID);
+                $deleteStmt->execute();
+                $deleteStmt->close();
+            }
+            
+            // Finally delete the user
+            $deleteUserStmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
+            $deleteUserStmt->bind_param("i", $userID);
+            $deleteUserStmt->execute();
+            
+            if ($deleteUserStmt->affected_rows === 0) {
+                throw new Exception("No user found with ID: $userID");
+            }
+            $deleteUserStmt->close();
+            
+            $this->conn->commit();
+            return true;
+            
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            error_log("User deletion failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }

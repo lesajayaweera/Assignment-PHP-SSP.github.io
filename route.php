@@ -50,6 +50,7 @@ $links = array(
     "Assignment/Admin/Account/Edit"=> "./src/pages/Admin/EditUserAccount.php",
     "Assignment/Admin/Accept"=> "./src/pages/Admin/AcceptListing.php",
     "Assignment/Admin/Reject"=> "./src/pages/Admin/RejectListing.php",
+    "Assignment/Admin/DeleteAccount"=> "./src/pages/Admin/DeleteAccounts.php",
 
 
 
