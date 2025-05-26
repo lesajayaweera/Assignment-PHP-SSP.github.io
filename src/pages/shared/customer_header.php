@@ -17,7 +17,7 @@
     <!-- Logo -->
     <div>
       <p class="text-4xl font-bold font-family-body">luxCars</p>
-      <p class="text-sm font-family-montserrat">A luxury-driven, high-performance</p>
+      <p class="text-sm hidden lg:block font-family-montserrat">A luxury-driven, high-performance</p>
     </div>
 
     <!-- Desktop Nav -->
@@ -50,29 +50,39 @@
       <?php endif; ?>
 
       <a href="<?php echo (isset($_SESSION['role']) && $_SESSION['role'] === 'buyer') ? '/Assignment/Customer/Account/Edit' : '/Assignment/Login'; ?>">
-        <img src="<?php echo isset($_SESSION['email']) ? isset($_SESSION['image']) ? $_SESSION['image']:'https://i.pravatar.cc/150?img=4' :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-10 h-10' : 'w-8 h-8'?>" alt="Account">
+        <img src="<?php echo isset($_SESSION['email']) ? isset($_SESSION['image']) ? $_SESSION['image']:'https://i.pravatar.cc/150?img=4' :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-16 ' : 'w-8 h-8'?>" alt="Account">
       </a>
     </div>
   </div>
 
   <!-- Mobile Nav -->
-  <nav class="md:hidden mt-4 hidden" id="mobile-menu">
-    <ul class="flex flex-col space-y-2 text-lg font-family-montserrat">
-      <li><a href="/Assignment/" class="hover:text-gray-400 block">Home</a></li>
-      <li><a href="/Assignment/About" class="hover:text-gray-400 block">About</a></li>
-      <li><a href="/Assignment/Service" class="hover:text-gray-400 block">Services</a></li>
-      <li><a href="/Assignment/ContactUs" class="hover:text-gray-400 block">Contact</a></li>
-      <li><a href="/Assignment/Listing" class="hover:text-gray-400 block">Listing</a></li>
-    </ul>
-  </nav>
+   <div id="mobileSidebar"
+        class="fixed inset-0 z-40 bg-black text-white w-full  transform -translate-x-full transition-transform duration-300 lg:hidden font-sans h-screen bg-black">
+        <div class="p-6 space-y-4">
+            <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
+            <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
+            <nav class="space-y-3">
+                <a href="/Assignment/Seller/Dashboard" class="block px-4 py-2  bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Seller/AddCar" class="block px-4 py-2 hover:bg-gray-700 rounded">Add Products</a>
+                <a href="/Assignment/Seller/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Seller/Negotiations" class="block px-4 py-2 hover:bg-gray-700 rounded">Deals</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+            </nav>
+        </div>
+    </div>
+  
 </header>
 
 <script>
   // Toggle mobile nav
+  
   const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
 
-  hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
+  function toggleSidebar() {
+    const sidebar = document.getElementById("mobileSidebar");
+    sidebar.classList.toggle("-translate-x-full");
+  }
+
+  hamburger.addEventListener('click', toggleSidebar);
 </script>

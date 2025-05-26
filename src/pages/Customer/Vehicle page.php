@@ -198,8 +198,7 @@ $script = "vehicle";
                         </button>
                     </a>
 
-                    </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>"
-                    class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
+                    
                 </div>
         </div>
     </div>
