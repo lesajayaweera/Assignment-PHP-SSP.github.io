@@ -34,7 +34,15 @@ class UserController{
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
             }else if ($role =="buyer"){
+                $buyer = new BuyerController();
+
+                $image =$buyer->GetBuyerDetails($email)['image_path'];
+                 $id =$buyer->GetBuyerDetails($email)['id'];
+                 
+                $_SESSION['image'] = $image;
+                $_SESSION['buyerID'] = $id;
                 header("Location:/Assignment/Listing");
+                 
                 exit;
             }
         } else {
@@ -78,6 +86,7 @@ class UserController{
                 $_SESSION['seller_id'] =$user_data['id'];
 
                 header("Location:/Assignment/Seller/Dashboard");
+                
                 exit;
 
             }else if ($user_data['role'] =="buyer"){

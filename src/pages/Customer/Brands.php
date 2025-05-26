@@ -15,9 +15,9 @@ session_start();
 $brand = new BrandController();
 
 $brandId = null;
-$brandName = null; // Initialize to null
-$brandDescription = null; // Initialize to null
-$errorMessage = ""; // Initialize to an empty string
+$brandName = null; 
+$brandDescription = null; 
+$errorMessage = ""; 
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
   $result =$brand->DisplayByID($_GET['id']); 

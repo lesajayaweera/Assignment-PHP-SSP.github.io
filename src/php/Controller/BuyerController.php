@@ -74,4 +74,28 @@ class BuyerController{
          }
     }
 
+    public function Addtofavourites($vehicleID, $buyerID){
+       $result= $this->buyer->addToFavorites($vehicleID, $buyerID);
+       if($result){
+        echo "<script>alert('Add to Favourites')</script>";
+        header("Location:/Assignment/Favourites");
+        exit;
+       }else{
+            echo "<script>alert('failed to Add to Favourites')</script>";
+       }
+    }
+
+    public function moveFavoriteTocart($fav_id){
+        $result =$this->buyer->moveFavoriteTocart($fav_id);
+        if($result['success']){
+            echo "<script>alert('moved to the cart');</script>";
+        }
+    }
+    public function removeFavorite($fav_id){
+        $result =$this->buyer->removeFavorite($fav_id);
+        if($result['success']){
+            echo "<script>alert('moved to the cart');</script>";
+        }
+    }
+
 }

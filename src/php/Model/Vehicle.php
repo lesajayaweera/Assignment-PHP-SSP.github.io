@@ -390,18 +390,16 @@ class Vehicle {
             $vehicle['location'] = $location;
 
             // Step 4: Get seller details
-            $sellerQuery = "
-            SELECT 
-                u.id AS user_id,
-                u.firstName,
-                u.lastName,
-                u.email,
-                u.image_path,
-                s.Description
-                FROM seller s
-                JOIN users u ON s.userID = u.id
-                WHERE s.userID = ?
-            ";
+           $sellerQuery = "
+                    SELECT 
+                        u.id AS user_id,
+                        u.firstName,
+                        u.lastName,
+                        u.email,
+                        u.image_path
+                    FROM users u
+                    WHERE u.id = ? AND u.role = 'seller'
+                ";
 
             $sellerStmt = $this->conn->prepare($sellerQuery);
             
@@ -677,8 +675,76 @@ class Vehicle {
             return false;
         }
     }
+    public function getFavoritesWithMainImage($buyerID) {
+        $query = "
+            SELECT 
+                f.id AS favorite_id,
+                f.createdAt AS favorited_date,
+                v.VehicleID,
+                v.Make,
+                v.Model,
+                v.Year,
+                v.price,
+                v.status,
+                v.description,
+                vi.image_path AS main_image,
+                u.id AS seller_id,
+                u.firstName AS seller_firstName,
+                u.lastName AS seller_lastName,
+                u.image_path AS seller_image
+            FROM favourites f
+            JOIN vehicles v ON f.vehicleID = v.VehicleID
+            LEFT JOIN vehicle_images vi ON v.VehicleID = vi.vehicle_id AND vi.is_main = 1
+            JOIN users u ON v.sellerID = u.id
+            WHERE f.buyerID = ? AND v.status = 'approve'
+            ORDER BY f.createdAt DESC
+        ";
 
-    
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("i", $buyerID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            $favorites = [];
+            while ($row = $result->fetch_assoc()) {
+                $favorites[] = [
+                    'favorite_id' => $row['favorite_id'],
+                    'favorited_date' => $row['favorited_date'],
+                    'vehicle' => [
+                        'id' => $row['VehicleID'],
+                        'make' => $row['Make'],
+                        'model' => $row['Model'],
+                        'year' => $row['Year'],
+                        'price' => $row['price'],
+                        'status' => $row['status'],
+                        'description' => $row['description'],
+                        'main_image' => $row['main_image'] ?? null
+                    ],
+                    'seller' => [
+                        'id' => $row['seller_id'],
+                        'firstName' => $row['seller_firstName'],
+                        'lastName' => $row['seller_lastName'],
+                        'image' => $row['seller_image']
+                    ]
+                ];
+            }
+            
+            return [
+                'success' => true,
+                'data' => $favorites
+            ];
+            
+        } catch (Exception $e) {
+            error_log("Error fetching favorites: " . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Failed to load favorite items'
+            ];
+        }
+    }
+
+        
 
 
 

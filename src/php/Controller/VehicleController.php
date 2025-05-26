@@ -75,4 +75,7 @@ class VehicleController{
     public function UpdateTheVehicleStatus($id,$approve){
         return $this->vehicle->UpdateVehicleStatus($id,$approve);
     }
+    public function getFavoritesWithMainImage($buyerID){
+        return $this->vehicle->getFavoritesWithMainImage($buyerID);
+    }
 }

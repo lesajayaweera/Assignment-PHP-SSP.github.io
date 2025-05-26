@@ -27,9 +27,7 @@ if($_SERVER['REQUEST_METHOD']==="GET"){
   $vehicleData = $vehicle->Load_everything_by_Id($id);
 
 
-    //   echo "<pre>";
-    //   print_r($vehicleData);
-    //   echo "<pre>";
+$_SESSION['vId'] =$vehicleData['VehicleID']; 
 
     $mainImage = null;
     foreach ($vehicleData['images'] as $img) {
@@ -134,7 +132,8 @@ $script = "vehicle";
             <!-- Dealer Info -->
             <div class="border rounded-lg p-4 space-y-4">
                 <div class="flex items-center space-x-4">
-                    <img title="images" src="<?php echo htmlspecialchars($vehicleData['seller']['image_path']) ?? '' ?>"
+                    <img title="images"
+                        src="<?php echo isset($vehicleData['seller']['image_path']) ? $vehicleData['seller']['image_path']: 'https://i.pravatar.cc/150?img=4' ?>"
                         class="w-10 object-contain  rounded-full">
                     <div>
                         <p class="font-medium">
@@ -144,19 +143,25 @@ $script = "vehicle";
                 </div>
                 <p class="text-sm">📞<?php echo htmlspecialchars($vehicleData['seller']['email']);?></p>
                 <div class="space-y-2">
-                    <!-- <button
-                        class=" w-full bg-black text-white py-2 rounded-md hover:bg-slate-900  duration-300 ease-in-out"
-                        id="buyBtn">Buy
-                        Now</button> -->
-                    <button
-                        class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out"
-                        id="wishBtn">WishList</button>
+                    
+                    <button class=" w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700  duration-300 ease-in-out" id="wishBtn"><a href="/Assignment/ADDFavourites">WishList</a></button>
+                    
+                    
+                    
+
                     <form method="post">
                         <button type="button"
-                            class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out"
-                            id="negotiate" <?php if (!isset($_SESSION['email'])&&(($_SESSION['role']==='admin') ||($_SESSION['role']==='seller'))): ?>
-                            onclick="alert('Need to Logged in or Register!'); window.location.href='/Assignment/Login';"
-                            <?php endif; ?>>Negotiate</button>
+                            class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 duration-300 ease-in-out"
+                            id="negotiate" <?php 
+                            if (
+                                !isset($_SESSION['email']) &&
+                                isset($_SESSION['role']) &&
+                                ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'seller')
+                            ): ?>
+                            onclick="alert('Need to be logged in or register!'); window.location.href='/Assignment/Login';"
+                            <?php endif; ?>>Negotiate
+                        </button>
+
                         <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
                             <div class="flex w-full space-x-2">
 
@@ -165,7 +170,12 @@ $script = "vehicle";
                                     min="<?php echo ((int)($vehicleData['price']) *0.9) ?>"
                                     max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
                                 <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
-                                <input type="hidden" name="buyerID" value="<?php echo ($_SESSION['role'] !=="admin" && $_SESSION['role'] !=="seller" )? $_SESSION['buyerID']:''; ?>">
+                                <input type="hidden" name="buyerID" value="<?php 
+                                    echo  
+                                        isset($_SESSION['buyerID']) ? $_SESSION['buyerID'] :''
+                                        ; 
+                                ?>">
+
                                 <input type="hidden" name="status" value="pending">
 
                             </div>
@@ -180,8 +190,7 @@ $script = "vehicle";
                         </div>
 
                     </form>
-                    <a
-                        href="/Assignment/Customer/AddCart?id=<?php echo $id; ?>">
+                    <a href="/Assignment/Customer/AddCart?id=<?php echo $id; ?>">
                         <button type="button"
                             class="w-full border py-2 rounded-md hover:bg-slate-400 hover:text-white duration-300 ease-in-out"
                             id="cartBtn">
@@ -189,9 +198,9 @@ $script = "vehicle";
                         </button>
                     </a>
 
-                </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>"
+                    </div><a href="/Assignment/Seller?sellerid=<?php echo $vehicleData['seller']['user_id'] ;?>"
                     class="block text-sm text-blue-600 hover:underline text-center">View All stock at this dealer →</a>
-            </div>
+                </div>
         </div>
     </div>
 

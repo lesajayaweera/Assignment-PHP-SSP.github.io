@@ -293,7 +293,7 @@ class Buyer {
 
     // function to get the total of the cart
     public function getCompleteCartSummary($buyerID) {
-        // Validate input
+        
         if (!is_numeric($buyerID) || $buyerID <= 0) {
             throw new InvalidArgumentException("Invalid Buyer ID: Must be a positive integer");
         }
@@ -301,7 +301,7 @@ class Buyer {
         $this->conn->begin_transaction();
         
         try {
-            // 1. Get cart total and item count (only pending orders)
+            
             $summaryQuery = "
                 SELECT 
                     COUNT(c.id) AS item_count,
@@ -337,7 +337,7 @@ class Buyer {
             $summary = $result->fetch_assoc();
             $stmt->close();
 
-            // 2. Get detailed cart items (only pending orders)
+            
             $itemsQuery = "
                 SELECT 
                     c.id AS order_id,
@@ -426,12 +426,11 @@ class Buyer {
     
  
     public function completeBuyerOrders($buyerID) {
-        // Validate input
+       
         if (!is_numeric($buyerID) || $buyerID <= 0) {
             throw new InvalidArgumentException("Invalid Buyer ID: Must be a positive integer");
         }
 
-        // Prepare the update statement
         $query = "
             UPDATE orders 
             SET status = 'completed'
@@ -457,4 +456,138 @@ class Buyer {
         
         return $affectedRows;
     }
+
+ 
+    public function addToFavorites($vehicleID, $buyerID) {
+    
+        if (!is_numeric($vehicleID) || $vehicleID <= 0) {
+            return ['success' => false, 'message' => 'Invalid vehicle ID'];
+        }
+        
+        if (!is_numeric($buyerID) || $buyerID <= 0) {
+            return ['success' => false, 'message' => 'Invalid buyer ID'];
+        }
+
+        try {
+      
+            $checkStmt = $this->conn->prepare("SELECT id FROM favourites WHERE vehicleID = ? AND buyerID = ?");
+            $checkStmt->bind_param("ii", $vehicleID, $buyerID);
+            $checkStmt->execute();
+            
+            if ($checkStmt->get_result()->num_rows > 0) {
+                return ['success' => false, 'message' => 'Vehicle already in favorites'];
+            }
+
+
+            $insertStmt = $this->conn->prepare("INSERT INTO favourites (vehicleID, buyerID) VALUES (?, ?)");
+            $insertStmt->bind_param("ii", $vehicleID, $buyerID);
+            
+            if ($insertStmt->execute()) {
+                return ['success' => true, 'message' => 'Added to favorites successfully'];
+            } else {
+                return ['success' => false, 'message' => 'Failed to add to favorites'];
+            }
+        } catch (Exception $e) {
+            error_log("Error adding to favorites: " . $e->getMessage());
+            return ['success' => false, 'message' => 'Database error'];
+        }
+    }
+   
+    public function moveFavoriteTocart($favoriteID) {
+        $this->conn->begin_transaction();
+        
+        try {
+       
+            $getFavoriteStmt = $this->conn->prepare("
+                SELECT f.vehicleID, f.buyerID, v.sellerID, v.price 
+                FROM favourites f
+                JOIN vehicles v ON f.vehicleID = v.VehicleID
+                WHERE f.id = ?
+            ");
+            $getFavoriteStmt->bind_param("i", $favoriteID);
+            $getFavoriteStmt->execute();
+            $favoriteData = $getFavoriteStmt->get_result()->fetch_assoc();
+            $getFavoriteStmt->close();
+            
+            if (!$favoriteData) {
+                throw new Exception("Favorite item not found");
+            }
+
+       
+            $addOrderStmt = $this->conn->prepare("
+                INSERT INTO orders 
+                (vehicleID, buyerID, sellerID, price, status) 
+                VALUES (?, ?, ?, ?, 'pending')
+            ");
+            $addOrderStmt->bind_param(
+                "iiii", 
+                $favoriteData['vehicleID'],
+                $favoriteData['buyerID'],
+                $favoriteData['sellerID'],
+                $favoriteData['price']
+            );
+            
+            if (!$addOrderStmt->execute()) {
+                throw new Exception("Failed to create order");
+            }
+            $addOrderStmt->close();
+
+           
+            $removeFavoriteStmt = $this->conn->prepare("
+                DELETE FROM favourites WHERE id = ?
+            ");
+            $removeFavoriteStmt->bind_param("i", $favoriteID);
+            
+            if (!$removeFavoriteStmt->execute()) {
+                throw new Exception("Failed to remove favorite");
+            }
+            $removeFavoriteStmt->close();
+
+            $this->conn->commit();
+            return [
+                'success' => true,
+                'message' => 'Item moved to orders successfully'
+            ];
+
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            return [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function removeFavorite($favoriteID) {
+        try {
+            
+            $stmt = $this->conn->prepare("DELETE FROM favourites WHERE id = ?");
+            $stmt->bind_param("i", $favoriteID);
+            
+          
+            if ($stmt->execute()) {
+             
+                if ($stmt->affected_rows > 0) {
+                    return [
+                        'success' => true,
+                        'message' => 'Item removed from favorites successfully'
+                    ];
+                } else {
+                    return [
+                        'success' => false,
+                        'message' => 'No favorite item found with that ID'
+                    ];
+                }
+            } else {
+                throw new Exception("Database error during deletion");
+            }
+        } catch (Exception $e) {
+            error_log("Error removing favorite: " . $e->getMessage());
+            return [
+                'success' => false,
+                'message' => 'Failed to remove item from favorites'
+            ];
+        }
+    }
+
 }

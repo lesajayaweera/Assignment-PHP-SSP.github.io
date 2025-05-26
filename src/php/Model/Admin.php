@@ -312,10 +312,11 @@ class Admin {
                 // Seller-specific deletions
                 $tablesToDeleteFrom = [
                      // Assuming sellerID exists in negotiations
-                    'orders' => 'sellerID'
+                    'orders' => 'sellerID',
+                    'seller'=>'userID'
                 ];
                 
-                // First get all vehicles by this seller to delete their images and locations
+                
                 $vehicleIDs = [];
                 $getVehiclesStmt = $this->conn->prepare("SELECT VehicleID FROM vehicles WHERE sellerID = ?");
                 $getVehiclesStmt->bind_param("i", $userID);
@@ -326,9 +327,9 @@ class Admin {
                 }
                 $getVehiclesStmt->close();
                 
-                // Delete vehicle images and locations for each vehicle
+               
                 foreach ($vehicleIDs as $vehicleID) {
-                    // Get image paths for physical file deletion
+                
                     $imagePaths = [];
                     $getImagesStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
                     $getImagesStmt->bind_param("i", $vehicleID);
@@ -339,19 +340,19 @@ class Admin {
                     }
                     $getImagesStmt->close();
                     
-                    // Delete from vehicle_images
+                    
                     $deleteImagesStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
                     $deleteImagesStmt->bind_param("i", $vehicleID);
                     $deleteImagesStmt->execute();
                     $deleteImagesStmt->close();
                     
-                    // Delete from locations
+                   
                     $deleteLocationStmt = $this->conn->prepare("DELETE FROM locations WHERE VehicleID = ?");
                     $deleteLocationStmt->bind_param("i", $vehicleID);
                     $deleteLocationStmt->execute();
                     $deleteLocationStmt->close();
                     
-                    // Delete physical image files
+                   
                     foreach ($imagePaths as $imagePath) {
                         $filePath = str_replace('/Assignment/uploads/', './uploads/', $imagePath);
                         if (file_exists($filePath)) {
@@ -360,14 +361,14 @@ class Admin {
                     }
                 }
                 
-                // Finally delete the vehicles themselves
+
                 $deleteVehiclesStmt = $this->conn->prepare("DELETE FROM vehicles WHERE sellerID = ?");
                 $deleteVehiclesStmt->bind_param("i", $userID);
                 $deleteVehiclesStmt->execute();
                 $deleteVehiclesStmt->close();
             }
             
-            // Delete from all relevant tables
+            
             foreach ($tablesToDeleteFrom as $table => $column) {
                 $deleteStmt = $this->conn->prepare("DELETE FROM $table WHERE $column = ?");
                 $deleteStmt->bind_param("i", $userID);
@@ -375,7 +376,7 @@ class Admin {
                 $deleteStmt->close();
             }
             
-            // Finally delete the user
+            
             $deleteUserStmt = $this->conn->prepare("DELETE FROM users WHERE id = ?");
             $deleteUserStmt->bind_param("i", $userID);
             $deleteUserStmt->execute();

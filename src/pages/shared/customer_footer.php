@@ -16,10 +16,10 @@
                 <div>
                 <h3 class="font-semibold mb-3 text-center">Company</h3>
                 <ul class="space-y-2">
-                    <li><a href="#" class="hover:underline">About Us</a></li>
-                    <li><a href="#" class="hover:underline">Blog</a></li>
-                    <li><a href="#" class="hover:underline">Services</a></li>
-                    <li><a href="#" class="hover:underline">FAQs</a></li>
+                    <li><a href="/Assignment/" class="hover:underline">About Us</a></li>
+                    <li><a href="/Assignment/Login" class="hover:underline">Blog</a></li>
+                    <li><a href="/Assignment/Register" class="hover:underline">Services</a></li>
+                    <li><a href="/Assignment/Listing" class="hover:underline">FAQs</a></li>
                     <li><a href="#" class="hover:underline">Terms</a></li>
                     <li><a href="#" class="hover:underline">Contact Us</a></li>
                 </ul>
