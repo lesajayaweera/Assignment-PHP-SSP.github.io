@@ -232,7 +232,7 @@ class Seller{
             WHERE 
                 v.sellerID = (SELECT sellerID FROM vehicles WHERE VehicleID = ?)
                 AND v.VehicleID != ?
-                AND v.VehicleID NOT IN (SELECT vehicleID FROM orders)
+                AND v.VehicleID NOT IN (SELECT vehicleID FROM orders) AND v.status= 'approve'
             ORDER BY 
                 v.CreatedAt DESC
         ";

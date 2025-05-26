@@ -40,7 +40,7 @@
         <span class="block w-full h-0.5 bg-white"></span>
       </button>
 
-      <?php if(isset($_SESSION['email'])): ?>
+      <?php if(isset($_SESSION['email'])&& $_SESSION['role']==='buyer'): ?>
         <a href="/Assignment/Cart">
           <img src="/Assignment/assets/icons/cart.svg" class="w-6 h-6" alt="Cart">
         </a>
@@ -50,7 +50,7 @@
       <?php endif; ?>
 
       <a href="<?php echo (isset($_SESSION['role']) && $_SESSION['role'] === 'buyer') ? '/Assignment/Customer/Account/Edit' : '/Assignment/Login'; ?>">
-        <img src="<?php echo isset($_SESSION['email']) ? $_SESSION['image'] :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-10 h-10' : 'w-8 h-8'?>" alt="Account">
+        <img src="<?php echo isset($_SESSION['email']) ? isset($_SESSION['image']) ? $_SESSION['image']:'https://i.pravatar.cc/150?img=4' :'/Assignment/assets/icons/account.svg' ?>" class="<?php echo isset($_SESSION['email']) ?'rounded-full w-10 h-10' : 'w-8 h-8'?>" alt="Account">
       </a>
     </div>
   </div>

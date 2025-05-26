@@ -169,7 +169,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                             <td class="px-4 py-3 flex items-center space-x-2">
                                 <img title="image" src="<?= $car['images'][0]['path'] ?>"
                                     class="w-20 object-cover rounded" />
-                                <span><?= $car['vehicle']['model'] ?> <?= $car['vehicle']['make'] ?></span>
+                                <span><?= $car['vehicle']['make'] ?> <?= $car['vehicle']['model'] ?> </span>
                             </td>
                             <td class="px-4 py-3"><?= $car['seller']['firstName'] ?> <?= $car['seller']['lastName'] ?></td>
                             <td class="px-4 py-3"><?= $car['vehicle']['year'] ?></td>

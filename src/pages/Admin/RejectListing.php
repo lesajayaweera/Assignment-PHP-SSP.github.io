@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD']==="GET"){
         echo "<script>alert('Approved');</script>";
     }
 
-    header("Location:Assignment/Admin/ManageListing");
+    header("Location:/Assignment/Admin/ManageListings");
 
     
 }

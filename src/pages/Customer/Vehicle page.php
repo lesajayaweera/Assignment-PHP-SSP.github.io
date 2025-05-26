@@ -154,7 +154,7 @@ $script = "vehicle";
                     <form method="post">
                         <button type="button"
                             class=" w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700  duration-300 ease-in-out"
-                            id="negotiate" <?php if (!isset($_SESSION['email'])): ?>
+                            id="negotiate" <?php if (!isset($_SESSION['email'])&&(($_SESSION['role']==='admin') ||($_SESSION['role']==='seller'))): ?>
                             onclick="alert('Need to Logged in or Register!'); window.location.href='/Assignment/Login';"
                             <?php endif; ?>>Negotiate</button>
                         <div class="flex flex-wrap w-full space-y-6" id="hiddenContainer">
@@ -165,7 +165,7 @@ $script = "vehicle";
                                     min="<?php echo ((int)($vehicleData['price']) *0.9) ?>"
                                     max="<?php echo ((int)($vehicleData['price']) *1.1) ?>" step="10000">
                                 <input type="hidden" name="vehicleID" value="<?php echo $id; ?>">
-                                <input type="hidden" name="buyerID" value="<?php echo $_SESSION['buyerID']; ?>">
+                                <input type="hidden" name="buyerID" value="<?php echo ($_SESSION['role'] !=="admin" && $_SESSION['role'] !=="seller" )? $_SESSION['buyerID']:''; ?>">
                                 <input type="hidden" name="status" value="pending">
 
                             </div>
