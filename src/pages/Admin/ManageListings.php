@@ -1,6 +1,15 @@
 <?php 
 session_start();
 
+require_once("./src/php/Controller/VehicleController.php");
+
+$controller = new VehicleController();
+$data=$controller->Get_pending_listing();
+
+// echo "<pre>";
+// print_r($data);
+// echo "<pre>";
+
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header("Location: /Assignment/Login");
     exit;
@@ -74,35 +83,41 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100">
                 <!-- Card -->
+                 <?php foreach($data as $car) :?>
                 <div class="max-w-xs bg-white rounded-xl shadow-md p-6 text-center space-y-4 font-sans">
                     <!-- Title -->
-                    <h3 class="text-lg font-semibold text-gray-900">Porshe 718 Cayman S</h3>
-                    <p class="text-sm text-gray-500">Coupe</p>
+                    <h3 class="text-lg font-semibold text-gray-900"><?= $car['vehicle']['make'] ?> <?= $car['vehicle']['model'] ?>(<?= $car['vehicle']['year'] ?>) </h3>
+                    <p class="text-sm text-gray-500"><?= ucfirst($car['vehicle']['cateogory']) ?></p>
 
                     <!-- Car Image -->
-                    <img src="/Assignment/assets/images/products/porsche_911.png" alt="Car"
-                        class="w-full h-40 object-contain mx-auto" />
+                    <img src="<?= $car['images'][0]['path'] ?>" alt="Car"
+                        class="w-full  object-cover mx-auto" />
 
                     <!-- Features -->
                     <div class="flex justify-center items-center gap-6 text-gray-600">
                         <div class="flex items-center gap-1">
                             <img src="/Assignment/assets/icons/fuel.png" class="w-[30px] object-contain" alt="">
-                            <span class="text-sm">4</span>
+                            <span class="text-sm"><?= $car['vehicle']['fueltype'] ?></span>
                         </div>
                         <div class="flex items-center gap-1">
                             <img src="/Assignment/assets/icons/transmission.png" class="w-[30px] object-contain" alt="">
-                            <span class="text-sm">Manual</span>
+                            <span class="text-sm"><?= $car['vehicle']['transmission'] ?></span>
                         </div>
                     </div>
 
                     <!-- Buttons -->
                     <div class="flex justify-between gap-4">
-                        <button
-                            class="bg-green-500 text-white px-4 py-2 rounded-md w-full hover:bg-green-600 transition">Approve</button>
-                        <button
-                            class="bg-red-500 text-white px-4 py-2 rounded-md w-full hover:bg-red-600 transition">Reject</button>
+                        <a href="/Assignment/Admin/Accept?id=<?= $car['vehicle']['id'] ?>">
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-md w-full hover:bg-green-600 transition">Approve</button>
+                        </a>
+                        
+                        <a href="/Assignment/Admin/Reject?id=<?= $car['vehicle']['id'] ?>">
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-md w-full hover:bg-red-600 transition">Reject</button>
+                        </a>
+                        
                     </div>
                 </div>
+                <?php endforeach;?>
 
 
 

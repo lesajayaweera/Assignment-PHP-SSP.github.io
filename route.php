@@ -48,6 +48,8 @@ $links = array(
     "Assignment/Admin/ViewProducts"=> "./src/pages/Admin/ViewProductDetails.php",
     "Assignment/Admin/ManageListings"=> "./src/pages/Admin/ManageListings.php",
     "Assignment/Admin/Account/Edit"=> "./src/pages/Admin/EditUserAccount.php",
+    "Assignment/Admin/Accept"=> "./src/pages/Admin/AcceptListing.php",
+    "Assignment/Admin/Reject"=> "./src/pages/Admin/RejectListing.php",
 
 
 

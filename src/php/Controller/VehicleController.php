@@ -72,5 +72,7 @@ class VehicleController{
         return $this->vehicle->getPendingVehiclesWithDetails();
     }
 
-    
+    public function UpdateTheVehicleStatus($id,$approve){
+        return $this->vehicle->UpdateVehicleStatus($id,$approve);
+    }
 }

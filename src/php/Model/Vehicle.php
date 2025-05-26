@@ -583,7 +583,9 @@ class Vehicle {
                     'model' => $row['Model'],
                     'year' => $row['Year'],
                     'price' => $row['price'],
-                    'status' => $row['status'],
+                    'cateogory' => $row['cateogory'],
+                    'fueltype'=>$row['FuelType'],
+                    'transmission'=>$row['Transmission']
                     // Include other vehicle fields as needed
                 ],
                 'seller' => [
@@ -601,6 +603,79 @@ class Vehicle {
         return $vehicles;
     }
 
+    public function UpdateVehicleStatus($vehicleID, $approve = true) {
+        $this->conn->begin_transaction();
+        $imagePaths = [];
+
+        try {
+            if ($approve) {
+                // APPROVE - Update status to 'approved'
+                $stmt = $this->conn->prepare("UPDATE vehicles SET status = 'approved' WHERE VehicleID = ?");
+                if (!$stmt) throw new Exception("Prepare failed for approval: " . $this->conn->error);
+                
+                $stmt->bind_param("i", $vehicleID);
+                if (!$stmt->execute()) throw new Exception("Approval failed: " . $stmt->error);
+                
+                $stmt->close();
+            } else {
+                // DISAPPROVE - Delete vehicle and all related data
+                
+                // 1. Get all image paths for physical file deletion
+                $getImagesStmt = $this->conn->prepare("SELECT image_path FROM vehicle_images WHERE vehicle_id = ?");
+                if ($getImagesStmt) {
+                    $getImagesStmt->bind_param("i", $vehicleID);
+                    if ($getImagesStmt->execute()) {
+                        $result = $getImagesStmt->get_result();
+                        while ($row = $result->fetch_assoc()) {
+                            $imagePaths[] = $row['image_path'];
+                        }
+                    }
+                    $getImagesStmt->close();
+                }
+
+                // 2. Delete from vehicle_images table
+                $deleteImagesStmt = $this->conn->prepare("DELETE FROM vehicle_images WHERE vehicle_id = ?");
+                if ($deleteImagesStmt) {
+                    $deleteImagesStmt->bind_param("i", $vehicleID);
+                    $deleteImagesStmt->execute();
+                    $deleteImagesStmt->close();
+                }
+
+                // 3. Delete from locations table (if exists)
+                $deleteLocationStmt = $this->conn->prepare("DELETE FROM locations WHERE VehicleID = ?");
+                if ($deleteLocationStmt) {
+                    $deleteLocationStmt->bind_param("i", $vehicleID);
+                    $deleteLocationStmt->execute();
+                    $deleteLocationStmt->close();
+                }
+
+                // 4. Delete from vehicles table
+                $deleteVehicleStmt = $this->conn->prepare("DELETE FROM vehicles WHERE VehicleID = ?");
+                if ($deleteVehicleStmt) {
+                    $deleteVehicleStmt->bind_param("i", $vehicleID);
+                    if (!$deleteVehicleStmt->execute()) throw new Exception("Vehicle deletion failed");
+                    $deleteVehicleStmt->close();
+                }
+
+                // 5. Delete physical image files
+                foreach ($imagePaths as $imagePath) {
+                    // Convert DB path to filesystem path
+                    $filePath = str_replace('/Assignment/uploads/', './uploads/', $imagePath);
+                    if (file_exists($filePath)) {
+                        @unlink($filePath);
+                    }
+                }
+            }
+
+            $this->conn->commit();
+            return true;
+
+        } catch (Exception $e) {
+            $this->conn->rollback();
+            error_log("Vehicle status change failed: " . $e->getMessage());
+            return false;
+        }
+    }
 
     
 
