@@ -36,8 +36,8 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
-                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 ">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2  bg-gray-800 rounded rounded">Manage
                     Listings</a>
                 <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Products</a>
@@ -51,11 +51,11 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 
     <div class="flex min-h-screen">
         <!-- Desktop Sidebar -->
-        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0 z-10">
             <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
             <nav class="space-y-3">
-                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
-                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded ">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 bg-gray-800 rounded ">Manage
                     Listings</a>
                 <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Products</a>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6 space-y-6 w-full">
+        <main class="flex-1 p-6 space-y-6 w-4/5 lg:ml-[20%]">
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">

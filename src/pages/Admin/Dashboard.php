@@ -84,11 +84,13 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
                     <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
                     <h2 class="text-2xl font-semibold">Admin Dashboard</h2>
                 </div>
+                <a href="/Assignment/Admin/EditAccounts">
                 <div class="flex items-center space-x-3">
                     <span class="text-sm"><?php echo $_SESSION['name']?$_SESSION['name']: "Guest User"  ?></span>
                     <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
                         alt="profile" class="w-10 h-10 rounded-full" />
                 </div>
+                </a>
             </div>
 
             <!-- Statistics -->

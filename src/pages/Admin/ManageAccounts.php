@@ -10,9 +10,9 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 $admin = new AdminController;
 $users=$admin->LoadAllUsers();
 
-echo "<pre>";
-print_r($users);
-echo "<pre>";
+// echo "<pre>";
+// print_r($users);
+// echo "<pre>";
 
 ?>
 
@@ -35,12 +35,12 @@ echo "<pre>";
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
                 <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Listings</a>
                 <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Products</a>
-                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 bg-gray-800 rounded">Manage
                     Accounts</a>
                 <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
                 <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -50,15 +50,15 @@ echo "<pre>";
 
     <div class="flex min-h-screen font-sans">
         <!-- Desktop Sidebar -->
-        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0">
             <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
             <nav class="space-y-3">
-                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
                 <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Listings</a>
                 <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
                     Products</a>
-                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 bg-gray-800 rounded bg-gray-800 rounded ">Manage
                     Accounts</a>
                 <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
                 <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -66,7 +66,7 @@ echo "<pre>";
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6 space-y-6 w-full">
+        <main class="flex-1 p-6 space-y-6 w-4/5 lg:ml-[20%] ">
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
@@ -74,10 +74,13 @@ echo "<pre>";
                     <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
                     <h2 class="text-2xl font-semibold">Manage Accounts</h2>
                 </div>
+                <a href="/Assignment/Admin/EditAccounts">
                 <div class="flex items-center space-x-3">
-                    <span class="text-sm"><?php echo isset($_SESSION['name']) ?  $_SESSION['name'] :  "User"; ?></span>
-                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>" alt="profile" class="w-10 h-10 rounded-full" />
+                    <span class="text-sm"><?php echo $_SESSION['name']?$_SESSION['name']: "Guest User"  ?></span>
+                    <img src="<?php echo isset($_SESSION['image']) && !empty($_SESSION['image']) ? $_SESSION['image'] : 'https://i.pravatar.cc/150?img=4'; ?>"
+                        alt="profile" class="w-10 h-10 rounded-full" />
                 </div>
+                </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 bg-gray-100">
@@ -98,16 +101,7 @@ echo "<pre>";
 
                     <div class="mt-6 flex justify-center space-x-3">
                         <a href="/Assignment/Admin/DeleteAccount?uid=<?= htmlspecialchars($u['id']) ?>&role=<?= htmlspecialchars($u['role']) ?>">
-                            <button
-                                class="rounded-xl bg-red-600 px-4 py-2 text-white text-sm font-medium hover:bg-red-700 w-full transition">Delete
-                                Account</button>
-
-                        </a>
-                        <a href="/Assignment/Admin/EditAccounts?uid=<?= htmlspecialchars($u['id']) ?>">
-                            <button
-                                class="rounded-xl bg-blue-600 px-4 py-2 text-white  text-sm font-medium hover:bg-blue-700 w-full transition">Edit
-                                Account</button>
-
+                            <button class="rounded-xl bg-red-600 px-4 py-2 text-white text-sm font-medium hover:bg-red-700 w-full transition">DeleteAccount</button>
                         </a>
                     </div>
                 </div>

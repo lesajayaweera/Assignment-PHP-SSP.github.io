@@ -190,8 +190,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Year</label>
-                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full" name="year"
-                                            required>
+                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full" min="<?php echo date("Y") -10 ?>" name="year"
+                                          max="<?php echo date("Y") ?>" maxlength="4" required>
                                     </div>
                                     <div>
                                         <label class="text-sm font-semibold">Condition</label>
@@ -207,9 +207,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
 
                                     <div>
+                                        <!-- seating_capacity -->
+                                         <!-- class="border border-gray-300 rounded p-2 w-full" -->
                                         <label class="text-sm font-semibold">Seating Capacity</label>
-                                        <input title="input" type="number" class="border border-gray-300 rounded p-2 w-full"
-                                            name="seating_capacity" required>
+                                        <select name="seating_capacity" id="" class="border border-gray-300 rounded p-2 w-full">
+                                            <option value="2">2</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
                                     </div>
                                 </div>
 

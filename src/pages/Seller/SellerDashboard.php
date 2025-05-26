@@ -10,12 +10,12 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'seller') {
 
 $controller = new SellerController();
 
-$total_products = $controller->GetTotal_ProductsOf_Seller($_SESSION['seller_id']);
-$total_deals =$controller->Get_total_negotiation_deals($_SESSION['seller_id']);
-$total_sales =$controller->getTotal_done_sales($_SESSION['seller_id']);
-$pending_orders =$controller->getTotal_PendingOrders($_SESSION['seller_id']);
+$total_products = $controller->GetTotal_ProductsOf_Seller((int)$_SESSION['seller_id']);
+$total_deals =$controller->Get_total_negotiation_deals((int)$_SESSION['seller_id']);
+$total_sales =$controller->getTotal_done_sales((int)$_SESSION['seller_id']);
+$pending_orders =$controller->getTotal_PendingOrders((int)$_SESSION['seller_id']);
 
-$vehicles = $controller->returnAllSellerCars($_SESSION['seller_id']);
+$vehicles = $controller->returnAllSellerCars((int)$_SESSION['seller_id']);
 
 // echo $total_deals;
 

@@ -1,5 +1,8 @@
 <?php
 include_once("./src/php/Model/User.php");
+require_once("./src/php/Controller/SellerController.php");
+require_once("./src/php/Controller/BuyerController.php");
+
 
 class UserController{
      
@@ -22,6 +25,12 @@ class UserController{
                 exit;
                 
             }else if ($role =="seller"){
+                $seller = new SellerController();
+                 $image =$seller->GetSellerDetails($email)['image_path'];
+
+                $_SESSION['image'] = $image;
+                $_SESSION['seller_id'] =$seller->GetSellerDetails($email)['id'];
+
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
             }else if ($role =="buyer"){
@@ -61,7 +70,6 @@ class UserController{
                 header("Location:/Assignment/Admin/Dashboard");
                 exit;
             }else if ($user_data['role'] ==="seller"){
-                require_once("./src/php/Controller/SellerController.php");
 
                 $seller = new SellerController();
                 $image =$seller->GetSellerDetails($user_data['email'])['image_path'];
@@ -73,7 +81,6 @@ class UserController{
                 exit;
 
             }else if ($user_data['role'] =="buyer"){
-                require_once("./src/php/Controller/BuyerController.php");
 
                  $buyer = new BuyerController();
 

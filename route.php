@@ -41,7 +41,7 @@ $links = array(
 
     // Admin pages
     "Assignment/Admin/Dashboard"=>"./src/pages/Admin/Dashboard.php",
-    "Assignment/Admin/EditAccounts"=>"./src/pages/Admin/EditAccounts.php",
+    "Assignment/Admin/EditAccounts"=>"./src/pages/Admin/EditUserAccount.php",
     "Assignment/Admin/ManageAccounts"=>"./src/pages/Admin/ManageAccounts.php",
     "Assignment/Admin/ManageProducts"=>"./src/pages/Admin/ManageProducts.php",
     "Assignment/Admin/Tables"=>"./src/pages/Admin/Tables.php",

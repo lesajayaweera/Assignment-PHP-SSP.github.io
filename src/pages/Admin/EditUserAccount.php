@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
     $fname = $_POST['fname'] ? $_POST['fname'] : " ";
     $lname = $_POST['lname'] ? $_POST['lname'] : " ";
     $email = $_SESSION['email'];
-    $description=$_POST ['description'] ? $_POST['description'] : " ";
     $password = $_POST['password'] ? $_POST['password'] : " ";
 
     $admin = new AdminController();
@@ -61,34 +60,38 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
             <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
             <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
             <nav class="space-y-3">
-                <a href="" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="" class="block px-4 py-2  bg-gray-800 rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Listings</a>
+                <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Accounts</a>
+                <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </div>
     </div>
 
     <div class="flex min-h-screen font-sans">
         <!-- Desktop Sidebar -->
-        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+        <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0">
             <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
             <nav class="space-y-3">
-                <a href="" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="./ViewProducts.html" class="block px-4 py-2 bg-gray-800  rounded">View Products</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700 rounded">Edit Account</a>
-                <a href="#" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
+                <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+                <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Listings</a>
+                <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Products</a>
+                <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage
+                    Accounts</a>
+                <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
+                <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
             </nav>
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-6 space-y-6 w-full">
+        <main class="flex-1 p-6 space-y-6 w-4/5 lg:ml-[20%]">
             <!-- Header -->
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
@@ -96,15 +99,17 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                     <button class="lg:hidden text-2xl" onclick="toggleSidebar()">☰</button>
                     <h2 class="text-2xl font-semibold">Edit Accounts</h2>
                 </div>
-                
+
             </div>
             <section>
                 <div class="max-w-4xl mx-auto p-8 bg-white rounded-2xl  shadow-md">
                     <div class="flex flex-col md:flex-row items-center justify-center md:items-start gap-8">
-                        <form class="flex items-start justify-around w-full space-x-6" enctype="multipart/form-data" method="post">
+                        <form class="flex items-start justify-around w-full space-x-6" enctype="multipart/form-data"
+                            method="post">
                             <!-- Profile Picture -->
                             <div class="flex-shrink-0 items-center justify-start relative">
-                                <img src="<?php echo $_SESSION['image'] ?>" id="profile-preview" alt="Profile Photo"
+                                <img src="<?php echo $_SESSION['image'] ? $_SESSION['image'] :'https://i.pravatar.cc/150?img=4'; ?>"
+                                    id="profile-preview" alt="Profile Photo"
                                     class="h-32 w-32 rounded-full object-cover shadow">
 
                                 <!-- Upload Icon/Button -->
@@ -117,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                                 </label>
 
                                 <!-- Hidden File Input -->
-                                <input type="file" id="profile-upload" class="hidden" name="image"  accept="image/*" />
+                                <input type="file" id="profile-upload" class="hidden" name="image" accept="image/*" />
                             </div>
 
 
@@ -125,26 +130,34 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                             <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1" for="fname">Your First Name</label>
-                                    <input title="input" type="text" name="fname"   
-                                      value="<?php echo  $_SESSION['first_name'];  ?>"  class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none" required />
+                                    <label class="block text-sm font-medium text-gray-700 mb-1" for="fname">Your First
+                                        Name</label>
+                                    <input title="input" type="text" name="fname"
+                                        value="<?php echo  $_SESSION['first_name'];  ?>"
+                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                                        required />
                                 </div>
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1" for="lname">Your Last Name</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1" for="lname">Your Last
+                                        Name</label>
                                     <input title="input" type="text" name="lname"
-                                      value="<?php echo  $_SESSION['last_name'];  ?>"  class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"  required/>
+                                        value="<?php echo  $_SESSION['last_name'];  ?>"
+                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                                        required />
                                 </div>
 
 
 
-                               
+
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1"  for="password">Password</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1"
+                                        for="password">Password</label>
                                     <input title="input" type="password" name="password"
-                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none" required/>
+                                        class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none"
+                                        required />
                                 </div>
-                                
+
 
                                 <!-- Save Button (spanning full width on mobile, bottom right on desktop) -->
                                 <div class="md:col-span-2 flex justify-end w-full">
@@ -168,35 +181,34 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
         const sidebar = document.getElementById("mobileSidebar");
         sidebar.classList.toggle("-translate-x-full");
     }
-   
-document.addEventListener('DOMContentLoaded', function() {
-    const profileUpload = document.getElementById('profile-upload');
-    const profilePreview = document.getElementById('profile-preview');
-    
-    profileUpload.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-        
-        // Validate file type
-        if (!file.type.match('image.*')) {
-            alert('Please select an image file (JPEG, PNG, etc.)');
-            return;
-        }
-        
-        // Create preview
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            profilePreview.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-    });
-    
-    // Optional: Click on image to trigger file input
-    profilePreview.addEventListener('click', function() {
-        profileUpload.click();
-    });
-});
 
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileUpload = document.getElementById('profile-upload');
+        const profilePreview = document.getElementById('profile-preview');
+
+        profileUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.match('image.*')) {
+                alert('Please select an image file (JPEG, PNG, etc.)');
+                return;
+            }
+
+            // Create preview
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                profilePreview.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Optional: Click on image to trigger file input
+        profilePreview.addEventListener('click', function() {
+            profileUpload.click();
+        });
+    });
     </script>
 
 </body>

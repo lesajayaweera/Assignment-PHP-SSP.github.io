@@ -25,9 +25,9 @@ $vehicle = $vehicle->Load_all_with_main_Image();
       <h1 class="text-2xl font-bold mb-4">LuxCars</h1>
       <button onclick="toggleSidebar()" class="text-right w-full mb-6 text-gray-300">✕ Close</button>
       <nav class="space-y-3">
-        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
         <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 bg-gray-800 rounded ">Manage Products</a>
         <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
         <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -37,12 +37,12 @@ $vehicle = $vehicle->Load_all_with_main_Image();
 
   <div class="flex min-h-screen">
     <!-- Desktop Sidebar -->
-    <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6">
+    <aside class="hidden lg:block lg:w-1/5 bg-black text-white p-6 fixed top-0 bottom-0 left-0 z-10">
       <h1 class="text-3xl font-bold mb-8">LuxCars</h1>
       <nav class="space-y-3">
-        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 bg-gray-800 rounded">Home</a>
+        <a href="/Assignment/Admin/Dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded">Home</a>
         <a href="/Assignment/Admin/ManageListings" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Listings</a>
-        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Products</a>
+        <a href="/Assignment/Admin/ManageProducts" class="block px-4 py-2 bg-gray-800 rounded">Manage Products</a>
         <a href="/Assignment/Admin/ManageAccounts" class="block px-4 py-2 hover:bg-gray-700 rounded">Manage Accounts</a>
         <a href="/Assignment/Admin/Tables" class="block px-4 py-2 hover:bg-gray-700 rounded">Tables</a>
         <a href="/Assignment/Logout" class="block px-4 py-2 text-red-400 hover:bg-gray-700 rounded">Log out</a>
@@ -50,7 +50,7 @@ $vehicle = $vehicle->Load_all_with_main_Image();
     </aside>
 
     <!-- Main Content -->
-    <section class="flex-1 p-6 font-family-montserrat space-y-6 w-full">
+    <section class="flex-1 p-6 font-family-montserrat w-4/5 space-y-6 lg:ml-[20%]">
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div class="flex items-center space-x-4">
