@@ -23,6 +23,8 @@ function toggleFAQ(index) {
     }
 }
 
+console.log('hrll')
+
 
 window.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('show-more-btn');
