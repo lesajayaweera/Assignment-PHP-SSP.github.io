@@ -10,7 +10,7 @@ class UserController{
         $user = new User($first_name, $last_name, $email, $password, $role);
 
         if ($user->save($first_name, $last_name, $email, $password)) {
-            session_start();
+            // session_start();
             $_SESSION['email'] = $email;
             $_SESSION['name'] = $first_name . " " . $last_name;
             $_SESSION['first_name'] =$first_name;
@@ -22,14 +22,16 @@ class UserController{
 
             if($role =="admin"){
                 header("Location:/Assignment/Admin/Dashboard");
+                $_SESSION['image'] = $image;
+
                 exit;
                 
             }else if ($role =="seller"){
                 $seller = new SellerController();
-                 $image =$seller->GetSellerDetails($email)['image_path'];
+                //  $image =$seller->GetSellerDetails($email)['image_path'];
 
                 $_SESSION['image'] = $image;
-                $_SESSION['seller_id'] =$seller->GetSellerDetails($email)['id'];
+                // $_SESSION['seller_id'] =$seller->GetSellerDetails($email)['id'];
 
                 header("Location:/Assignment/Seller/Dashboard");
                 exit;
@@ -39,8 +41,8 @@ class UserController{
                 $image =$buyer->GetBuyerDetails($email)['image_path'];
                  $id =$buyer->GetBuyerDetails($email)['id'];
                  
-                $_SESSION['image'] = $image;
-                $_SESSION['buyerID'] = $id;
+                // $_SESSION['image'] = $image;
+                // $_SESSION['buyerID'] = $id;
                 header("Location:/Assignment/Listing");
                  
                 exit;

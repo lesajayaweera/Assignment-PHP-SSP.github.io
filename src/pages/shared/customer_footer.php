@@ -2,9 +2,9 @@
 
 <?php 
 
-    require_once("./src/php/Controller/BrandController.php");
-    $brand = new BrandController();
-    $result_brands = $brand->DisplayAll();
+    // require_once("./src/php/Controller/BrandController.php");
+    // $brand = new BrandController();
+    // $result_brands = $brand->DisplayAll();
 
 ?>     
       

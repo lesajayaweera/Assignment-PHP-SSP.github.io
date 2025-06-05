@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD']==="POST"){
                             method="post">
                             <!-- Profile Picture -->
                             <div class="flex-shrink-0 items-center justify-start relative">
-                                <img src="<?php echo $_SESSION['image'] ? $_SESSION['image'] :'https://i.pravatar.cc/150?img=4'; ?>"
+                                <img src="<?php echo isset($_SESSION['image'])&& !empty($_SESSION['image']) ? $_SESSION['image'] :'https://i.pravatar.cc/150?img=4'?>"
                                     id="profile-preview" alt="Profile Photo"
                                     class="h-32 w-32 rounded-full object-cover shadow">
 
